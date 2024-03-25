@@ -1,225 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     tools:context=".ConfiguracaoJogoActivity">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/azul_marinho"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MeliTruko"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="N° de jogadores"
-        android:textColor="@color/azul_marinho"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-        <com.google.android.material.chip.Chip
-            android:layout_width="70dp"
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="1x1"
-            android:textAlignment="center"
-            android:textColor="@color/azul_marinho"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:chipCornerRadius="20dp"
-            app:chipStrokeColor="@color/azul_marinho"
-            app:chipStrokeWidth="2dp" />
+            android:background="@color/azul_marinho"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.chip.Chip
-            android:layout_width="70dp"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MeliTruko"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="N° de jogadores"
+            android:textColor="@color/azul_marinho"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:text="2x2"
-            android:textAlignment="center"
-            android:textColor="@color/azul_marinho"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:chipCornerRadius="20dp"
-            app:chipStrokeColor="@color/azul_marinho"
-            app:chipStrokeWidth="2dp" />
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:singleSelection="true">
 
-        <com.google.android.material.chip.Chip
-            android:layout_width="70dp"
-            android:layout_height="60dp"
-            android:text="3x3"
-            android:textAlignment="center"
-            android:textColor="@color/azul_marinho"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:chipCornerRadius="20dp"
-            app:chipStrokeColor="@color/azul_marinho"
-            app:chipStrokeWidth="2dp" />
+            <com.google.android.material.chip.Chip
+                style="@style/Theme.SelectorChip"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="1x1"
+                app:chipCornerRadius="20dp"
+                app:chipStrokeColor="@color/azul_marinho"
+                app:chipStrokeWidth="2dp" />
 
-    </com.google.android.material.chip.ChipGroup>
+            <com.google.android.material.chip.Chip
+                style="@style/Theme.SelectorChip"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="2x2"
+                app:chipCornerRadius="20dp"
+                app:chipStrokeColor="@color/azul_marinho"
+                app:chipStrokeWidth="2dp" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="50dp"
-        android:background="@color/azul_marinho"
-        app:layout_constraintBottom_toTopOf="@+id/materialButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+            <com.google.android.material.chip.Chip
+                style="@style/Theme.SelectorChip"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="3x3"
+                app:chipCornerRadius="20dp"
+                app:chipStrokeColor="@color/azul_marinho"
+                app:chipStrokeWidth="2dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/ivPlayer1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:foreground="@drawable/person"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toStartOf="@+id/ivPlayer2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view2" />
+        </com.google.android.material.chip.ChipGroup>
 
-    <TextView
-        android:id="@+id/tvPlayer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Jogador 1"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer1"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer1"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer1" />
+        <include
+            android:id="@+id/includeLayout"
+            layout="@layout/layout_quatro_jogadores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/materialButton"
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/ivPlayer2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:foreground="@drawable/person"
-        android:padding="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ivPlayer1"
-        app:layout_constraintTop_toTopOf="@+id/view2" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Iniciar jogo"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:cornerRadius="0dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvPlayer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Jogador 2"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer2"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer2"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer2" />
-
-    <TextView
-        android:id="@+id/tvXis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="X"
-        android:textColor="@color/white"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPlayer1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/ivPlayer3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:foreground="@drawable/person"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toStartOf="@+id/ivPlayer4"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvXis" />
-
-    <TextView
-        android:id="@+id/tvPlayer3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Jogador 3"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer3"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer3"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer3" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/ivPlayer4"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:foreground="@drawable/person"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ivPlayer3"
-        app:layout_constraintTop_toBottomOf="@+id/tvXis" />
-
-    <TextView
-        android:id="@+id/tvPlayer4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Jogador 4"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer4"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer4"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer4" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Iniciar jogo"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:cornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

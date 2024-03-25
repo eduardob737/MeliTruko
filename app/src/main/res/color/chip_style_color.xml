@@ -1,0 +1,10 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:color="@color/white"
+        android:textColor="@color/azul_marinho"
+        android:state_checked="false"/>
+    <item
+        android:color="@color/azul_marinho"
+        android:textColor="@color/white"
+        android:state_checked="true" />
+</selector>
