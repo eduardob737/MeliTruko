@@ -6,6 +6,11 @@ android {
     namespace = "com.example.melitruko"
     compileSdk = 34
 
+    buildFeatures{
+        viewBinding = true
+        dataBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.melitruko"
         minSdk = 24

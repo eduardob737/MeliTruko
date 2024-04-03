@@ -1,18 +1,42 @@
 package com.example.melitruko;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.melitruko.databinding.ActivityConfiguracaoJogoBinding;
+import com.google.android.material.chip.ChipGroup;
 
 public class ConfiguracaoJogoActivity extends AppCompatActivity {
+
+    private ActivityConfiguracaoJogoBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_configuracao_jogo);
+        binding = ActivityConfiguracaoJogoBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
+        binding.chipGroup.setOnCheckedStateChangeListener((chipGroup, list) -> {
+            Toast.makeText(this, "oi", Toast.LENGTH_SHORT).show();
+            Log.i("chip", "oi 1");
+        });
+
+       /* binding.chipOneVersusOne.setOnCheckedChangeListener((compoundButton, b) ->
+            Log.i("chip", "oi 1")
+        );
+
+        binding.chipTwoVersusTwo.setOnClickListener(view -> {
+            Log.i("chip", "oi 2");
+        });
+
+        binding.chipThreeVersusThree.setOnClickListener(view -> {
+            Log.i("chip", "oi 3");
+        });*/
+
     }
 }
