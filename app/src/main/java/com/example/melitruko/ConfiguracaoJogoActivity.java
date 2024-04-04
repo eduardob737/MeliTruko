@@ -1,14 +1,12 @@
 package com.example.melitruko;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.melitruko.databinding.ActivityConfiguracaoJogoBinding;
-import com.google.android.material.chip.ChipGroup;
 
 public class ConfiguracaoJogoActivity extends AppCompatActivity {
 
@@ -22,21 +20,29 @@ public class ConfiguracaoJogoActivity extends AppCompatActivity {
         setContentView(view);
 
         binding.chipGroup.setOnCheckedStateChangeListener((chipGroup, list) -> {
-            Toast.makeText(this, "oi", Toast.LENGTH_SHORT).show();
-            Log.i("chip", "oi 1");
+            if (binding.chipOneVersusOne.isChecked()){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, TwoPlayersFragment.class, null).commit();
+                binding.chipOneVersusOne.setEnabled(false);
+                binding.chipTwoVersusTwo.setEnabled(true);
+                binding.chipThreeVersusThree.setEnabled(true);
+            } else if (binding.chipTwoVersusTwo.isChecked()) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FourPlayersFragment.class, null).commit();
+                binding.chipTwoVersusTwo.setEnabled(false);
+                binding.chipOneVersusOne.setEnabled(true);
+                binding.chipThreeVersusThree.setEnabled(true);
+            } else if (binding.chipThreeVersusThree.isChecked()){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, SixPlayersFragment.class, null).commit();
+                binding.chipThreeVersusThree.setEnabled(false);
+                binding.chipTwoVersusTwo.setEnabled(true);
+                binding.chipOneVersusOne.setEnabled(true);
+            } else {
+                Toast.makeText(this, "Escolha uma opção", Toast.LENGTH_SHORT).show();
+            }
         });
 
-       /* binding.chipOneVersusOne.setOnCheckedChangeListener((compoundButton, b) ->
-            Log.i("chip", "oi 1")
-        );
-
-        binding.chipTwoVersusTwo.setOnClickListener(view -> {
-            Log.i("chip", "oi 2");
+        binding.btnStartGame.setOnClickListener(view1 -> {
+            if (binding.chipGroup.getCheckedChipId() == -1)
+                Toast.makeText(this, "Escolha a quantidade de jogadores", Toast.LENGTH_SHORT).show();
         });
-
-        binding.chipThreeVersusThree.setOnClickListener(view -> {
-            Log.i("chip", "oi 3");
-        });*/
-
     }
 }

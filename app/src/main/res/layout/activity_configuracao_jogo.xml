@@ -11,7 +11,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:background="@color/azul_marinho"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:text="N° de jogadores"
             android:textColor="@color/azul_marinho"
             android:textSize="26sp"
@@ -83,15 +83,15 @@
 
         </com.google.android.material.chip.ChipGroup>
 
-        <include
-            android:id="@+id/includeLayout"
-            layout="@layout/layout_quatro_jogadores"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnStartGame"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup"
-            tools:layout_editor_absoluteX="0dp" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnStartGame"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        tools:layout_editor_absoluteX="0dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnStartGame"
