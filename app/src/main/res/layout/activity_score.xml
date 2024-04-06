@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ScoreActivity">
+
+    <View
+        android:id="@+id/main_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/azul_marinho"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MeliTruko"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/main_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name_app"
+        app:layout_constraintStart_toStartOf="@+id/main_view"
+        app:layout_constraintTop_toTopOf="@+id/tv_name_app" />
+
+    <View
+        android:id="@+id/view_blue_team"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/style_view_blue_team"
+        app:layout_constraintEnd_toStartOf="@+id/view_white_team"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_view" />
+
+    <View
+        android:id="@+id/view_white_team"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="-2dp"
+        android:background="@drawable/style_view_white_team"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view_blue_team"
+        app:layout_constraintTop_toBottomOf="@id/main_view" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player1_blue"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player2_blue"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/view_blue_team"
+        app:layout_constraintTop_toTopOf="@+id/view_blue_team"
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        app:srcCompat="@drawable/img_perfil" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player2_blue"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        app:srcCompat="@drawable/img_perfil"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_player1_white"
+        app:layout_constraintEnd_toEndOf="@+id/view_blue_team"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_player1_blue"
+        app:layout_constraintTop_toTopOf="@+id/view_blue_team" />
+
+    <TextView
+        android:id="@+id/tv_name_blue_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Azul"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="@+id/view_blue_team"
+        app:layout_constraintStart_toStartOf="@+id/view_blue_team"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player1_blue" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player1_white"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player2_white"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/view_white_team"
+        app:layout_constraintTop_toTopOf="@+id/view_white_team"
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        app:srcCompat="@drawable/img_perfil" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player2_white"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        app:shapeAppearanceOverlay="@style/circleImageView"
+        app:srcCompat="@drawable/img_perfil"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_player1_white"
+        app:layout_constraintEnd_toEndOf="@+id/view_white_team"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_player1_white"
+        app:layout_constraintTop_toTopOf="@+id/view_white_team" />
+
+    <TextView
+        android:id="@+id/tv_name_white_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Branco"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/azul_marinho"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="@+id/view_white_team"
+        app:layout_constraintStart_toStartOf="@+id/view_white_team"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player1_white" />
+
+    <TextView
+        android:id="@+id/tvXis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="X"
+        android:textColor="@color/azul_marinho"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_blue_team" />
+
+    <View
+        android:id="@+id/view_score_blue_team"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/style_view_blue_team"
+        app:layout_constraintEnd_toStartOf="@+id/view_score_white_team"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvXis" />
+
+    <TextView
+        android:id="@+id/tv_score_blue_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_score_blue_team"
+        app:layout_constraintEnd_toEndOf="@+id/view_score_blue_team"
+        app:layout_constraintStart_toStartOf="@+id/view_score_blue_team"
+        app:layout_constraintTop_toTopOf="@+id/view_score_blue_team" />
+
+    <View
+        android:id="@+id/view_score_white_team"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="-2dp"
+        android:background="@drawable/style_view_white_team"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view_score_blue_team"
+        app:layout_constraintTop_toBottomOf="@id/tvXis" />
+
+    <TextView
+        android:id="@+id/tv_score_white_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/azul_marinho"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_score_white_team"
+        app:layout_constraintEnd_toEndOf="@+id/view_score_white_team"
+        app:layout_constraintStart_toStartOf="@+id/view_score_white_team"
+        app:layout_constraintTop_toTopOf="@+id/view_score_white_team" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_points_blue_team"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/style_btn_blue_add_points"
+        app:layout_constraintEnd_toStartOf="@+id/btn_add_points_white_team"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_score_blue_team" />
+
+    <TextView
+        android:id="@+id/tv_add_points_blue_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+1"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_add_points_blue_team"
+        app:layout_constraintEnd_toEndOf="@+id/btn_add_points_blue_team"
+        app:layout_constraintStart_toStartOf="@+id/btn_add_points_blue_team"
+        app:layout_constraintTop_toTopOf="@+id/btn_add_points_blue_team" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_points_white_team"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/style_btn_white_team"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_add_points_blue_team"
+        app:layout_constraintTop_toBottomOf="@id/view_score_white_team" />
+
+    <TextView
+        android:id="@+id/tv_add_points_white_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+1"
+        android:textColor="@color/azul_marinho"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_add_points_white_team"
+        app:layout_constraintEnd_toEndOf="@+id/btn_add_points_white_team"
+        app:layout_constraintStart_toStartOf="@+id/btn_add_points_white_team"
+        app:layout_constraintTop_toTopOf="@+id/btn_add_points_white_team" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_truco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="TRUCO!!"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:padding="8dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

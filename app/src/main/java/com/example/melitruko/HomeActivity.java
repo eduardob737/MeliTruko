@@ -35,8 +35,11 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         binding.btnStartGame.setOnClickListener(view1 -> {
-            if (binding.chipGroup.getCheckedChipId() == -1)
+            if (binding.chipGroup.getCheckedChipId() == -1) {
                 Toast.makeText(this, "Escolha a quantidade de jogadores", Toast.LENGTH_SHORT).show();
+            } else {
+                startActivity(new Intent(this, ScoreActivity.class));
+            }
         });
     }
 
