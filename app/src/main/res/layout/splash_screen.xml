@@ -6,7 +6,7 @@
     android:background="@color/azul_marinho"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen">
+    tools:context=".view.activities.SplashScreen">
 
     <ImageView
         android:id="@+id/logoMeliTruko"

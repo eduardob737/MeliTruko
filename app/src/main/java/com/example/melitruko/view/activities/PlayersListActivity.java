@@ -1,4 +1,4 @@
-package com.example.melitruko;
+package com.example.melitruko.view.activities;
 
 import android.os.Bundle;
 

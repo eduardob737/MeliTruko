@@ -1,4 +1,4 @@
-package com.example.melitruko;
+package com.example.melitruko.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,10 +6,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.melitruko.R;
 import com.example.melitruko.databinding.ActivityHomeBinding;
-import com.example.melitruko.fragments.FourPlayersFragment;
-import com.example.melitruko.fragments.SixPlayersFragment;
-import com.example.melitruko.fragments.TwoPlayersFragment;
+import com.example.melitruko.view.fragments.FourPlayersFragment;
+import com.example.melitruko.view.fragments.SixPlayersFragment;
+import com.example.melitruko.view.fragments.TwoPlayersFragment;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -38,7 +39,11 @@ public class HomeActivity extends AppCompatActivity {
             if (binding.chipGroup.getCheckedChipId() == -1) {
                 Toast.makeText(this, "Escolha a quantidade de jogadores", Toast.LENGTH_SHORT).show();
             } else {
-                startActivity(new Intent(this, ScoreActivity.class));
+                // TODO validar se configuração do jogo está completa e correta antes de prosseguir
+
+
+
+                startActivity(new Intent(this, MatchActivity.class));
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.example.melitruko.fragments;
+package com.example.melitruko.view.fragments;
 
 import android.os.Bundle;
 
