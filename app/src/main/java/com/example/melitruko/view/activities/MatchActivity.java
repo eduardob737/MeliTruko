@@ -9,13 +9,13 @@ import com.example.melitruko.R;
 import com.example.melitruko.databinding.ActivityMatchBinding;
 import com.example.melitruko.view.fragments.MatchFragment;
 import com.example.melitruko.viewmodel.MatchViewModel;
-import com.example.melitruko.viewmodel.MatchViewModelProviderFactory;
+import com.example.melitruko.viewmodel.ViewModelProviderFactory;
 
 public class MatchActivity extends AppCompatActivity {
 
     private ActivityMatchBinding binding;
     private MatchViewModel viewModel;
-    private MatchViewModelProviderFactory factory;
+    private ViewModelProviderFactory factory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

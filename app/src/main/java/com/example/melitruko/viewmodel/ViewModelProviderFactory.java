@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class MatchViewModelProviderFactory implements ViewModelProvider.Factory {
+public class ViewModelProviderFactory implements ViewModelProvider.Factory {
 
     Application application;
 
-    public MatchViewModelProviderFactory(Application application) {
+    public ViewModelProviderFactory(Application application) {
         this.application = application;
     }
 

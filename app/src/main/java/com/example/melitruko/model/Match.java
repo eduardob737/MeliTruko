@@ -13,6 +13,7 @@ public class Match {
         this.team1 = team1;
         this.team2 = team2;
     }
+    public Match (){}
 
     public int getMatchValue() {
         return matchValue;

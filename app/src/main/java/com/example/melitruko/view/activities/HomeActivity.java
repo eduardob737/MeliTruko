@@ -5,22 +5,32 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.ActivityHomeBinding;
+import com.example.melitruko.model.Match;
+import com.example.melitruko.model.Team;
 import com.example.melitruko.view.fragments.FourPlayersFragment;
 import com.example.melitruko.view.fragments.SixPlayersFragment;
 import com.example.melitruko.view.fragments.TwoPlayersFragment;
+import com.example.melitruko.viewmodel.HomeViewModel;
+import com.example.melitruko.viewmodel.ViewModelProviderFactory;
+
+import java.net.URI;
 
 
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
+    private HomeViewModel viewModel;
+    private ViewModelProviderFactory factory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        viewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
         setContentView(binding.getRoot());
 
         /*NavHostFragment navHost = NavHostFragment.create(R.navigation.nav_graph_home);
@@ -41,9 +51,8 @@ public class HomeActivity extends AppCompatActivity {
             } else {
                 // TODO validar se configuração do jogo está completa e correta antes de prosseguir
 
-
-
-                startActivity(new Intent(this, MatchActivity.class));
+                Intent intent = new Intent(this, MatchActivity.class);
+                startActivity(intent);
             }
         });
     }

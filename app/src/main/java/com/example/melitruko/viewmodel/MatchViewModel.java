@@ -13,8 +13,6 @@ import java.net.URI;
 
 public class MatchViewModel extends AndroidViewModel {
 
-    private Player player;
-    private Team team;
     private Match match;
 
     public MatchViewModel(@NonNull Application application) {
@@ -25,14 +23,6 @@ public class MatchViewModel extends AndroidViewModel {
         match = new Match(team1, team2);
     }
 
-    private void setNewTeam(Team.QtdTeamPlayers qtdTeamPlayer){
-        team = new Team(qtdTeamPlayer);
-    }
 
-    private void setNewPlayer(String name, URI photo){
-        player = new Player();
-        player.setName(name);
-        player.setPhoto(photo);
-    }
 
 }

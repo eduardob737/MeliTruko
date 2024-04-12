@@ -5,15 +5,13 @@ public class Team {
     public enum QtdTeamPlayers { ONE_PLAYER, TWO_PLAYERS, THREE_PLAYERS}
     public enum ColorTeam {BLUE, WHITE}
 
-    private QtdTeamPlayers qtdPlayers;
+    private ColorTeam color;
     private Player player1;
     private Player player2;
     private Player player3;
-    private ColorTeam color;
     private int score = 0;
 
-    public Team (QtdTeamPlayers qtdPlayers){
-        this.qtdPlayers = qtdPlayers;
+    public Team (){
     }
 
     public Player getPlayer1() {

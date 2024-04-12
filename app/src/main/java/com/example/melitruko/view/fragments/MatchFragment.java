@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.databinding.FragmentMatchBinding;
-import com.example.melitruko.databinding.FragmentScoreBinding;
 import com.example.melitruko.viewmodel.MatchViewModel;
 
 public class MatchFragment extends Fragment {
