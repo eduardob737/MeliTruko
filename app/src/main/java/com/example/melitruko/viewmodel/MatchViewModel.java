@@ -14,6 +14,7 @@ import java.net.URI;
 public class MatchViewModel extends AndroidViewModel {
 
     private Match match;
+    private int number;
 
     public MatchViewModel(@NonNull Application application) {
         super(application);
@@ -23,6 +24,11 @@ public class MatchViewModel extends AndroidViewModel {
         match = new Match(team1, team2);
     }
 
+    public int getNumber() {
+        return number;
+    }
 
-
+    public void setNumber(int number) {
+        this.number = number;
+    }
 }

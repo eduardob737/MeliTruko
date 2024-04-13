@@ -60,7 +60,5 @@ public class TwoPlayersFragment extends Fragment {
             viewModel.getTeam().setColor(Team.ColorTeam.WHITE);
             viewModel.getMatch().setTeam2(viewModel.getTeam());
         });
-
-        // TODO parei aqui...definir se o app terá uma ou duas VM e como implementar isso da melhor forma
     }
 }

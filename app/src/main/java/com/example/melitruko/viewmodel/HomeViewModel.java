@@ -16,6 +16,15 @@ public class HomeViewModel extends AndroidViewModel {
     private Player player;
     private Team team = new Team();
     private Match match = new Match();
+    private int number;
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
