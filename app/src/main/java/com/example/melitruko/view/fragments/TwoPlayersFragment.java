@@ -1,28 +1,19 @@
 package com.example.melitruko.view.fragments;
 
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.renderscript.ScriptGroup;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.melitruko.R;
-import com.example.melitruko.Utils;
 import com.example.melitruko.databinding.FragmentTwoPlayersBinding;
-import com.example.melitruko.model.Team;
 import com.example.melitruko.viewmodel.HomeViewModel;
 
 import java.net.URI;
-import java.util.Objects;
 
 public class TwoPlayersFragment extends Fragment {
 
@@ -49,16 +40,12 @@ public class TwoPlayersFragment extends Fragment {
     private void configuraAcoesBotoesPlayers() {
         binding.ivPlayer1.setOnClickListener(view1 -> {
             viewModel.setNewPlayer("mock1_blue", uriMock);
-            viewModel.getTeam().setPlayer1(viewModel.getPlayer());
-            viewModel.getTeam().setColor(Team.ColorTeam.BLUE);
-            viewModel.getMatch().setTeam1(viewModel.getTeam());
+            viewModel.getBlueTeam().setPlayer1(viewModel.getPlayer());
         });
 
         binding.ivPlayer2.setOnClickListener(view1 -> {
             viewModel.setNewPlayer("mock1_white", uriMock);
-            viewModel.getTeam().setPlayer1(viewModel.getPlayer());
-            viewModel.getTeam().setColor(Team.ColorTeam.WHITE);
-            viewModel.getMatch().setTeam2(viewModel.getTeam());
+            viewModel.getWhiteTeam().setPlayer1(viewModel.getPlayer());
         });
     }
 }

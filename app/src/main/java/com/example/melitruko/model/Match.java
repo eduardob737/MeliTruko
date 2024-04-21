@@ -1,4 +1,5 @@
 package com.example.melitruko.model;
+
 public class Match {
 
     public enum QtdPlayers {
@@ -6,12 +7,12 @@ public class Match {
     }
 
     private int matchValue = 1;
-    private Team team1;
-    private Team team2;
+    private Team blueTeam;
+    private Team whiteTeam;
 
-    public Match (Team team1, Team team2){
-        this.team1 = team1;
-        this.team2 = team2;
+    public Match (Team blueTeam, Team whiteTeam){
+        this.blueTeam = blueTeam;
+        this.whiteTeam = whiteTeam;
     }
     public Match (){}
 
@@ -23,19 +24,19 @@ public class Match {
         this.matchValue = matchValue;
     }
 
-    public Team getTeam1() {
-        return team1;
+    public Team getBlueTeam() {
+        return blueTeam;
     }
 
-    public void setTeam1(Team team1) {
-        this.team1 = team1;
+    public void setBlueTeam(Team blueTeam) {
+        this.blueTeam = blueTeam;
     }
 
-    public Team getTeam2() {
-        return team2;
+    public Team getWhiteTeam() {
+        return whiteTeam;
     }
 
-    public void setTeam2(Team team2) {
-        this.team2 = team2;
+    public void setWhiteTeam(Team whiteTeam) {
+        this.whiteTeam = whiteTeam;
     }
 }

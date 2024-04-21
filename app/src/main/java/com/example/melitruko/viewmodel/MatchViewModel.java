@@ -9,26 +9,22 @@ import com.example.melitruko.model.Match;
 import com.example.melitruko.model.Player;
 import com.example.melitruko.model.Team;
 
+import java.io.Serializable;
 import java.net.URI;
 
 public class MatchViewModel extends AndroidViewModel {
 
     private Match match;
-    private int number;
 
     public MatchViewModel(@NonNull Application application) {
         super(application);
     }
 
-    private void setNewMatch(Team team1, Team team2){
-        match = new Match(team1, team2);
+    public void setNewMatch(Serializable blueTeam, Serializable whiteTeam){
+        match = new Match((Team) blueTeam, (Team) whiteTeam);
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
+    public Match getMatch() {
+        return match;
     }
 }

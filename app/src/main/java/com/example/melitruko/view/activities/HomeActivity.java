@@ -52,8 +52,9 @@ public class HomeActivity extends AppCompatActivity {
             } else {
                 // TODO validar se configuração do jogo está completa e correta antes de prosseguir
 
-                viewModel.setNumber(5);
                 Intent intent = new Intent(this, MatchActivity.class);
+                intent.putExtra("BLUE_TEAM", viewModel.getBlueTeam());
+                intent.putExtra("WHITE_TEAM", viewModel.getWhiteTeam());
                 startActivity(intent);
             }
         });

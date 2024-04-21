@@ -124,7 +124,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/view_white_team"
-        app:layout_constraintTop_toBottomOf="@+id/tv_score_white_team"
+        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
         app:shapeAppearanceOverlay="@style/circleImageView"
         app:srcCompat="@drawable/img_perfil" />
 
@@ -140,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="@+id/view_white_team"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_player1_white"
-        app:layout_constraintTop_toBottomOf="@+id/tv_score_white_team" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score" />
 
     <TextView
         android:id="@+id/tv_name_white_team"
@@ -167,7 +167,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view_blue_team" />
 
     <TextView
-        android:id="@+id/tv_score_blue_team"
+        android:id="@+id/tv_blue_team_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -179,7 +179,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_player1_blue" />
 
     <TextView
-        android:id="@+id/tv_score_white_team"
+        android:id="@+id/tv_white_team_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"

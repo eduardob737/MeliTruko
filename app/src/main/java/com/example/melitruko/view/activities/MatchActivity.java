@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.ActivityMatchBinding;
+import com.example.melitruko.model.Match;
 import com.example.melitruko.view.fragments.MatchFragment;
-import com.example.melitruko.viewmodel.HomeViewModel;
 import com.example.melitruko.viewmodel.MatchViewModel;
 import com.example.melitruko.viewmodel.ViewModelProviderFactory;
 
@@ -26,6 +26,12 @@ public class MatchActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, factory).get(MatchViewModel.class);
         binding = ActivityMatchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Bundle bundle = getIntent().getExtras();
+
+        if ((bundle != null) && (bundle.containsKey("BLUE_TEAM"))){
+            viewModel.setNewMatch(bundle.getSerializable("BLUE_TEAM"), bundle.getSerializable("WHITE_TEAM"));
+        }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, MatchFragment.class, null).commit();
     }

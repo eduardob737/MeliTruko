@@ -159,33 +159,33 @@
         app:layout_constraintTop_toBottomOf="@+id/view_blue_team" />
 
     <View
-        android:id="@+id/view_score_blue_team"
+        android:id="@+id/view_blue_team_score"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="-2dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/style_view_blue_team"
-        app:layout_constraintEnd_toStartOf="@+id/view_score_white_team"
+        app:layout_constraintEnd_toStartOf="@+id/view_white_team_score"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvXis" />
 
     <TextView
-        android:id="@+id/tv_score_blue_team"
+        android:id="@+id/tv_blue_team_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        tools:text="0"
         android:textColor="@color/white"
         android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view_score_blue_team"
-        app:layout_constraintEnd_toEndOf="@+id/view_score_blue_team"
-        app:layout_constraintStart_toStartOf="@+id/view_score_blue_team"
-        app:layout_constraintTop_toTopOf="@+id/view_score_blue_team" />
+        app:layout_constraintBottom_toBottomOf="@+id/view_blue_team_score"
+        app:layout_constraintEnd_toEndOf="@+id/view_blue_team_score"
+        app:layout_constraintStart_toStartOf="@+id/view_blue_team_score"
+        app:layout_constraintTop_toTopOf="@+id/view_blue_team_score" />
 
     <View
-        android:id="@+id/view_score_white_team"
+        android:id="@+id/view_white_team_score"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
@@ -194,48 +194,48 @@
         android:background="@drawable/style_view_white_team"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/view_score_blue_team"
+        app:layout_constraintStart_toEndOf="@+id/view_blue_team_score"
         app:layout_constraintTop_toBottomOf="@id/tvXis" />
 
     <TextView
-        android:id="@+id/tv_score_white_team"
+        android:id="@+id/tv_white_team_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        tools:text="0"
         android:textColor="@color/azul_marinho"
         android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view_score_white_team"
-        app:layout_constraintEnd_toEndOf="@+id/view_score_white_team"
-        app:layout_constraintStart_toStartOf="@+id/view_score_white_team"
-        app:layout_constraintTop_toTopOf="@+id/view_score_white_team" />
+        app:layout_constraintBottom_toBottomOf="@+id/view_white_team_score"
+        app:layout_constraintEnd_toEndOf="@+id/view_white_team_score"
+        app:layout_constraintStart_toStartOf="@+id/view_white_team_score"
+        app:layout_constraintTop_toTopOf="@+id/view_white_team_score" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_add_points_blue_team"
+        android:id="@+id/btn_to_add_points_blue_team"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/style_btn_blue_add_points"
-        app:layout_constraintEnd_toStartOf="@+id/btn_add_points_white_team"
+        app:layout_constraintEnd_toStartOf="@+id/btn_to_add_points_white_team"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_score_blue_team" />
+        app:layout_constraintTop_toBottomOf="@id/view_blue_team_score" />
 
     <TextView
-        android:id="@+id/tv_add_points_blue_team"
+        android:id="@+id/tv_to_add_points_blue_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+1"
+        tools:text="+1"
         android:textColor="@color/white"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_add_points_blue_team"
-        app:layout_constraintEnd_toEndOf="@+id/btn_add_points_blue_team"
-        app:layout_constraintStart_toStartOf="@+id/btn_add_points_blue_team"
-        app:layout_constraintTop_toTopOf="@+id/btn_add_points_blue_team" />
+        app:layout_constraintBottom_toBottomOf="@+id/btn_to_add_points_blue_team"
+        app:layout_constraintEnd_toEndOf="@+id/btn_to_add_points_blue_team"
+        app:layout_constraintStart_toStartOf="@+id/btn_to_add_points_blue_team"
+        app:layout_constraintTop_toTopOf="@+id/btn_to_add_points_blue_team" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_add_points_white_team"
+        android:id="@+id/btn_to_add_points_white_team"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="10dp"
@@ -243,23 +243,23 @@
         android:background="@drawable/style_btn_white_team"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_add_points_blue_team"
-        app:layout_constraintTop_toBottomOf="@id/view_score_white_team" />
+        app:layout_constraintStart_toEndOf="@+id/btn_to_add_points_blue_team"
+        app:layout_constraintTop_toBottomOf="@id/view_white_team_score" />
 
     <TextView
-        android:id="@+id/tv_add_points_white_team"
+        android:id="@+id/tv_to_add_points_white_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+1"
+        tools:text="+1"
         android:textColor="@color/azul_marinho"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_add_points_white_team"
-        app:layout_constraintEnd_toEndOf="@+id/btn_add_points_white_team"
-        app:layout_constraintStart_toStartOf="@+id/btn_add_points_white_team"
-        app:layout_constraintTop_toTopOf="@+id/btn_add_points_white_team" />
+        app:layout_constraintBottom_toBottomOf="@+id/btn_to_add_points_white_team"
+        app:layout_constraintEnd_toEndOf="@+id/btn_to_add_points_white_team"
+        app:layout_constraintStart_toStartOf="@+id/btn_to_add_points_white_team"
+        app:layout_constraintTop_toTopOf="@+id/btn_to_add_points_white_team" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_truco"
+        android:id="@+id/btn_to_add_match_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"

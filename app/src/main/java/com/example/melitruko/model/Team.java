@@ -1,6 +1,8 @@
 package com.example.melitruko.model;
 
-public class Team {
+import java.io.Serializable;
+
+public class Team implements Serializable {
 
     public enum QtdTeamPlayers { ONE_PLAYER, TWO_PLAYERS, THREE_PLAYERS}
     public enum ColorTeam {BLUE, WHITE}
