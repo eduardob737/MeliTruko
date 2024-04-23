@@ -2,11 +2,10 @@ package com.example.melitruko.model;
 
 public class Match {
 
-    public enum QtdPlayers {
-        TWO_PLAYERS, FOUR_PLAYERS, SIX_PLAYERS;
-    }
-
     private int matchValue = 1;
+    private final int initialValueMatch = 1;
+    private final int additionalValueMatch = 3;
+    private final int finalValueMatch = 12;
     private Team blueTeam;
     private Team whiteTeam;
 
@@ -38,5 +37,17 @@ public class Match {
 
     public void setWhiteTeam(Team whiteTeam) {
         this.whiteTeam = whiteTeam;
+    }
+
+    public int getInitialValueMatch() {
+        return initialValueMatch;
+    }
+
+    public int getAdditionalValueMatch() {
+        return additionalValueMatch;
+    }
+
+    public int getFinalValueMatch() {
+        return finalValueMatch;
     }
 }

@@ -45,6 +45,10 @@ public class MatchFragment extends Fragment {
     }
 
     private void setupButtonsActions() {
+        binding.btnBack.setOnClickListener(view ->
+            requireActivity().finish()
+        );
+
         binding.btnToAddPointsBlueTeam.setOnClickListener(view1 -> {
             viewModel.getMatch().getBlueTeam().setScore(getBlueTeamScore() + getMatchValue());
             binding.tvBlueTeamScore.setText(String.valueOf(getBlueTeamScore()));
@@ -56,14 +60,14 @@ public class MatchFragment extends Fragment {
         });
 
         binding.btnToAddMatchValue.setOnClickListener(view1 -> {
-            if (getMatchValue() == 1){
-                viewModel.getMatch().setMatchValue(3);
+            if (getMatchValue() == viewModel.getMatch().getInitialValueMatch()){
+                viewModel.getMatch().setMatchValue(viewModel.getMatch().getAdditionalValueMatch());
             } else {
-                viewModel.getMatch().setMatchValue(getMatchValue() + 3);
+                viewModel.getMatch().setMatchValue(getMatchValue() + viewModel.getMatch().getAdditionalValueMatch());
             }
             setupTextViewToAddPoints();
 
-            if (getMatchValue() == 12)
+            if (getMatchValue() == viewModel.getMatch().getFinalValueMatch())
                 binding.btnToAddMatchValue.setVisibility(View.GONE);
         });
     }
