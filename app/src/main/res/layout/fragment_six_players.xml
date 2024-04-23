@@ -14,13 +14,7 @@
 
     <ImageButton
         android:id="@+id/ivPlayer1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/player_photo"
-        android:padding="6dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/person"
+        style="@style/Style.ImageButton.Profile"
         app:layout_constraintEnd_toStartOf="@+id/ivPlayer2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,13 +34,7 @@
 
     <ImageButton
         android:id="@+id/ivPlayer2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/player_photo"
-        android:padding="6dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/person"
+        style="@style/Style.ImageButton.Profile"
         app:layout_constraintEnd_toStartOf="@+id/ivPlayer3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivPlayer1"
@@ -66,13 +54,7 @@
 
     <ImageButton
         android:id="@+id/ivPlayer3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/player_photo"
-        android:padding="6dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/person"
+        style="@style/Style.ImageButton.Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivPlayer2"
@@ -104,13 +86,8 @@
 
     <ImageButton
         android:id="@+id/ivPlayer4"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/player_photo"
-        android:padding="6dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/person"
+        style="@style/Style.ImageButton.Profile"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toStartOf="@+id/ivPlayer5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,13 +109,8 @@
 
     <ImageButton
         android:id="@+id/ivPlayer5"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/player_photo"
-        android:padding="6dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/person"
+        style="@style/Style.ImageButton.Profile"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toStartOf="@+id/ivPlayer6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivPlayer4"
@@ -160,13 +132,8 @@
 
     <ImageButton
         android:id="@+id/ivPlayer6"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/player_photo"
-        android:padding="6dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/person"
+        style="@style/Style.ImageButton.Profile"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivPlayer5"
