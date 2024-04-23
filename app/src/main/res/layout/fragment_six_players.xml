@@ -1,156 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="30dp"
-    android:background="@color/azul_marinho"
+    android:background="@color/navy_blue"
     app:layout_constraintBottom_toTopOf="@+id/materialButton"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/chipGroup">
+    app:layout_constraintTop_toBottomOf="@+id/chip_group">
 
     <ImageButton
-        android:id="@+id/ivPlayer1"
+        android:id="@+id/iv_player_1"
         style="@style/Style.ImageButton.Profile"
-        app:layout_constraintEnd_toStartOf="@+id/ivPlayer2"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player_2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/cd_btn_player" />
 
     <TextView
-        android:id="@+id/tvPlayer1"
+        android:id="@+id/tv_player_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Jogador 1"
+        android:text="@string/txt_player_1"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer1"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer1"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer1" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_player_1"
+        app:layout_constraintStart_toStartOf="@+id/iv_player_1"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player_1" />
 
     <ImageButton
-        android:id="@+id/ivPlayer2"
+        android:id="@+id/iv_player_2"
         style="@style/Style.ImageButton.Profile"
-        app:layout_constraintEnd_toStartOf="@+id/ivPlayer3"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player_3"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ivPlayer1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/iv_player_1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/cd_btn_player" />
 
     <TextView
-        android:id="@+id/tvPlayer2"
+        android:id="@+id/tv_player_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Jogador 2"
+        android:text="@string/txt_player_2"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer2"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer2"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer2" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_player_2"
+        app:layout_constraintStart_toStartOf="@+id/iv_player_2"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player_2" />
 
     <ImageButton
-        android:id="@+id/ivPlayer3"
+        android:id="@+id/iv_player_3"
         style="@style/Style.ImageButton.Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ivPlayer2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/iv_player_2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/cd_btn_player" />
 
     <TextView
-        android:id="@+id/tvPlayer3"
+        android:id="@+id/tv_player_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Jogador 3"
+        android:text="@string/txt_player_3"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer3"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer3"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer3" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_player_3"
+        app:layout_constraintStart_toStartOf="@+id/iv_player_3"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player_3" />
 
     <TextView
-        android:id="@+id/tvXis"
+        android:id="@+id/tv_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="X"
+        android:text="@string/txt_x"
         android:textColor="@color/white"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPlayer1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_1" />
 
     <ImageButton
-        android:id="@+id/ivPlayer4"
+        android:id="@+id/iv_player_4"
         style="@style/Style.ImageButton.Profile"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/ivPlayer5"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player_5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvXis" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_x"
+        android:contentDescription="@string/cd_btn_player" />
 
     <TextView
-        android:id="@+id/tvPlayer4"
+        android:id="@+id/tv_player_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:text="Jogador 4"
+        android:text="@string/txt_player_4"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer4"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer4"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer4" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_player_4"
+        app:layout_constraintStart_toStartOf="@+id/iv_player_4"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player_4" />
 
     <ImageButton
-        android:id="@+id/ivPlayer5"
+        android:id="@+id/iv_player_5"
         style="@style/Style.ImageButton.Profile"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/ivPlayer6"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player_6"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ivPlayer4"
-        app:layout_constraintTop_toBottomOf="@+id/tvXis" />
+        app:layout_constraintStart_toEndOf="@+id/iv_player_4"
+        app:layout_constraintTop_toBottomOf="@+id/tv_x"
+        android:contentDescription="@string/cd_btn_player" />
 
     <TextView
-        android:id="@+id/tvPlayer5"
+        android:id="@+id/tv_player_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:text="Jogador 5"
+        android:text="@string/txt_player_5"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer5"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer5"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer5" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_player_5"
+        app:layout_constraintStart_toStartOf="@+id/iv_player_5"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player_5" />
 
     <ImageButton
-        android:id="@+id/ivPlayer6"
+        android:id="@+id/iv_player_6"
         style="@style/Style.ImageButton.Profile"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ivPlayer5"
-        app:layout_constraintTop_toBottomOf="@+id/tvXis" />
+        app:layout_constraintStart_toEndOf="@+id/iv_player_5"
+        app:layout_constraintTop_toBottomOf="@+id/tv_x"
+        android:contentDescription="@string/cd_btn_player" />
 
     <TextView
-        android:id="@+id/tvPlayer6"
+        android:id="@+id/tv_player_6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:text="Jogador 6"
+        android:text="@string/txt_player_6"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ivPlayer6"
-        app:layout_constraintStart_toStartOf="@+id/ivPlayer6"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlayer6" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_player_6"
+        app:layout_constraintStart_toStartOf="@+id/iv_player_6"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player_6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

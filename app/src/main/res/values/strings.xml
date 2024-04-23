@@ -2,4 +2,32 @@
     <string name="app_name">MeliTruko</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_melitruko">MeliTruko</string>
+    <string name="title_players_list">Lista de jogadores</string>
+    <string name="cd_icon_person">Icone de uma pessoa</string>
+    <string name="label_no_players_added">Nenhum jogador \n adicionado</string>
+    <string name="txt_add_player">Adicionar jogador</string>
+    <string name="cd_ic_back">Seta de retorno à tela anterior</string>
+    <string name="cd_ic_players">Ícone de pessoas/ jogadores</string>
+    <string name="txt_1x1">1x1</string>
+    <string name="txt_2x2">2x2</string>
+    <string name="txt_3x3">3x3</string>
+    <string name="txt_start_game">Iniciar jogo</string>
+    <string name="txt_blue">Azul</string>
+    <string name="txt_white">Branco</string>
+    <string name="txt_x">X</string>
+    <string name="txt_truco">TRUCO!!</string>
+    <string name="txt_end_game">Fim de jogo!</string>
+    <string name="cd_player_photo">Foto do jogador</string>
+    <string name="txt_new_game">Novo jogo</string>
+    <string name="cd_btn_player">Botão para escolher um jogador</string>
+    <string name="txt_player_1">Jogador 1</string>
+    <string name="txt_player_2">Jogador 2</string>
+    <string name="txt_player_3">Jogador 3</string>
+    <string name="txt_player_4">Jogador 4</string>
+    <string name="txt_player_5">Jogador 5</string>
+    <string name="txt_player_6">Jogador 6</string>
+    <string name="cd_btn_add_player_image">Botão para inserir uma imagem ao jogador</string>
+    <string name="txt_hint_insert_player_name">Insira o nome do jogador</string>
+    <string name="cd_app_logo">Logotipo do aplicativo Melitruko</string>
 </resources>

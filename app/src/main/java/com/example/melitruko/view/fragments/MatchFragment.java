@@ -52,11 +52,13 @@ public class MatchFragment extends Fragment {
         binding.btnToAddPointsBlueTeam.setOnClickListener(view1 -> {
             viewModel.getMatch().getBlueTeam().setScore(getBlueTeamScore() + getMatchValue());
             binding.tvBlueTeamScore.setText(String.valueOf(getBlueTeamScore()));
+            resetMatchValue();
         });
 
         binding.btnToAddPointsWhiteTeam.setOnClickListener(view1 -> {
             viewModel.getMatch().getWhiteTeam().setScore(getWhiteTeamScore() + getMatchValue());
             binding.tvWhiteTeamScore.setText(String.valueOf(getWhiteTeamScore()));
+            resetMatchValue();
         });
 
         binding.btnToAddMatchValue.setOnClickListener(view1 -> {
@@ -70,6 +72,11 @@ public class MatchFragment extends Fragment {
             if (getMatchValue() == viewModel.getMatch().getFinalValueMatch())
                 binding.btnToAddMatchValue.setVisibility(View.GONE);
         });
+    }
+
+    private void resetMatchValue() {
+        viewModel.getMatch().setMatchValue(viewModel.getMatch().getInitialValueMatch());
+        setupTextViewToAddPoints();
     }
 
     private int getWhiteTeamScore() {

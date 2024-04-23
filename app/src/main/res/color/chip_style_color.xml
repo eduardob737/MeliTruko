@@ -1,10 +1,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:color="@color/white"
-        android:textColor="@color/azul_marinho"
+        android:textColor="@color/navy_blue"
         android:state_checked="false"/>
     <item
-        android:color="@color/azul_marinho"
+        android:color="@color/navy_blue"
         android:textColor="@color/white"
         android:state_checked="true" />
 </selector>

@@ -11,7 +11,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/azul_marinho"
+        android:background="@color/navy_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +20,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MeliTruko"
+        android:text="@string/title_melitruko"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/ivTeam"
+        android:id="@+id/ic_players"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="14dp"
@@ -38,7 +38,8 @@
         android:foreground="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        android:contentDescription="@string/cd_ic_players" />
 
     <TextView
         android:id="@+id/textView2"
@@ -46,14 +47,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="N° de jogadores"
-        android:textColor="@color/azul_marinho"
+        android:textColor="@color/navy_blue"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+        android:id="@+id/chip_group"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -63,33 +64,33 @@
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipOneVersusOne"
+            android:id="@+id/chip_one_versus_one"
             style="@style/Theme.SelectorChip"
             android:layout_width="70dp"
             android:layout_height="60dp"
-            android:text="1x1"
+            android:text="@string/txt_1x1"
             app:chipCornerRadius="20dp"
-            app:chipStrokeColor="@color/azul_marinho"
+            app:chipStrokeColor="@color/navy_blue"
             app:chipStrokeWidth="2dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipTwoVersusTwo"
+            android:id="@+id/chip_two_versus_two"
             style="@style/Theme.SelectorChip"
             android:layout_width="70dp"
             android:layout_height="60dp"
-            android:text="2x2"
+            android:text="@string/txt_2x2"
             app:chipCornerRadius="20dp"
-            app:chipStrokeColor="@color/azul_marinho"
+            app:chipStrokeColor="@color/navy_blue"
             app:chipStrokeWidth="2dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipThreeVersusThree"
+            android:id="@+id/chip_three_versus_three"
             style="@style/Theme.SelectorChip"
             android:layout_width="70dp"
             android:layout_height="60dp"
-            android:text="3x3"
+            android:text="@string/txt_3x3"
             app:chipCornerRadius="20dp"
-            app:chipStrokeColor="@color/azul_marinho"
+            app:chipStrokeColor="@color/navy_blue"
             app:chipStrokeWidth="2dp" />
 
     </com.google.android.material.chip.ChipGroup>
@@ -101,7 +102,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_start_game"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        app:layout_constraintTop_toBottomOf="@+id/chip_group"
         tools:layout_editor_absoluteX="0dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -109,7 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="Iniciar jogo"
+        android:text="@string/txt_start_game"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:cornerRadius="0dp"

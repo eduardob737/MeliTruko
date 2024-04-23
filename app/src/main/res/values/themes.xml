@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MeliTruko" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/azul_marinho</item>
+         <item name="colorPrimary">@color/navy_blue</item>
          <item name="colorSecondary">@color/white</item>
         <item name="fontFamily">@font/jockey_one_regular</item>
     </style>
@@ -41,6 +41,7 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:src">@drawable/person</item>
+        <item name="android:contentDescription">@string/cd_btn_player</item>
     </style>
 
 </resources>

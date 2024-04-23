@@ -11,7 +11,7 @@
         android:id="@+id/main_view"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/azul_marinho"
+        android:background="@color/navy_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +20,7 @@
         android:id="@+id/tv_name_app"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MeliTruko"
+        android:text="@string/title_melitruko"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/main_view"
@@ -38,15 +38,16 @@
         android:foreground="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="@+id/tv_name_app"
         app:layout_constraintStart_toStartOf="@+id/main_view"
-        app:layout_constraintTop_toTopOf="@+id/tv_name_app" />
+        app:layout_constraintTop_toTopOf="@+id/tv_name_app"
+        android:contentDescription="@string/cd_ic_back" />
 
     <TextView
         android:id="@+id/tv_end_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Fim de jogo!"
-        android:textColor="@color/azul_marinho"
+        android:text="@string/txt_end_game"
+        android:textColor="@color/navy_blue"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/view_blue_team"
@@ -58,7 +59,7 @@
         android:layout_height="160dp"
         android:layout_marginStart="-2dp"
         android:layout_marginTop="30dp"
-        android:background="@color/azul_marinho"
+        android:background="@color/navy_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_end_game"/>
@@ -74,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvXis" />
+        app:layout_constraintTop_toBottomOf="@id/tv_x" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player1_blue"
@@ -88,7 +89,8 @@
         app:layout_constraintStart_toStartOf="@id/view_blue_team"
         app:layout_constraintTop_toBottomOf="@+id/tv_name_blue_team"
         app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_perfil" />
+        app:srcCompat="@drawable/img_profile"
+        android:contentDescription="@string/cd_player_photo"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player2_blue"
@@ -97,17 +99,18 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="10dp"
         app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_perfil"
+        app:srcCompat="@drawable/img_profile"
         app:layout_constraintEnd_toEndOf="@+id/view_blue_team"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_player1_blue"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_blue_team" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_blue_team"
+        android:contentDescription="@string/cd_player_photo"/>
 
     <TextView
         android:id="@+id/tv_name_blue_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Azul"
+        android:text="@string/txt_blue"
         android:layout_marginTop="4dp"
         android:textColor="@color/white"
         android:textSize="26sp"
@@ -127,7 +130,8 @@
         app:layout_constraintStart_toStartOf="@id/view_white_team"
         app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
         app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_perfil" />
+        app:srcCompat="@drawable/img_profile"
+        android:contentDescription="@string/cd_player_photo"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player2_white"
@@ -136,32 +140,33 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="10dp"
         app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_perfil"
+        app:srcCompat="@drawable/img_profile"
         app:layout_constraintBottom_toBottomOf="@+id/iv_player1_white"
         app:layout_constraintEnd_toEndOf="@+id/view_white_team"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_player1_white"
-        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
+        android:contentDescription="@string/cd_player_photo"/>
 
     <TextView
         android:id="@+id/tv_name_white_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Branco"
+        android:text="@string/txt_white"
         android:layout_marginTop="10dp"
-        android:textColor="@color/azul_marinho"
+        android:textColor="@color/navy_blue"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@+id/view_white_team"
         app:layout_constraintStart_toStartOf="@+id/view_white_team"
         app:layout_constraintTop_toBottomOf="@+id/iv_player1_white" />
 
     <TextView
-        android:id="@+id/tvXis"
+        android:id="@+id/tv_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="X"
-        android:textColor="@color/azul_marinho"
+        android:text="@string/txt_x"
+        android:textColor="@color/navy_blue"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -172,7 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="12"
+        tools:text="12"
         android:textColor="@color/white"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -183,18 +188,19 @@
         android:id="@+id/tv_white_team_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
-        android:textColor="@color/azul_marinho"
+        tools:text="0"
+        android:textColor="@color/navy_blue"
         android:textSize="34sp"
-        app:layout_constraintTop_toTopOf="@+id/view_white_team"
-        tools:layout_editor_absoluteX="191dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_white_team" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_new_game"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="Novo jogo"
+        android:text="@string/txt_new_game"
         android:textColor="@color/white"
         android:textSize="36sp"
         android:padding="8dp"
