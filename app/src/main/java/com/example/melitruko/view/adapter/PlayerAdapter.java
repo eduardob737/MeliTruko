@@ -4,9 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +42,6 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
             Glide.with(holder.itemView)
                     .load(player.getPhoto())
                     .into(holder.ivPlayer);
-
         }
     }
 
@@ -53,7 +50,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         return players.size();
     }
 
-    public class PlayerViewHolder extends RecyclerView.ViewHolder {
+    public static class PlayerViewHolder extends RecyclerView.ViewHolder {
         public ShapeableImageView ivPlayer;
         public TextView tvPlayer;
 
@@ -63,12 +60,12 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
             ivPlayer = itemView.findViewById(R.id.iv_player);
             tvPlayer = itemView.findViewById(R.id.tv_player);
 
-            itemView.setOnClickListener(view -> {
+            /*itemView.setOnClickListener(view -> {
                 if (!players.isEmpty()) {
                     Player player = players.get(getLayoutPosition());
                     Toast.makeText(context, player.getName(), Toast.LENGTH_SHORT).show();
                 }
-            });
+            });*/
 
         }
     }

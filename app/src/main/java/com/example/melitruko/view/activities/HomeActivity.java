@@ -2,10 +2,13 @@ package com.example.melitruko.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
@@ -105,4 +108,5 @@ public class HomeActivity extends AppCompatActivity {
         }
         return true;
     }
+
 }
