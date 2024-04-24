@@ -3,7 +3,6 @@ package com.example.melitruko.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.melitruko.R;
 import com.example.melitruko.model.Player;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
@@ -35,8 +35,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         if ((players != null) && (!players.isEmpty())) {
 
             Player player = players.get(position);
-            holder.ivPlayer.setImageURI(player.getPhoto());
             holder.tvPlayer.setText(player.getName());
+            holder.ivPlayer.setImageURI(player.getPhoto());
         }
     }
 
@@ -46,7 +46,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
     }
 
     public static class PlayerViewHolder extends RecyclerView.ViewHolder {
-        public ImageView ivPlayer;
+        public ShapeableImageView ivPlayer;
         public TextView tvPlayer;
 
         public PlayerViewHolder(@NonNull View itemView) {

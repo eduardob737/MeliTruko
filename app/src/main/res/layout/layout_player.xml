@@ -7,16 +7,15 @@
     android:paddingHorizontal="10dp"
     android:padding="8dp">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="40dp"
-        android:background="@drawable/style_players_list"
         android:contentDescription="@string/cd_player_photo"
-        android:padding="6dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/person"
+        app:shapeAppearanceOverlay="@style/Rounded.Square.ImageView"
+        android:src="@drawable/img_profile"
         app:layout_constraintEnd_toStartOf="@+id/tv_player"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
