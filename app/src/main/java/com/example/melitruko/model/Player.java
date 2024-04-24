@@ -1,12 +1,13 @@
 package com.example.melitruko.model;
 
+import android.net.Uri;
+
 import java.io.Serializable;
-import java.net.URI;
 
 public class Player implements Serializable {
 
     private String name;
-    private URI photo;
+    private Uri photo;
 
     public String getName() {
         return name;
@@ -16,11 +17,11 @@ public class Player implements Serializable {
         this.name = name;
     }
 
-    public URI getPhoto() {
+    public Uri getPhoto() {
         return photo;
     }
 
-    public void setPhoto(URI photo) {
+    public void setPhoto(Uri photo) {
         this.photo = photo;
     }
 }

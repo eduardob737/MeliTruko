@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentMatchBinding;
 import com.example.melitruko.viewmodel.MatchViewModel;
 
@@ -46,7 +47,7 @@ public class MatchFragment extends Fragment {
 
     private void setupButtonsActions() {
         binding.btnBack.setOnClickListener(view ->
-            requireActivity().finish()
+                requireActivity().finish()
         );
 
         binding.btnToAddPointsBlueTeam.setOnClickListener(view1 -> {
@@ -62,21 +63,40 @@ public class MatchFragment extends Fragment {
         });
 
         binding.btnToAddMatchValue.setOnClickListener(view1 -> {
-            if (getMatchValue() == viewModel.getMatch().getInitialValueMatch()){
+            if (getMatchValue() == viewModel.getMatch().getInitialValueMatch()) {
                 viewModel.getMatch().setMatchValue(viewModel.getMatch().getAdditionalValueMatch());
             } else {
                 viewModel.getMatch().setMatchValue(getMatchValue() + viewModel.getMatch().getAdditionalValueMatch());
             }
             setupTextViewToAddPoints();
+            setupTextBtnToAddMatchValue();
 
             if (getMatchValue() == viewModel.getMatch().getFinalValueMatch())
                 binding.btnToAddMatchValue.setVisibility(View.GONE);
         });
     }
 
+    private void setupTextBtnToAddMatchValue() {
+        switch (getMatchValue()) {
+            case 1:
+                binding.btnToAddMatchValue.setText(R.string.txt_btn_truco);
+                break;
+            case 3:
+                binding.btnToAddMatchValue.setText(R.string.txt_btn_six);
+                break;
+            case 6:
+                binding.btnToAddMatchValue.setText(R.string.txt_btn_nine);
+                break;
+            case 9:
+                binding.btnToAddMatchValue.setText(R.string.txt_btn_twelve);
+                break;
+        }
+    }
+
     private void resetMatchValue() {
         viewModel.getMatch().setMatchValue(viewModel.getMatch().getInitialValueMatch());
         setupTextViewToAddPoints();
+        setupTextBtnToAddMatchValue();
     }
 
     private int getWhiteTeamScore() {

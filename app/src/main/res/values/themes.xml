@@ -35,12 +35,12 @@
     <style name="Style.ImageButton.Profile" parent="Widget.AppCompat.ImageButton">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
-        <item name="android:padding">6dp</item>
+        <item name="android:padding">12dp</item>
         <item name="android:layout_marginTop">30dp</item>
         <item name="android:background">@drawable/player_photo</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="android:scaleType">centerCrop</item>
-        <item name="android:src">@drawable/person</item>
+        <item name="android:src">@drawable/ic_add_person_gray</item>
         <item name="android:contentDescription">@string/cd_btn_player</item>
     </style>
 

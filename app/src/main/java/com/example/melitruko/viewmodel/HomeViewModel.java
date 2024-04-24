@@ -1,6 +1,7 @@
 package com.example.melitruko.viewmodel;
 
 import android.app.Application;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -8,11 +9,10 @@ import androidx.lifecycle.AndroidViewModel;
 import com.example.melitruko.model.Player;
 import com.example.melitruko.model.Team;
 
-import java.net.URI;
 
 public class HomeViewModel extends AndroidViewModel {
 
-    private Player player;
+    private Player player = null;
     private Team blueTeam = new Team();
     private Team whiteTeam = new Team();
 
@@ -22,7 +22,7 @@ public class HomeViewModel extends AndroidViewModel {
         whiteTeam.setColor(Team.ColorTeam.WHITE);
     }
 
-    public void setNewPlayer(String name, URI photo){
+    public void setNewPlayer(String name, Uri photo){
         player = new Player();
         player.setName(name);
         player.setPhoto(photo);

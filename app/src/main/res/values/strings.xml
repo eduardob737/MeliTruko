@@ -16,7 +16,10 @@
     <string name="txt_blue">Azul</string>
     <string name="txt_white">Branco</string>
     <string name="txt_x">X</string>
-    <string name="txt_truco">TRUCO!!</string>
+    <string name="txt_btn_truco">TRUCO!!</string>
+    <string name="txt_btn_six">SEIS!!</string>
+    <string name="txt_btn_nine">NOVE!!</string>
+    <string name="txt_btn_twelve">DOZE!!</string>
     <string name="txt_end_game">Fim de jogo!</string>
     <string name="cd_player_photo">Foto do jogador</string>
     <string name="txt_new_game">Novo jogo</string>
@@ -30,4 +33,8 @@
     <string name="cd_btn_add_player_image">Botão para inserir uma imagem ao jogador</string>
     <string name="txt_hint_insert_player_name">Insira o nome do jogador</string>
     <string name="cd_app_logo">Logotipo do aplicativo Melitruko</string>
+    <string name="txt_toast_choose_option">Escolha uma opção</string>
+    <string name="txt_numbers_players">N° de jogadores</string>
+    <string name="txt_select_a_player">Selecione um jogador</string>
+    <string name="txt_tap_the_image">Aperte nas imagens para escolher os jogadores</string>
 </resources>
