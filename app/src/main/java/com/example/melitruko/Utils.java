@@ -1,6 +1,5 @@
 package com.example.melitruko;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -58,7 +57,7 @@ public class Utils {
         player6.setPhoto(foto);
         playerList.add(player6);
 
-        /*Player player7 = new Player();
+        Player player7 = new Player();
         player7.setName("Bruno");
         player7.setPhoto(foto);
         playerList.add(player7);
@@ -78,7 +77,7 @@ public class Utils {
         player10.setPhoto(foto);
         playerList.add(player10);
 
-        Player player11 = new Player();
+        /*Player player11 = new Player();
         player11.setName("Bruno");
         player11.setPhoto(foto);
         playerList.add(player11);
@@ -96,8 +95,8 @@ public class Utils {
         Player player14 = new Player();
         player14.setName("Ultimo");
         player14.setPhoto(foto);
-        playerList.add(player14);*/
-
+        playerList.add(player14);
+*/
         return playerList;
     }
 
