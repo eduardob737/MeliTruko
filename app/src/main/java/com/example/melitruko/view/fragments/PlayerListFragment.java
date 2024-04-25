@@ -1,32 +1,32 @@
 package com.example.melitruko.view.fragments;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentPlayersListBinding;
 import com.example.melitruko.model.Player;
 import com.example.melitruko.view.RecyclerItemClickListener;
 import com.example.melitruko.view.adapter.PlayerAdapter;
 import com.example.melitruko.viewmodel.HomeViewModel;
 
+import java.util.Objects;
+
 public class PlayerListFragment extends Fragment {
     private FragmentPlayersListBinding binding;
     private HomeViewModel viewModel;
     private String TEAM_BUNDLE;
     private int PLAYER_BUNDLE;
+    private int position = -1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,17 +59,34 @@ public class PlayerListFragment extends Fragment {
         binding.recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(requireContext(), binding.recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                if (binding.recyclerView.getChildViewHolder(view).itemView.isPressed()){
+                    binding.recyclerView.getChildViewHolder(view).itemView.setPressed(false);
+                    setPosition(-1);
+                } else {
+                    binding.recyclerView.setPressed(false);
+                    binding.recyclerView.getChildViewHolder(view).itemView.setPressed(true);
+                    setPosition(position);
+                }
                 //TODO otimizar metodo setupPlayers
-
-                setupPlayers(viewModel.getList().get(position));
-                requireActivity().getOnBackPressedDispatcher().onBackPressed();
             }
 
             @Override
             public void onLongItemClick(View view, int position) {
             }
         }));
+
+        binding.btnConfirme.setOnClickListener(view1 -> {
+            if (position == -1){
+                Toast.makeText(requireActivity(), "Escolha um jogador", Toast.LENGTH_SHORT).show();
+            } else {
+                setupPlayers(viewModel.getList().get(position));
+                requireActivity().getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+    }
+
+    private void setPosition(int position) {
+        this.position = position;
     }
 
     private void setupPlayers(Player player) {

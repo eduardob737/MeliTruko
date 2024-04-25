@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_dialog_container"
     android:layout_width="320dp"
@@ -19,24 +20,70 @@
         android:text="@string/txt_tv_choose_a_player"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginVertical="10dp">
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@id/tv_choose_a_player"
+        tools:layout_editor_absoluteX="43dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            tools:itemCount="12"
+            android:focusableInTouchMode="true"
+            android:padding="10dp"
+            tools:itemCount="5"
             tools:listitem="@layout/layout_player" />
 
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+    <View
+        android:id="@id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/style_blue_view_players_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nestedScrollView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_new_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:text="Novo jogador"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_confirme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_confirme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/white"
+        android:text="Confirmar"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textColor="@color/navy_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_new_player"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
