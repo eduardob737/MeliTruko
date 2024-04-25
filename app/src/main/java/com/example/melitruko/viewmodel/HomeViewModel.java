@@ -13,7 +13,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HomeViewModel extends AndroidViewModel {
 
     private Player player = null;

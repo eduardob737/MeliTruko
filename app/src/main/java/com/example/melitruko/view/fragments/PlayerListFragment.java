@@ -1,16 +1,21 @@
 package com.example.melitruko.view.fragments;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentPlayersListBinding;
 import com.example.melitruko.model.Player;
 import com.example.melitruko.view.RecyclerItemClickListener;
@@ -54,8 +59,11 @@ public class PlayerListFragment extends Fragment {
         binding.recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(requireContext(), binding.recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                // TODO voltar a tela anterior e passar o objeto Player escolhido
-                metodoTeste(viewModel.getList().get(position));
+
+                //TODO otimizar metodo setupPlayers
+
+                setupPlayers(viewModel.getList().get(position));
+                requireActivity().getOnBackPressedDispatcher().onBackPressed();
             }
 
             @Override
@@ -64,7 +72,7 @@ public class PlayerListFragment extends Fragment {
         }));
     }
 
-    private void metodoTeste(Player player) {
+    private void setupPlayers(Player player) {
         if ((TEAM_BUNDLE.equalsIgnoreCase("BLUE")) && (PLAYER_BUNDLE == 1)){
             viewModel.getBlueTeam().setPlayer1(player);
         } else if ((TEAM_BUNDLE.equalsIgnoreCase("WHITE")) && (PLAYER_BUNDLE == 1)){

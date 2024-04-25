@@ -58,21 +58,21 @@ public class HomeActivity extends AppCompatActivity {
         binding.chipGroup.setOnCheckedStateChangeListener((chipGroup, list) -> {
             if (binding.chipOneVersusOne.isChecked()) {
                 qtdPlayers = 2;
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, TwoPlayersFragment.class, null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, TwoPlayersFragment.class, null).addToBackStack(null).commit();
                 binding.chipOneVersusOne.setEnabled(false);
                 binding.chipTwoVersusTwo.setEnabled(true);
                 binding.chipThreeVersusThree.setEnabled(true);
 
             } else if (binding.chipTwoVersusTwo.isChecked()) {
                 qtdPlayers = 4;
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FourPlayersFragment.class, null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FourPlayersFragment.class, null).addToBackStack(null).commit();
                 binding.chipTwoVersusTwo.setEnabled(false);
                 binding.chipOneVersusOne.setEnabled(true);
                 binding.chipThreeVersusThree.setEnabled(true);
 
             } else if (binding.chipThreeVersusThree.isChecked()) {
                 qtdPlayers = 6;
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, SixPlayersFragment.class, null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, SixPlayersFragment.class, null).addToBackStack(null).commit();
                 binding.chipThreeVersusThree.setEnabled(false);
                 binding.chipTwoVersusTwo.setEnabled(true);
                 binding.chipOneVersusOne.setEnabled(true);

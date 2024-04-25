@@ -20,7 +20,7 @@ public class TwoPlayersFragment extends Fragment {
     private HomeViewModel viewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentTwoPlayersBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         return binding.getRoot();
@@ -51,13 +51,13 @@ public class TwoPlayersFragment extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("TEAM", "BLUE");
             bundle.putInt("PLAYER", 1);
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, PlayerListFragment.class, bundle).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, PlayerListFragment.class, bundle).addToBackStack(null).commit();
         });
         binding.ivPlayer2.setOnClickListener(view1 -> {
             Bundle bundle = new Bundle();
             bundle.putString("TEAM", "WHITE");
             bundle.putInt("PLAYER", 1);
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, PlayerListFragment.class, bundle).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, PlayerListFragment.class, bundle).addToBackStack(null).commit();
         });
     }
 }
