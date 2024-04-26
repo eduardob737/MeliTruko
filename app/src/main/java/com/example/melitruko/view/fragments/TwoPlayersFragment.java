@@ -1,5 +1,6 @@
 package com.example.melitruko.view.fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ public class TwoPlayersFragment extends Fragment {
 
     private FragmentTwoPlayersBinding binding;
     private HomeViewModel viewModel;
+    private Uri uriMock;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

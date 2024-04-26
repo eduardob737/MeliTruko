@@ -13,6 +13,8 @@ import com.example.melitruko.view.fragments.MatchFragment;
 import com.example.melitruko.viewmodel.MatchViewModel;
 import com.example.melitruko.viewmodel.ViewModelProviderFactory;
 
+import java.util.Objects;
+
 public class MatchActivity extends AppCompatActivity {
 
     private ActivityMatchBinding binding;
@@ -27,11 +29,10 @@ public class MatchActivity extends AppCompatActivity {
         binding = ActivityMatchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Bundle bundle = getIntent().getExtras();
+        Bundle blueTeamBundle = Objects.requireNonNull(getIntent().getExtras());
+        Bundle whiteTeamBundle = Objects.requireNonNull(getIntent().getExtras());
 
-        if ((bundle != null) && (bundle.containsKey("BLUE_TEAM"))){
-            viewModel.setNewMatch(bundle.getSerializable("BLUE_TEAM"), bundle.getSerializable("WHITE_TEAM"));
-        }
+        viewModel.setNewMatch(blueTeamBundle.getParcelable("BLUE_TEAM"), whiteTeamBundle.getParcelable("WHITE_TEAM"));
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, MatchFragment.class, null).commit();
     }

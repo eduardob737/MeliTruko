@@ -1,8 +1,13 @@
 package com.example.melitruko.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
-public class Team implements Serializable {
+public class Team implements Parcelable {
 
     public enum QtdTeamPlayers { ONE_PLAYER, TWO_PLAYERS, THREE_PLAYERS}
     public enum ColorTeam {BLUE, WHITE}
@@ -15,6 +20,25 @@ public class Team implements Serializable {
 
     public Team (){
     }
+
+    protected Team(Parcel in) {
+        player1 = in.readParcelable(Player.class.getClassLoader());
+        player2 = in.readParcelable(Player.class.getClassLoader());
+        player3 = in.readParcelable(Player.class.getClassLoader());
+        score = in.readInt();
+    }
+
+    public static final Creator<Team> CREATOR = new Creator<Team>() {
+        @Override
+        public Team createFromParcel(Parcel in) {
+            return new Team(in);
+        }
+
+        @Override
+        public Team[] newArray(int size) {
+            return new Team[size];
+        }
+    };
 
     public Player getPlayer1() {
         return player1;
@@ -54,5 +78,18 @@ public class Team implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeParcelable(player1, i);
+        parcel.writeParcelable(player2, i);
+        parcel.writeParcelable(player3, i);
+        parcel.writeInt(score);
     }
 }

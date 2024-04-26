@@ -1,6 +1,7 @@
 package com.example.melitruko.viewmodel;
 
 import android.app.Application;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -20,7 +21,7 @@ public class MatchViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void setNewMatch(Serializable blueTeam, Serializable whiteTeam){
+    public void setNewMatch(Parcelable blueTeam, Parcelable whiteTeam){
         match = new Match((Team) blueTeam, (Team) whiteTeam);
     }
 

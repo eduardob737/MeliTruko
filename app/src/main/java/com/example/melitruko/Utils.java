@@ -102,7 +102,6 @@ public class Utils {
 
     public static void setupActionButtonPlayer(Context context, View view){
         Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.layout_players_list);
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         PlayerAdapter adapter = new PlayerAdapter(getList()) ;

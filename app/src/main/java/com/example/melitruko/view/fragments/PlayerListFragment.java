@@ -1,5 +1,6 @@
 package com.example.melitruko.view.fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,7 +60,7 @@ public class PlayerListFragment extends Fragment {
         binding.recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(requireContext(), binding.recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if (binding.recyclerView.getChildViewHolder(view).itemView.isPressed()){
+                if (binding.recyclerView.getChildViewHolder(view).itemView.isPressed()) {
                     binding.recyclerView.getChildViewHolder(view).itemView.setPressed(false);
                     setPosition(-1);
                 } else {
@@ -76,7 +77,7 @@ public class PlayerListFragment extends Fragment {
         }));
 
         binding.btnConfirme.setOnClickListener(view1 -> {
-            if (position == -1){
+            if (position == -1) {
                 Toast.makeText(requireActivity(), "Escolha um jogador", Toast.LENGTH_SHORT).show();
             } else {
                 setupPlayers(viewModel.getList().get(position));
@@ -90,10 +91,11 @@ public class PlayerListFragment extends Fragment {
     }
 
     private void setupPlayers(Player player) {
-        if ((TEAM_BUNDLE.equalsIgnoreCase("BLUE")) && (PLAYER_BUNDLE == 1)){
-            viewModel.getBlueTeam().setPlayer1(player);
-        } else if ((TEAM_BUNDLE.equalsIgnoreCase("WHITE")) && (PLAYER_BUNDLE == 1)){
-            viewModel.getWhiteTeam().setPlayer1(player);
+        viewModel.setPlayer(player);
+        if ((TEAM_BUNDLE.equalsIgnoreCase("BLUE")) && (PLAYER_BUNDLE == 1)) {
+            viewModel.getBlueTeam().setPlayer1(viewModel.getPlayer());
+        } else if ((TEAM_BUNDLE.equalsIgnoreCase("WHITE")) && (PLAYER_BUNDLE == 1)) {
+            viewModel.getWhiteTeam().setPlayer1(viewModel.getPlayer());
         }
     }
 
