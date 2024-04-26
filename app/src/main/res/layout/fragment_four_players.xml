@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,7 +11,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/chip_group">
 
-    <ImageButton
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player_1"
         style="@style/Style.ImageButton.Profile"
         app:layout_constraintEnd_toStartOf="@+id/iv_player_2"
@@ -23,15 +24,14 @@
         android:id="@+id/tv_player_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="@string/txt_player_1"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/iv_player_1"
         app:layout_constraintStart_toStartOf="@+id/iv_player_1"
         app:layout_constraintTop_toBottomOf="@+id/iv_player_1" />
 
-    <ImageButton
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player_2"
         style="@style/Style.ImageButton.Profile"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,10 +44,9 @@
         android:id="@+id/tv_player_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="@string/txt_player_2"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/iv_player_2"
         app:layout_constraintStart_toStartOf="@+id/iv_player_2"
         app:layout_constraintTop_toBottomOf="@+id/iv_player_2" />
@@ -64,52 +63,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_player_1" />
 
-    <ImageButton
-        android:id="@+id/iv_player_3"
-        style="@style/Style.ImageButton.Profile"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/iv_player_4"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_x"
-        android:contentDescription="@string/cd_btn_player" />
-
     <TextView
         android:id="@+id/tv_player_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
         android:text="@string/txt_player_3"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/iv_player_3"
         app:layout_constraintStart_toStartOf="@+id/iv_player_3"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player_3" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_x" />
 
-    <ImageButton
-        android:id="@+id/iv_player_4"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player_3"
         style="@style/Style.ImageButton.Profile"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/cd_btn_player"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player_4"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_player_3"
-        app:layout_constraintTop_toBottomOf="@+id/tv_x"
-        android:contentDescription="@string/cd_btn_player" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_3" />
 
     <TextView
         android:id="@+id/tv_player_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
         android:text="@string/txt_player_4"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/iv_player_4"
         app:layout_constraintStart_toStartOf="@+id/iv_player_4"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player_4" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_x" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player_4"
+        style="@style/Style.ImageButton.Profile"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/cd_btn_player"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_player_3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
