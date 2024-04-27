@@ -2,14 +2,18 @@ package com.example.melitruko.viewmodel;
 
 import android.app.Application;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.melitruko.model.Player;
 import com.example.melitruko.model.Team;
 
 import java.io.File;
+import java.io.PipedReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +23,24 @@ public class HomeViewModel extends AndroidViewModel {
     private Team blueTeam = new Team();
     private Team whiteTeam = new Team();
 
+    private final MutableLiveData<Player> mPlayer = new MutableLiveData<>();
+    public LiveData<Player> playerLiveData = mPlayer;
+
     public HomeViewModel(@NonNull Application application) {
         super(application);
         blueTeam.setColor(Team.ColorTeam.BLUE);
         whiteTeam.setColor(Team.ColorTeam.WHITE);
     }
 
-    public void setNewPlayer(String name, Uri photo){
-        player = new Player();
-        player.setName(name);
-        player.setPhoto(photo);
+    public void createNewPlayer(Player player){
+        if (mPlayer.getValue() != player){
+            setPlayer(player);
+            notifyObservers(player);
+        }
+    }
+
+    private void notifyObservers(Player player){
+        mPlayer.postValue(player);
     }
 
     public Player getPlayer() {
@@ -92,46 +104,6 @@ public class HomeViewModel extends AndroidViewModel {
         player6.setPhoto(foto);
         playerList.add(player6);
 
-        Player player7 = new Player();
-        player7.setName("Bruno");
-        player7.setPhoto(foto);
-        playerList.add(player7);
-
-        Player player8 = new Player();
-        player8.setName("Leo");
-        player8.setPhoto(foto);
-        playerList.add(player8);
-
-        Player player9 = new Player();
-        player9.setName("Denis");
-        player9.setPhoto(foto);
-        playerList.add(player9);
-
-        Player player10 = new Player();
-        player10.setName("Lucas");
-        player10.setPhoto(foto);
-        playerList.add(player10);
-
-        /*Player player11 = new Player();
-        player11.setName("Bruno");
-        player11.setPhoto(foto);
-        playerList.add(player11);
-
-        Player player12 = new Player();
-        player12.setName("Leo");
-        player12.setPhoto(foto);
-        playerList.add(player12);
-
-        Player player13 = new Player();
-        player13.setName("Denis");
-        player13.setPhoto(foto);
-        playerList.add(player13);
-
-        Player player14 = new Player();
-        player14.setName("Ultimo");
-        player14.setPhoto(foto);
-        playerList.add(player14);
-*/
         return playerList;
     }
 }

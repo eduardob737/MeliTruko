@@ -1,6 +1,8 @@
 package com.example.melitruko.view.fragments;
 
-import android.net.Uri;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +20,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.melitruko.databinding.FragmentPlayersListBinding;
 import com.example.melitruko.model.Player;
 import com.example.melitruko.view.RecyclerItemClickListener;
+import com.example.melitruko.view.activities.PlayersControlActivity;
 import com.example.melitruko.view.adapter.PlayerAdapter;
 import com.example.melitruko.viewmodel.HomeViewModel;
 
-import java.util.Objects;
-
-public class PlayerListFragment extends Fragment {
+public class PlayerListFragment extends DialogFragment {
     private FragmentPlayersListBinding binding;
     private HomeViewModel viewModel;
     private String TEAM_BUNDLE;
@@ -42,8 +44,10 @@ public class PlayerListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentPlayersListBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        binding = FragmentPlayersListBinding.inflate(inflater, container, false);
+
+        this.getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         return binding.getRoot();
     }
 
@@ -55,7 +59,6 @@ public class PlayerListFragment extends Fragment {
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.setHasFixedSize(true);
 
         binding.recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(requireContext(), binding.recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -81,8 +84,12 @@ public class PlayerListFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Escolha um jogador", Toast.LENGTH_SHORT).show();
             } else {
                 setupPlayers(viewModel.getList().get(position));
-                requireActivity().getOnBackPressedDispatcher().onBackPressed();
+                this.dismiss();
             }
+        });
+
+        binding.btnNewPlayer.setOnClickListener(view1 -> {
+            startActivity(new Intent(requireActivity(), PlayersControlActivity.class));
         });
     }
 
@@ -91,7 +98,8 @@ public class PlayerListFragment extends Fragment {
     }
 
     private void setupPlayers(Player player) {
-        viewModel.setPlayer(player);
+        viewModel.createNewPlayer(player);
+
         if ((TEAM_BUNDLE.equalsIgnoreCase("BLUE")) && (PLAYER_BUNDLE == 1)) {
             viewModel.getBlueTeam().setPlayer1(viewModel.getPlayer());
         } else if ((TEAM_BUNDLE.equalsIgnoreCase("WHITE")) && (PLAYER_BUNDLE == 1)) {

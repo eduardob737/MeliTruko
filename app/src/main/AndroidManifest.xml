@@ -16,7 +16,7 @@
             android:name=".view.activities.MatchActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activities.PlayersListActivity"
+            android:name=".view.activities.PlayersControlActivity"
             android:exported="false" />
         <activity
             android:name=".view.activities.HomeActivity"

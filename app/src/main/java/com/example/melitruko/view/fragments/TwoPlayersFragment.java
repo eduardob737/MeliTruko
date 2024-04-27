@@ -1,17 +1,16 @@
 package com.example.melitruko.view.fragments;
 
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentTwoPlayersBinding;
 import com.example.melitruko.viewmodel.HomeViewModel;
 
@@ -19,21 +18,23 @@ public class TwoPlayersFragment extends Fragment {
 
     private FragmentTwoPlayersBinding binding;
     private HomeViewModel viewModel;
-    private Uri uriMock;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentTwoPlayersBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+
+        setupObservers();
+        setupPlayersButton();
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        setupChosenPlayers();
-        setupPlayersButton();
+    private void setupObservers() {
+        viewModel.playerLiveData.observe(getViewLifecycleOwner(), (Observer<Object>) obj -> {
+            if (obj != null) {
+                setupChosenPlayers();
+            }
+        });
     }
 
     private void setupChosenPlayers() {
@@ -49,17 +50,23 @@ public class TwoPlayersFragment extends Fragment {
     }
 
     private void setupPlayersButton() {
+        Bundle bundle = new Bundle();
         binding.ivPlayer1.setOnClickListener(view1 -> {
-            Bundle bundle = new Bundle();
             bundle.putString("TEAM", "BLUE");
             bundle.putInt("PLAYER", 1);
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, PlayerListFragment.class, bundle).addToBackStack(null).commit();
+            showPlayersListFragment(bundle);
         });
+
         binding.ivPlayer2.setOnClickListener(view1 -> {
-            Bundle bundle = new Bundle();
             bundle.putString("TEAM", "WHITE");
             bundle.putInt("PLAYER", 1);
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, PlayerListFragment.class, bundle).addToBackStack(null).commit();
+            showPlayersListFragment(bundle);
         });
+    }
+
+    private void showPlayersListFragment(Bundle bundle){
+        PlayerListFragment playerListFragment = new PlayerListFragment();
+        playerListFragment.setArguments(bundle);
+        playerListFragment.show(requireActivity().getSupportFragmentManager(), "list");
     }
 }

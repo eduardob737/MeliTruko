@@ -2,21 +2,17 @@ package com.example.melitruko.view.activities;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.melitruko.databinding.ActivityPlayersListBinding;
+import com.example.melitruko.databinding.ActivityPlayersControlBinding;
 
-public class PlayersListActivity extends AppCompatActivity {
+public class PlayersControlActivity extends AppCompatActivity {
 
-    private ActivityPlayersListBinding binding;
+    private ActivityPlayersControlBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityPlayersListBinding.inflate(getLayoutInflater());
+        binding = ActivityPlayersControlBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

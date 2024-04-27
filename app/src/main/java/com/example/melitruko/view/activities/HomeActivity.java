@@ -2,18 +2,14 @@ package com.example.melitruko.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.ActivityHomeBinding;
-import com.example.melitruko.model.Team;
 import com.example.melitruko.view.fragments.FourPlayersFragment;
 import com.example.melitruko.view.fragments.SixPlayersFragment;
 import com.example.melitruko.view.fragments.TwoPlayersFragment;
@@ -37,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         setupShowLayouts();
 
         binding.btnPlayers.setOnClickListener(view -> {
-            startActivity(new Intent(this, PlayersListActivity.class));
+            startActivity(new Intent(this, PlayersControlActivity.class));
         });
 
         binding.btnStartGame.setOnClickListener(view1 -> {

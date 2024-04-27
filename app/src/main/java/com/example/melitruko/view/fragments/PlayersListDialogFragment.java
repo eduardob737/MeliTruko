@@ -32,6 +32,4 @@ public class PlayersListDialogFragment extends DialogFragment {
 
         return builder.create();
     }
-
-
 }
