@@ -1,10 +1,9 @@
-package com.example.melitruko.view.fragments;
+package com.example.melitruko.ui.view.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +12,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.melitruko.databinding.FragmentPlayersListBinding;
-import com.example.melitruko.model.Player;
-import com.example.melitruko.view.RecyclerItemClickListener;
-import com.example.melitruko.view.activities.PlayersControlActivity;
-import com.example.melitruko.view.adapter.PlayerAdapter;
-import com.example.melitruko.viewmodel.HomeViewModel;
+import com.example.melitruko.data.model.Player;
+import com.example.melitruko.ui.view.activities.PlayersControlActivity;
+import com.example.melitruko.ui.view.RecyclerItemClickListener;
+import com.example.melitruko.ui.view.adapter.PlayerAdapter;
+import com.example.melitruko.ui.viewmodel.HomeViewModel;
 
 public class PlayerListFragment extends DialogFragment {
     private FragmentPlayersListBinding binding;
@@ -55,7 +53,7 @@ public class PlayerListFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        PlayerAdapter adapter = new PlayerAdapter(viewModel.getList());
+        PlayerAdapter adapter = new PlayerAdapter(viewModel.getPlayers());
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerView.setAdapter(adapter);
@@ -83,7 +81,7 @@ public class PlayerListFragment extends DialogFragment {
             if (position == -1) {
                 Toast.makeText(requireActivity(), "Escolha um jogador", Toast.LENGTH_SHORT).show();
             } else {
-                setupPlayers(viewModel.getList().get(position));
+                setupPlayers(viewModel.getPlayers().get(position));
                 this.dismiss();
             }
         });

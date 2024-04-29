@@ -1,4 +1,4 @@
-package com.example.melitruko.model;
+package com.example.melitruko.data.model;
 
 import android.net.Uri;
 import android.os.Parcel;

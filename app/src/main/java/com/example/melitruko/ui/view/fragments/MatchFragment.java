@@ -1,4 +1,4 @@
-package com.example.melitruko.view.fragments;
+package com.example.melitruko.ui.view.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentMatchBinding;
-import com.example.melitruko.viewmodel.MatchViewModel;
+import com.example.melitruko.ui.viewmodel.MatchViewModel;
 
 public class MatchFragment extends Fragment {
 

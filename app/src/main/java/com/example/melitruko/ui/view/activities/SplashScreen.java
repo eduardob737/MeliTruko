@@ -1,4 +1,4 @@
-package com.example.melitruko.view.activities;
+package com.example.melitruko.ui.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

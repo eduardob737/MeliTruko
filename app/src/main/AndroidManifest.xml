@@ -13,16 +13,16 @@
         android:theme="@style/Theme.MeliTruko"
         tools:targetApi="31">
         <activity
-            android:name=".view.activities.MatchActivity"
+            android:name=".ui.view.activities.MatchActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activities.PlayersControlActivity"
+            android:name=".ui.view.activities.PlayersControlActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activities.HomeActivity"
+            android:name=".ui.view.activities.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activities.SplashScreen"
+            android:name=".ui.view.activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

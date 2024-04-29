@@ -1,11 +1,9 @@
-package com.example.melitruko.model;
+package com.example.melitruko.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-
-import java.io.Serializable;
 
 public class Team implements Parcelable {
 

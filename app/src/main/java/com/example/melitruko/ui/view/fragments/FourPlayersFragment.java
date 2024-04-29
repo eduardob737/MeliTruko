@@ -1,4 +1,4 @@
-package com.example.melitruko.view.fragments;
+package com.example.melitruko.ui.view.fragments;
 
 import android.app.Dialog;
 import android.graphics.Color;

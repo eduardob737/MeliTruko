@@ -1,4 +1,4 @@
-package com.example.melitruko.view.activities;
+package com.example.melitruko.ui.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.ActivityHomeBinding;
-import com.example.melitruko.view.fragments.FourPlayersFragment;
-import com.example.melitruko.view.fragments.SixPlayersFragment;
-import com.example.melitruko.view.fragments.TwoPlayersFragment;
-import com.example.melitruko.viewmodel.HomeViewModel;
-import com.example.melitruko.viewmodel.ViewModelProviderFactory;
+import com.example.melitruko.ui.view.fragments.FourPlayersFragment;
+import com.example.melitruko.ui.view.fragments.SixPlayersFragment;
+import com.example.melitruko.ui.view.fragments.TwoPlayersFragment;
+import com.example.melitruko.ui.viewmodel.HomeViewModel;
+import com.example.melitruko.ui.viewmodel.ViewModelProviderFactory;
 
 public class HomeActivity extends AppCompatActivity {
 

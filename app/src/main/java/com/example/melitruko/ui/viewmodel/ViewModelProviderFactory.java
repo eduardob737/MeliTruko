@@ -1,10 +1,12 @@
-package com.example.melitruko.viewmodel;
+package com.example.melitruko.ui.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.example.melitruko.data.repositories.PlayersRepository;
 
 import java.lang.reflect.InvocationTargetException;
 

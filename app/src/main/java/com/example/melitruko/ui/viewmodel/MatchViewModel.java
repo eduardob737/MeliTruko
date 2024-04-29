@@ -1,4 +1,4 @@
-package com.example.melitruko.viewmodel;
+package com.example.melitruko.ui.viewmodel;
 
 import android.app.Application;
 import android.os.Parcelable;
@@ -6,12 +6,8 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.example.melitruko.model.Match;
-import com.example.melitruko.model.Player;
-import com.example.melitruko.model.Team;
-
-import java.io.Serializable;
-import java.net.URI;
+import com.example.melitruko.data.model.Match;
+import com.example.melitruko.data.model.Team;
 
 public class MatchViewModel extends AndroidViewModel {
 

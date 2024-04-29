@@ -1,4 +1,4 @@
-package com.example.melitruko.view;
+package com.example.melitruko.ui.view;
 
 import android.content.Context;
 import android.view.GestureDetector;

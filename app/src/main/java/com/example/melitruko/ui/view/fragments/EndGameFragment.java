@@ -1,4 +1,4 @@
-package com.example.melitruko.view.fragments;
+package com.example.melitruko.ui.view.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

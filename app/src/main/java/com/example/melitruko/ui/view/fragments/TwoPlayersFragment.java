@@ -1,7 +1,6 @@
-package com.example.melitruko.view.fragments;
+package com.example.melitruko.ui.view.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.databinding.FragmentTwoPlayersBinding;
-import com.example.melitruko.viewmodel.HomeViewModel;
+import com.example.melitruko.ui.viewmodel.HomeViewModel;
 
 public class TwoPlayersFragment extends Fragment {
 

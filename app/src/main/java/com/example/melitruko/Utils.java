@@ -10,8 +10,8 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.melitruko.model.Player;
-import com.example.melitruko.view.adapter.PlayerAdapter;
+import com.example.melitruko.data.model.Player;
+import com.example.melitruko.ui.view.adapter.PlayerAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
