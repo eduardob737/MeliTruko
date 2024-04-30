@@ -6,8 +6,8 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.example.melitruko.data.model.Match;
-import com.example.melitruko.data.model.Team;
+import com.example.melitruko.domain.model.Match;
+import com.example.melitruko.domain.model.Team;
 
 public class MatchViewModel extends AndroidViewModel {
 

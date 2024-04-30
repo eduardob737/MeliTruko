@@ -2,7 +2,7 @@ package com.example.melitruko.data.repositories;
 
 import android.net.Uri;
 
-import com.example.melitruko.data.model.Player;
+import com.example.melitruko.domain.model.Player;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayersRepository {
 
-    public List<Player> getPlayers() {
+    public List<Player> getPlayersList() {
         File imagem = new File("/data/data/com.example.melitruko/files/foto_isabela.jpeg");
 
         Uri foto = Uri.fromFile(imagem);
@@ -49,4 +49,5 @@ public class PlayersRepository {
 
         return playerList;
     }
+
 }

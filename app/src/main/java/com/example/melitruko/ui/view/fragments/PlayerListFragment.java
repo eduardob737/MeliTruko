@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.melitruko.databinding.FragmentPlayersListBinding;
-import com.example.melitruko.data.model.Player;
+import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.ui.view.activities.PlayersControlActivity;
 import com.example.melitruko.ui.view.RecyclerItemClickListener;
 import com.example.melitruko.ui.view.adapter.PlayerAdapter;
@@ -25,23 +26,10 @@ import com.example.melitruko.ui.viewmodel.HomeViewModel;
 public class PlayerListFragment extends DialogFragment {
     private FragmentPlayersListBinding binding;
     private HomeViewModel viewModel;
-    private String TEAM_BUNDLE;
-    private int PLAYER_BUNDLE;
     private int position = -1;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Bundle bundle = this.getArguments();
-
-        if (bundle != null) {
-            TEAM_BUNDLE = bundle.getString("TEAM");
-            PLAYER_BUNDLE = bundle.getInt("PLAYER");
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         binding = FragmentPlayersListBinding.inflate(inflater, container, false);
 
@@ -97,12 +85,6 @@ public class PlayerListFragment extends DialogFragment {
 
     private void setupPlayers(Player player) {
         viewModel.createNewPlayer(player);
-
-        if ((TEAM_BUNDLE.equalsIgnoreCase("BLUE")) && (PLAYER_BUNDLE == 1)) {
-            viewModel.getBlueTeam().setPlayer1(viewModel.getPlayer());
-        } else if ((TEAM_BUNDLE.equalsIgnoreCase("WHITE")) && (PLAYER_BUNDLE == 1)) {
-            viewModel.getWhiteTeam().setPlayer1(viewModel.getPlayer());
-        }
     }
 
 }

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.melitruko.R;
-import com.example.melitruko.data.model.Player;
+import com.example.melitruko.domain.model.Player;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;

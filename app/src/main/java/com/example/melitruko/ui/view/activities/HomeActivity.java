@@ -2,6 +2,7 @@ package com.example.melitruko.ui.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.ActivityHomeBinding;
+import com.example.melitruko.domain.model.Team;
 import com.example.melitruko.ui.view.fragments.FourPlayersFragment;
 import com.example.melitruko.ui.view.fragments.SixPlayersFragment;
 import com.example.melitruko.ui.view.fragments.TwoPlayersFragment;
@@ -20,7 +22,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
     private HomeViewModel viewModel;
-    private int qtdPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,21 +54,21 @@ public class HomeActivity extends AppCompatActivity {
     private void setupShowLayouts() {
         binding.chipGroup.setOnCheckedStateChangeListener((chipGroup, list) -> {
             if (binding.chipOneVersusOne.isChecked()) {
-                qtdPlayers = 2;
+                viewModel.getBlueTeam().setQtdPlayers(Team.QtdTeamPlayers.ONE_PLAYER);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, TwoPlayersFragment.class, null).commit();
                 binding.chipOneVersusOne.setEnabled(false);
                 binding.chipTwoVersusTwo.setEnabled(true);
                 binding.chipThreeVersusThree.setEnabled(true);
 
             } else if (binding.chipTwoVersusTwo.isChecked()) {
-                qtdPlayers = 4;
+                viewModel.getBlueTeam().setQtdPlayers(Team.QtdTeamPlayers.TWO_PLAYERS);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FourPlayersFragment.class, null).commit();
                 binding.chipTwoVersusTwo.setEnabled(false);
                 binding.chipOneVersusOne.setEnabled(true);
                 binding.chipThreeVersusThree.setEnabled(true);
 
             } else if (binding.chipThreeVersusThree.isChecked()) {
-                qtdPlayers = 6;
+                viewModel.getBlueTeam().setQtdPlayers(Team.QtdTeamPlayers.THREE_PLAYERS);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, SixPlayersFragment.class, null).commit();
                 binding.chipThreeVersusThree.setEnabled(false);
                 binding.chipTwoVersusTwo.setEnabled(true);
@@ -79,24 +80,21 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private boolean playerValidation() {
-        switch (qtdPlayers) {
-            case 2:
-                if ((viewModel.getBlueTeam().getPlayer1() == null) || (viewModel.getWhiteTeam().getPlayer1() == null)) {
+        switch (viewModel.getBlueTeam().getQtdPlayers()) {
+            case ONE_PLAYER:
+                if ((viewModel.getBlueTeam().getPlayers().get(0) == null) || (viewModel.getWhiteTeam().getPlayers().get(0) == null)) {
                     Toast.makeText(this, "Escolha os 2 jogadores antes de iniciar a partida", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 break;
-            case 4:
-                if ((viewModel.getBlueTeam().getPlayer1() == null) || (viewModel.getWhiteTeam().getPlayer1() == null) ||
-                        (viewModel.getBlueTeam().getPlayer2() == null) || (viewModel.getWhiteTeam().getPlayer2() == null)) {
+            case TWO_PLAYERS:
+                if ((viewModel.getBlueTeam().getPlayers().get(1) == null) || (viewModel.getWhiteTeam().getPlayers().get(1) == null)){
                     Toast.makeText(this, "Escolha os 4 jogadores antes de iniciar a partida", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 break;
-            case 6:
-                if ((viewModel.getBlueTeam().getPlayer1() == null) || (viewModel.getWhiteTeam().getPlayer1() == null) ||
-                        (viewModel.getBlueTeam().getPlayer2() == null) || (viewModel.getWhiteTeam().getPlayer2() == null) ||
-                        (viewModel.getBlueTeam().getPlayer3() == null) || (viewModel.getWhiteTeam().getPlayer3() == null)) {
+            case THREE_PLAYERS:
+                if ((viewModel.getBlueTeam().getPlayers().get(2) == null) || (viewModel.getWhiteTeam().getPlayers().get(2) == null)){
                     Toast.makeText(this, "Escolha os 6 jogadores antes de iniciar a partida", Toast.LENGTH_SHORT).show();
                     return false;
                 }

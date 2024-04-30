@@ -1,6 +1,7 @@
 package com.example.melitruko.ui.view.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.databinding.FragmentTwoPlayersBinding;
+import com.example.melitruko.domain.model.Player;
+import com.example.melitruko.domain.model.Team;
 import com.example.melitruko.ui.viewmodel.HomeViewModel;
+
+import java.util.List;
 
 public class TwoPlayersFragment extends Fragment {
 
@@ -29,43 +34,42 @@ public class TwoPlayersFragment extends Fragment {
     }
 
     private void setupObservers() {
-        viewModel.playerLiveData.observe(getViewLifecycleOwner(), (Observer<Object>) obj -> {
-            if (obj != null) {
+        viewModel.playerLiveData.observe(getViewLifecycleOwner(), (Observer<Object>) player -> {
+            if (player != null) {
                 setupChosenPlayers();
             }
         });
     }
 
     private void setupChosenPlayers() {
-        if (viewModel.getBlueTeam().getPlayer1() != null) {
-            binding.ivPlayer1.setImageURI(viewModel.getBlueTeam().getPlayer1().getPhoto());
-            binding.tvPlayer1.setText(viewModel.getBlueTeam().getPlayer1().getName());
+        List<Player> blueList = viewModel.getBlueTeam().getPlayers();
+        List<Player> whiteList = viewModel.getWhiteTeam().getPlayers();
+
+        if ((!blueList.isEmpty()) && (blueList.get(0) != null)) {
+            binding.ivPlayer1.setImageURI(blueList.get(0).getPhoto());
+            binding.tvPlayer1.setText(blueList.get(0).getName());
         }
 
-        if (viewModel.getWhiteTeam().getPlayer1() != null) {
-            binding.ivPlayer2.setImageURI(viewModel.getWhiteTeam().getPlayer1().getPhoto());
-            binding.tvPlayer2.setText(viewModel.getWhiteTeam().getPlayer1().getName());
+        if ((!whiteList.isEmpty()) && (whiteList.get(0) != null)) {
+            binding.ivPlayer2.setImageURI(whiteList.get(0).getPhoto());
+            binding.tvPlayer2.setText(whiteList.get(0).getName());
         }
     }
 
     private void setupPlayersButton() {
-        Bundle bundle = new Bundle();
         binding.ivPlayer1.setOnClickListener(view1 -> {
-            bundle.putString("TEAM", "BLUE");
-            bundle.putInt("PLAYER", 1);
-            showPlayersListFragment(bundle);
+            viewModel.setTeamAtributes(Team.ColorTeam.BLUE, 0);
+            showPlayersListFragment();
         });
 
         binding.ivPlayer2.setOnClickListener(view1 -> {
-            bundle.putString("TEAM", "WHITE");
-            bundle.putInt("PLAYER", 1);
-            showPlayersListFragment(bundle);
+            viewModel.setTeamAtributes(Team.ColorTeam.WHITE, 0);
+            showPlayersListFragment();
         });
     }
 
-    private void showPlayersListFragment(Bundle bundle){
+    private void showPlayersListFragment() {
         PlayerListFragment playerListFragment = new PlayerListFragment();
-        playerListFragment.setArguments(bundle);
         playerListFragment.show(requireActivity().getSupportFragmentManager(), "list");
     }
 }

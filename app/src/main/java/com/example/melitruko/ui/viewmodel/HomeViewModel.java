@@ -1,14 +1,18 @@
 package com.example.melitruko.ui.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.melitruko.data.model.Player;
-import com.example.melitruko.data.model.Team;
+import com.example.melitruko.data.repositories.TeamsRepository;
+import com.example.melitruko.domain.CreateTeamUseCase;
+import com.example.melitruko.domain.GetPlayersListUseCase;
+import com.example.melitruko.domain.model.Player;
+import com.example.melitruko.domain.model.Team;
 import com.example.melitruko.data.repositories.PlayersRepository;
 
 import java.util.List;
@@ -19,10 +23,17 @@ public class HomeViewModel extends AndroidViewModel {
     private Team blueTeam = new Team();
     private Team whiteTeam = new Team();
 
+    private Team.ColorTeam colorTeam;
+    private int position = -1;
+
     private final MutableLiveData<Player> mPlayer = new MutableLiveData<>();
     public LiveData<Player> playerLiveData = mPlayer;
 
     private final PlayersRepository playersRepository = new PlayersRepository();
+    private final GetPlayersListUseCase getPlayersListUseCase = new GetPlayersListUseCase(playersRepository);
+
+    private final TeamsRepository teamsRepository = new TeamsRepository();
+    private final CreateTeamUseCase createTeamUseCase = new CreateTeamUseCase(teamsRepository);
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
@@ -33,12 +44,31 @@ public class HomeViewModel extends AndroidViewModel {
     public void createNewPlayer(Player player){
         if (mPlayer.getValue() != player){
             setPlayer(player);
+            atributePlayer(player);
             notifyObservers(player);
         }
     }
 
+    public void setTeamAtributes(Team.ColorTeam colorTeam, int position){
+        this.colorTeam = colorTeam;
+        this.position = position;
+    }
+
+    public void atributePlayer(Player player) {
+        if (colorTeam.equals(Team.ColorTeam.BLUE)){
+            getBlueTeam().getPlayers().set(position, player);
+        }
+        if (colorTeam.equals(Team.ColorTeam.WHITE)){
+            getWhiteTeam().getPlayers().set(position, player);
+        }
+    }
+
     public List<Player> getPlayers(){
-        return playersRepository.getPlayers();
+        return getPlayersListUseCase.invoke();
+    }
+
+    public void createTeam(Team team){
+        createTeamUseCase.invoke(team);
     }
 
     private void notifyObservers(Player player){
@@ -68,4 +98,5 @@ public class HomeViewModel extends AndroidViewModel {
     public void setWhiteTeam(Team whiteTeam) {
         this.whiteTeam = whiteTeam;
     }
+
 }

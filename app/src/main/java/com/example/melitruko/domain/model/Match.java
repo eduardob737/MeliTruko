@@ -1,4 +1,4 @@
-package com.example.melitruko.data.model;
+package com.example.melitruko.domain.model;
 
 public class Match {
 
