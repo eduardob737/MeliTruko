@@ -46,29 +46,31 @@ public class HomeActivity extends AppCompatActivity {
                     intent.putExtra("BLUE_TEAM",  viewModel.getBlueTeam());
                     intent.putExtra("WHITE_TEAM", viewModel.getWhiteTeam());
                     startActivity(intent);
+                    finish();
                 }
             }
         });
     }
-
     private void setupShowLayouts() {
         binding.chipGroup.setOnCheckedStateChangeListener((chipGroup, list) -> {
+            viewModel.clearViewModel();
+
             if (binding.chipOneVersusOne.isChecked()) {
-                viewModel.getBlueTeam().setQtdPlayers(Team.QtdTeamPlayers.ONE_PLAYER);
+                viewModel.getBlueTeam().setQtdPlayers(1);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, TwoPlayersFragment.class, null).commit();
                 binding.chipOneVersusOne.setEnabled(false);
                 binding.chipTwoVersusTwo.setEnabled(true);
                 binding.chipThreeVersusThree.setEnabled(true);
 
             } else if (binding.chipTwoVersusTwo.isChecked()) {
-                viewModel.getBlueTeam().setQtdPlayers(Team.QtdTeamPlayers.TWO_PLAYERS);
+                viewModel.getBlueTeam().setQtdPlayers(2);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FourPlayersFragment.class, null).commit();
                 binding.chipTwoVersusTwo.setEnabled(false);
                 binding.chipOneVersusOne.setEnabled(true);
                 binding.chipThreeVersusThree.setEnabled(true);
 
             } else if (binding.chipThreeVersusThree.isChecked()) {
-                viewModel.getBlueTeam().setQtdPlayers(Team.QtdTeamPlayers.THREE_PLAYERS);
+                viewModel.getBlueTeam().setQtdPlayers(3);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, SixPlayersFragment.class, null).commit();
                 binding.chipThreeVersusThree.setEnabled(false);
                 binding.chipTwoVersusTwo.setEnabled(true);
@@ -81,19 +83,19 @@ public class HomeActivity extends AppCompatActivity {
 
     private boolean playerValidation() {
         switch (viewModel.getBlueTeam().getQtdPlayers()) {
-            case ONE_PLAYER:
+            case 1:
                 if ((viewModel.getBlueTeam().getPlayers().get(0) == null) || (viewModel.getWhiteTeam().getPlayers().get(0) == null)) {
                     Toast.makeText(this, "Escolha os 2 jogadores antes de iniciar a partida", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 break;
-            case TWO_PLAYERS:
+            case 2:
                 if ((viewModel.getBlueTeam().getPlayers().get(1) == null) || (viewModel.getWhiteTeam().getPlayers().get(1) == null)){
                     Toast.makeText(this, "Escolha os 4 jogadores antes de iniciar a partida", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 break;
-            case THREE_PLAYERS:
+            case 3:
                 if ((viewModel.getBlueTeam().getPlayers().get(2) == null) || (viewModel.getWhiteTeam().getPlayers().get(2) == null)){
                     Toast.makeText(this, "Escolha os 6 jogadores antes de iniciar a partida", Toast.LENGTH_SHORT).show();
                     return false;

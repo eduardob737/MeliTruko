@@ -1,12 +1,12 @@
 package com.example.melitruko.ui.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.melitruko.data.repositories.TeamsRepository;
 import com.example.melitruko.domain.CreateTeamUseCase;
@@ -23,7 +23,7 @@ public class HomeViewModel extends AndroidViewModel {
     private Team blueTeam = new Team();
     private Team whiteTeam = new Team();
 
-    private Team.ColorTeam colorTeam;
+    private Team.ColorTeam colorTeam = null;
     private int position = -1;
 
     private final MutableLiveData<Player> mPlayer = new MutableLiveData<>();
@@ -99,4 +99,11 @@ public class HomeViewModel extends AndroidViewModel {
         this.whiteTeam = whiteTeam;
     }
 
+    public void clearViewModel(){
+        player = null;
+        blueTeam = new Team();
+        whiteTeam = new Team();
+        colorTeam = null;
+        position = -1;
+    }
 }

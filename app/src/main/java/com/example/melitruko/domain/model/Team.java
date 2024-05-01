@@ -11,10 +11,9 @@ import java.util.List;
 
 public class Team implements Parcelable {
 
-    public enum QtdTeamPlayers { ONE_PLAYER, TWO_PLAYERS, THREE_PLAYERS}
     public enum ColorTeam {BLUE, WHITE}
 
-    private QtdTeamPlayers qtdPlayers;
+    private int qtdPlayers;
     private ColorTeam color;
     private ArrayList<Player> players;
     private int score = 0;
@@ -28,6 +27,7 @@ public class Team implements Parcelable {
 
     protected Team(Parcel in) {
         players = in.createTypedArrayList(Player.CREATOR);
+        qtdPlayers = in.readInt();
         score = in.readInt();
     }
 
@@ -51,6 +51,7 @@ public class Team implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeTypedList(players);
+        parcel.writeInt(qtdPlayers);
         parcel.writeInt(score);
     }
 
@@ -78,11 +79,11 @@ public class Team implements Parcelable {
         this.score = score;
     }
 
-    public QtdTeamPlayers getQtdPlayers() {
+    public int getQtdPlayers() {
         return qtdPlayers;
     }
 
-    public void setQtdPlayers(QtdTeamPlayers qtdPlayers) {
+    public void setQtdPlayers(int qtdPlayers) {
         this.qtdPlayers = qtdPlayers;
     }
 }
