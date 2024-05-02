@@ -1,13 +1,7 @@
 package com.example.melitruko.ui.view.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.window.OnBackInvokedCallback;
-import android.window.OnBackInvokedDispatcher;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -40,12 +34,5 @@ public class MatchActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, MatchFragment.class, null).commit();
 
-        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                finish();
-                startActivity(new Intent(MatchActivity.this, HomeActivity.class));
-            }
-        });
     }
 }

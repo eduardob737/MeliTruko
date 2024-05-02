@@ -33,14 +33,12 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player1_blue"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile"
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@id/view_blue_team"
-        app:layout_constraintTop_toTopOf="@+id/view_blue_team"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile" />
+        app:layout_constraintTop_toTopOf="@+id/view_blue_team" />
 
     <TextView
         android:id="@+id/tv_name_player1_blue"
@@ -56,14 +54,12 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player2_blue"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/view_blue_team"
         app:layout_constraintTop_toBottomOf="@+id/iv_player1_blue"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile" />
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
         android:id="@+id/tv_name_player2_blue"
@@ -79,14 +75,12 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player3_blue"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/view_blue_team"
         app:layout_constraintTop_toBottomOf="@+id/iv_player2_blue"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile" />
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
         android:id="@+id/tv_name_player3_blue"
@@ -102,15 +96,12 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player1_white"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="@id/view_white_team"
         app:layout_constraintTop_toTopOf="@+id/view_white_team"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile"
-        tools:layout_editor_absoluteX="344dp" />
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
         android:id="@+id/tv_name_player1_white"
@@ -126,14 +117,12 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player2_white"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="@id/view_white_team"
         app:layout_constraintTop_toBottomOf="@+id/iv_player1_white"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile" />
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
         android:id="@+id/tv_name_player2_white"
@@ -149,14 +138,12 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player3_white"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="@id/view_white_team"
         app:layout_constraintTop_toBottomOf="@+id/iv_player2_white"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile" />
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
         android:id="@+id/tv_name_player3_white"

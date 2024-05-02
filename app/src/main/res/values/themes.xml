@@ -50,4 +50,11 @@
         <item name="shapeAppearanceOverlay">@style/Rounded.Square.ImageView</item>
     </style>
 
+    <style name="ImageViewPlayerPhotoMatch" parent="">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="shapeAppearanceOverlay">@style/circleImageView</item>
+    </style>
+
 </resources>

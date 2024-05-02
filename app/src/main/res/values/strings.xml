@@ -38,4 +38,8 @@
     <string name="txt_select_a_player">Selecione um jogador</string>
     <string name="txt_tap_the_image">Aperte nas imagens para escolher os jogadores</string>
     <string name="txt_tv_choose_a_player">Escolha um jogador</string>
+    <string name="txt_positive_button">SIM</string>
+    <string name="txt_negative_button">NÃO</string>
+    <string name="txt_dialog_confirmation">Deseja encerrar a partida?</string>
+    <string name="cd_img_alert">Imagem de alerta</string>
 </resources>

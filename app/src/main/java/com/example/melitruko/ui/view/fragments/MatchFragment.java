@@ -1,19 +1,21 @@
 package com.example.melitruko.ui.view.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -21,8 +23,9 @@ import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentMatchBinding;
 import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.ui.view.activities.HomeActivity;
-import com.example.melitruko.ui.view.activities.MatchActivity;
 import com.example.melitruko.ui.viewmodel.MatchViewModel;
+
+import java.util.Objects;
 
 public class MatchFragment extends Fragment {
 
@@ -160,9 +163,15 @@ public class MatchFragment extends Fragment {
     }
 
     private void setupButtonsActions() {
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                setupAlertDialog();
+            }
+        });
+
         binding.btnBack.setOnClickListener(view -> {
-            requireActivity().finish();
-            startActivity(new Intent(requireActivity(), HomeActivity.class));
+            setupAlertDialog();
         });
 
         binding.btnToAddPointsBlueTeam.setOnClickListener(view1 -> {
@@ -228,5 +237,22 @@ public class MatchFragment extends Fragment {
 
     private String getMatchValueWithPlusSign() {
         return "+ " + viewModel.getMatch().getMatchValue();
+    }
+
+    private void setupAlertDialog(){
+        Dialog dialog = new Dialog(requireContext());
+        dialog.setContentView(R.layout.dialog_confirmation);
+        dialog.setCancelable(true);
+
+        dialog.findViewById(R.id.positive_button).setOnClickListener(view -> {
+            requireActivity().finish();
+            startActivity(new Intent(requireActivity(), HomeActivity.class));
+        });
+
+        dialog.findViewById(R.id.negative_button).setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 }
