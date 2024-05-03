@@ -1,4 +1,4 @@
-package com.example.melitruko.ui.view.adapter;
+package com.example.melitruko.presentation.ui.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

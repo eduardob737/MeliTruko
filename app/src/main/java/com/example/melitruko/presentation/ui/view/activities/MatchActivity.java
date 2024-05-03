@@ -1,4 +1,4 @@
-package com.example.melitruko.ui.view.activities;
+package com.example.melitruko.presentation.ui.view.activities;
 
 import android.os.Bundle;
 
@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.ActivityMatchBinding;
-import com.example.melitruko.ui.view.fragments.MatchFragment;
-import com.example.melitruko.ui.viewmodel.MatchViewModel;
-import com.example.melitruko.ui.viewmodel.ViewModelProviderFactory;
+import com.example.melitruko.presentation.ui.view.fragments.MatchFragment;
+import com.example.melitruko.presentation.viewmodel.MatchViewModel;
+import com.example.melitruko.presentation.viewmodel.ViewModelProviderFactory;
 
 import java.util.Objects;
 

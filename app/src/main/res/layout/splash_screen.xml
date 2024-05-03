@@ -6,7 +6,7 @@
     android:background="@color/navy_blue"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.activities.SplashScreen">
+    tools:context=".presentation.ui.view.activities.SplashScreen">
 
     <ImageView
         android:id="@+id/logo_melitruko"

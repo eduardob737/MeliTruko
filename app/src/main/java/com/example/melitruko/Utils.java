@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.melitruko.domain.model.Player;
-import com.example.melitruko.ui.view.adapter.PlayerAdapter;
+import com.example.melitruko.presentation.ui.view.adapter.PlayerAdapter;
 
 import java.io.File;
 import java.util.ArrayList;

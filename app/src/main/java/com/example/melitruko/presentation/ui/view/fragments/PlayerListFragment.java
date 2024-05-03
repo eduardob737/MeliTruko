@@ -1,10 +1,9 @@
-package com.example.melitruko.ui.view.fragments;
+package com.example.melitruko.presentation.ui.view.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.melitruko.databinding.FragmentPlayersListBinding;
 import com.example.melitruko.domain.model.Player;
-import com.example.melitruko.ui.view.activities.PlayersControlActivity;
-import com.example.melitruko.ui.view.RecyclerItemClickListener;
-import com.example.melitruko.ui.view.adapter.PlayerAdapter;
-import com.example.melitruko.ui.viewmodel.HomeViewModel;
+import com.example.melitruko.presentation.ui.view.adapter.PlayerAdapter;
+import com.example.melitruko.presentation.ui.view.activities.PlayersControlActivity;
+import com.example.melitruko.presentation.ui.view.RecyclerItemClickListener;
+import com.example.melitruko.presentation.viewmodel.HomeViewModel;
 
 public class PlayerListFragment extends DialogFragment {
     private FragmentPlayersListBinding binding;

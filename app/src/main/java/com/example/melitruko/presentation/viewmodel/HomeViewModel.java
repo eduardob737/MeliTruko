@@ -1,4 +1,4 @@
-package com.example.melitruko.ui.viewmodel;
+package com.example.melitruko.presentation.viewmodel;
 
 import android.app.Application;
 

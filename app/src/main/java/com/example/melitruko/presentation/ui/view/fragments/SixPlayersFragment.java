@@ -1,9 +1,7 @@
-package com.example.melitruko.ui.view.fragments;
+package com.example.melitruko.presentation.ui.view.fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,12 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.melitruko.R;
-import com.example.melitruko.Utils;
 import com.example.melitruko.databinding.FragmentSixPlayersBinding;
 import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.domain.model.Team;
-import com.example.melitruko.ui.viewmodel.HomeViewModel;
+import com.example.melitruko.presentation.viewmodel.HomeViewModel;
 
 import java.util.List;
 

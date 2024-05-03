@@ -24,103 +24,109 @@
         app:layout_constraintTop_toTopOf="@id/main" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_player1_blue"
+        android:id="@+id/iv_player1_winner"
         style="@style/ImageViewPlayerPhotoMatch"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/cd_player_photo"
-        app:layout_constraintEnd_toStartOf="@+id/iv_player2_blue"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player2_winner"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_winner_team_score"
         app:layout_constraintTop_toBottomOf="@+id/tv_end_game"
         tools:srcCompat="@drawable/img_profile" />
 
     <TextView
-        android:id="@+id/tv_name_player1_blue"
+        android:id="@+id/tv_name_player1_winner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/navy_blue"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_player1_blue"
-        app:layout_constraintStart_toStartOf="@+id/iv_player1_blue"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player1_blue"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player1_winner"
+        app:layout_constraintStart_toStartOf="@+id/iv_player1_winner"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player1_winner"
         tools:text="Jogador" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_player2_blue"
+        android:id="@+id/iv_player2_winner"
+        style="@style/ImageViewPlayerPhotoMatch"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/cd_player_photo"
-        app:layout_constraintEnd_toStartOf="@+id/iv_player3_blue"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player3_winner"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_player1_blue"
+        app:layout_constraintStart_toEndOf="@+id/iv_player1_winner"
         app:layout_constraintTop_toBottomOf="@+id/tv_end_game"
-        style="@style/ImageViewPlayerPhotoMatch"
-        tools:srcCompat="@drawable/img_profile"/>
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
-        android:id="@+id/tv_name_player2_blue"
+        android:id="@+id/tv_name_player2_winner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/navy_blue"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_player2_blue"
-        app:layout_constraintStart_toStartOf="@+id/iv_player2_blue"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player2_blue"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player2_winner"
+        app:layout_constraintStart_toStartOf="@+id/iv_player2_winner"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player2_winner"
         tools:text="Jogador" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_player3_blue"
+        android:id="@+id/iv_player3_winner"
+        style="@style/ImageViewPlayerPhotoMatch"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/cd_player_photo"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_player2_blue"
+        app:layout_constraintStart_toEndOf="@+id/iv_player2_winner"
         app:layout_constraintTop_toBottomOf="@+id/tv_end_game"
-        style="@style/ImageViewPlayerPhotoMatch"
-        tools:srcCompat="@drawable/img_profile"/>
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
-        android:id="@+id/tv_name_player3_blue"
+        android:id="@+id/tv_name_player3_winner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/navy_blue"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_player3_blue"
-        app:layout_constraintStart_toStartOf="@+id/iv_player3_blue"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player3_blue"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player3_winner"
+        app:layout_constraintStart_toStartOf="@+id/iv_player3_winner"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player3_winner"
         tools:text="Jogador" />
 
     <TextView
-        android:id="@+id/tv_blue_team_score"
+        android:id="@+id/tv_winner_team_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:textColor="@color/navy_blue"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_player2_blue"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name_player1_winner"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player1_winner"
+        app:layout_constraintStart_toEndOf="@+id/iv_winner"
+        app:layout_constraintTop_toTopOf="@+id/iv_player1_winner"
         tools:text="12" />
 
     <ImageView
-        android:id="@+id/iv_trophy_2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/ic_trophy"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_blue_team_score"
-        app:layout_constraintStart_toEndOf="@+id/tv_blue_team_score"
-        app:layout_constraintTop_toTopOf="@+id/tv_blue_team_score" />
+        android:id="@+id/iv_winner"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_winner"
+        android:contentDescription="@string/cd_happy_emoji"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_winner_team_score"
+        app:layout_constraintEnd_toStartOf="@+id/tv_winner_team_score"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_winner_team_score" />
 
     <TextView
         android:id="@+id/tv_x"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:background="@color/navy_blue"
         android:text="@string/txt_x"
         android:textAlignment="center"
@@ -128,92 +134,102 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_blue_team_score" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_player1_winner" />
+
+    <ImageView
+        android:id="@+id/iv_loser"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/cd_bad_emoji"
+        android:src="@drawable/ic_loser"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_loser_team_score"
+        app:layout_constraintEnd_toStartOf="@+id/tv_loser_team_score"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_loser_team_score" />
 
     <TextView
-        android:id="@+id/tv_white_team_score"
+        android:id="@+id/tv_loser_team_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/navy_blue"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name_player1_loser"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player1_loser"
+        app:layout_constraintStart_toEndOf="@+id/iv_loser"
+        app:layout_constraintTop_toTopOf="@+id/iv_player1_loser"
+        tools:text="11" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player1_loser"
+        style="@style/ImageViewPlayerPhotoMatch"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/cd_player_photo"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player2_loser"
+        app:layout_constraintStart_toEndOf="@+id/tv_loser_team_score"
         app:layout_constraintTop_toBottomOf="@+id/tv_x"
-        tools:text="9" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_player1_white"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/cd_player_photo"
-        app:layout_constraintEnd_toStartOf="@+id/iv_player2_white"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
-        style="@style/ImageViewPlayerPhotoMatch"
-        tools:srcCompat="@drawable/img_profile"/>
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
-        android:id="@+id/tv_name_player1_white"
+        android:id="@+id/tv_name_player1_loser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/navy_blue"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_player1_white"
-        app:layout_constraintStart_toStartOf="@+id/iv_player1_white"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player1_white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player1_loser"
+        app:layout_constraintStart_toStartOf="@+id/iv_player1_loser"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player1_loser"
         tools:text="Jogador" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_player2_white"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/cd_player_photo"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_player1_white"
-        app:layout_constraintEnd_toStartOf="@+id/iv_player3_white"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_player1_white"
-        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
+        android:id="@+id/iv_player2_loser"
         style="@style/ImageViewPlayerPhotoMatch"
-        tools:srcCompat="@drawable/img_profile"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/cd_player_photo"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player3_loser"
+        app:layout_constraintStart_toEndOf="@+id/iv_player1_loser"
+        app:layout_constraintTop_toBottomOf="@+id/tv_x"
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
-        android:id="@+id/tv_name_player2_white"
+        android:id="@+id/tv_name_player2_loser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/navy_blue"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_player2_white"
-        app:layout_constraintStart_toStartOf="@+id/iv_player2_white"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player2_white"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player2_loser"
+        app:layout_constraintStart_toStartOf="@+id/iv_player2_loser"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player2_loser"
         tools:text="Jogador" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_player3_white"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
+        android:id="@+id/iv_player3_loser"
+        style="@style/ImageViewPlayerPhotoMatch"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/cd_player_photo"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_player2_white"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_player2_white"
-        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
-        style="@style/ImageViewPlayerPhotoMatch"
-        tools:srcCompat="@drawable/img_profile"/>
+        app:layout_constraintStart_toEndOf="@+id/iv_player2_loser"
+        app:layout_constraintTop_toBottomOf="@+id/tv_x"
+        tools:srcCompat="@drawable/img_profile" />
 
     <TextView
-        android:id="@+id/tv_name_player3_white"
+        android:id="@+id/tv_name_player3_loser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/navy_blue"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_player3_white"
-        app:layout_constraintStart_toStartOf="@+id/iv_player3_white"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player3_white"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player3_loser"
+        app:layout_constraintStart_toStartOf="@+id/iv_player3_loser"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player3_loser"
         tools:text="Jogador" />
 
     <View
@@ -224,7 +240,7 @@
         android:background="@drawable/style_blue_view_players_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_name_player3_white" />
+        app:layout_constraintTop_toBottomOf="@id/tv_name_player1_loser" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_to_back"
@@ -234,12 +250,11 @@
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/white"
         android:foreground="?android:attr/selectableItemBackground"
-        android:text="Voltar"
+        android:text="@string/txt_btn_back"
         android:textColor="@color/navy_blue"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_new_game"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view" />
 
@@ -253,10 +268,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_to_back"
         app:layout_constraintTop_toTopOf="@+id/view"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,4 +1,4 @@
-package com.example.melitruko.ui.view.fragments;
+package com.example.melitruko.presentation.ui.view.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

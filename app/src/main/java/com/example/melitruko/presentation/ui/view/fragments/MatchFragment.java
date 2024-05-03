@@ -1,4 +1,4 @@
-package com.example.melitruko.ui.view.fragments;
+package com.example.melitruko.presentation.ui.view.fragments;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -17,8 +17,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentMatchBinding;
 import com.example.melitruko.domain.model.Player;
-import com.example.melitruko.ui.view.activities.HomeActivity;
-import com.example.melitruko.ui.viewmodel.MatchViewModel;
+import com.example.melitruko.presentation.ui.view.activities.HomeActivity;
+import com.example.melitruko.presentation.viewmodel.MatchViewModel;
 
 public class MatchFragment extends Fragment {
 

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.activities.HomeActivity">
+    tools:context=".presentation.ui.view.activities.HomeActivity">
 
     <View
         android:id="@+id/view"

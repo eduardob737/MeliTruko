@@ -42,4 +42,7 @@
     <string name="txt_negative_button">NÃO</string>
     <string name="txt_dialog_confirmation">Deseja encerrar a partida?</string>
     <string name="cd_img_alert">Imagem de alerta</string>
+    <string name="cd_bad_emoji">Emoji de raiva</string>
+    <string name="cd_happy_emoji">Emoji de alegria com óculos escuros</string>
+    <string name="txt_btn_back">Voltar</string>
 </resources>
