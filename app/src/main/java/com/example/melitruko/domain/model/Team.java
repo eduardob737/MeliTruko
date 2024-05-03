@@ -76,7 +76,7 @@ public class Team implements Parcelable {
     }
 
     public void setScore(int score) {
-        this.score = score;
+        this.score = Math.min(score, 12);
     }
 
     public int getQtdPlayers() {

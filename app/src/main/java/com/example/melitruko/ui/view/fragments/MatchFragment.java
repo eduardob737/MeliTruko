@@ -1,16 +1,11 @@
 package com.example.melitruko.ui.view.fragments;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,8 +20,6 @@ import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.ui.view.activities.HomeActivity;
 import com.example.melitruko.ui.viewmodel.MatchViewModel;
 
-import java.util.Objects;
-
 public class MatchFragment extends Fragment {
 
     private FragmentMatchBinding binding;
@@ -39,11 +32,19 @@ public class MatchFragment extends Fragment {
         binding = FragmentMatchBinding.inflate(getLayoutInflater(), container, false);
 
         setupPlayersTeams();
-        setupTextViewTeamsScore();
-        setupTextViewToAddPoints();
         setupButtonsActions();
+        setupDefaultScore();
+        setupObservers();
 
         return binding.getRoot();
+    }
+
+    private void setupDefaultScore(){
+        binding.tvBlueTeamScore.setText(String.valueOf(viewModel.getBlueTeamScore()));
+        binding.tvWhiteTeamScore.setText(String.valueOf(viewModel.getWhiteTeamScore()));
+        binding.tvToAddPointsBlueTeam.setText(formatValueMatch(viewModel.getMatchValue()));
+        binding.tvToAddPointsWhiteTeam.setText(formatValueMatch(viewModel.getMatchValue()));
+        binding.btnToAddMatchValue.setText(viewModel.setMessageButtonToAddPoints());
     }
 
     private void setupPlayersTeams() {
@@ -152,14 +153,34 @@ public class MatchFragment extends Fragment {
         ivPlayer3White.setImageURI(whitePlayer3.getPhoto());
     }
 
-    private void setupTextViewTeamsScore() {
-        binding.tvBlueTeamScore.setText(String.valueOf(getBlueTeamScore()));
-        binding.tvWhiteTeamScore.setText(String.valueOf(getWhiteTeamScore()));
+    private void setupObservers() {
+        viewModel.blueTeamScoreLiveData.observe(getViewLifecycleOwner(), score -> {
+            binding.tvBlueTeamScore.setText(String.valueOf(score));
+            if (score == viewModel.maximumValueMatch())
+                endGame();
+        });
+        viewModel.whiteTeamScoreLiveData.observe(getViewLifecycleOwner(), score -> {
+            binding.tvWhiteTeamScore.setText(String.valueOf(score));
+            if (score == viewModel.maximumValueMatch())
+                endGame();
+        });
+
+        viewModel.matchValueLiveData.observe(getViewLifecycleOwner(), matchValue -> {
+            binding.tvToAddPointsBlueTeam.setText(formatValueMatch(matchValue));
+            binding.tvToAddPointsWhiteTeam.setText(formatValueMatch(matchValue));
+            binding.btnToAddMatchValue.setText(viewModel.setMessageButtonToAddPoints());
+
+            if (viewModel.isTheMaximumValueOfTheMatch()) {
+                binding.btnToAddMatchValue.setVisibility(View.GONE);
+            }
+        });
     }
 
-    private void setupTextViewToAddPoints() {
-        binding.tvToAddPointsBlueTeam.setText(getMatchValueWithPlusSign());
-        binding.tvToAddPointsWhiteTeam.setText(getMatchValueWithPlusSign());
+    private StringBuilder formatValueMatch(int value){
+        StringBuilder text = new StringBuilder();
+        text.append("+ ");
+        text.append(value);
+        return text;
     }
 
     private void setupButtonsActions() {
@@ -175,71 +196,21 @@ public class MatchFragment extends Fragment {
         });
 
         binding.btnToAddPointsBlueTeam.setOnClickListener(view1 -> {
-            viewModel.getMatch().getBlueTeam().setScore(getBlueTeamScore() + getMatchValue());
-            binding.tvBlueTeamScore.setText(String.valueOf(getBlueTeamScore()));
-            resetMatchValue();
+            viewModel.toAddPointsBlueTeam();
+            viewModel.resetMatchValue();
         });
 
         binding.btnToAddPointsWhiteTeam.setOnClickListener(view1 -> {
-            viewModel.getMatch().getWhiteTeam().setScore(getWhiteTeamScore() + getMatchValue());
-            binding.tvWhiteTeamScore.setText(String.valueOf(getWhiteTeamScore()));
-            resetMatchValue();
+            viewModel.toAddPointsWhiteTeam();
+            viewModel.resetMatchValue();
         });
 
         binding.btnToAddMatchValue.setOnClickListener(view1 -> {
-            if (getMatchValue() == viewModel.getMatch().getInitialValueMatch()) {
-                viewModel.getMatch().setMatchValue(viewModel.getMatch().getAdditionalValueMatch());
-            } else {
-                viewModel.getMatch().setMatchValue(getMatchValue() + viewModel.getMatch().getAdditionalValueMatch());
-            }
-            setupTextViewToAddPoints();
-            setupTextBtnToAddMatchValue();
-
-            if (getMatchValue() == viewModel.getMatch().getFinalValueMatch())
-                binding.btnToAddMatchValue.setVisibility(View.GONE);
+            viewModel.setupMatchValue();
         });
     }
 
-    private void setupTextBtnToAddMatchValue() {
-        switch (getMatchValue()) {
-            case 1:
-                binding.btnToAddMatchValue.setText(R.string.txt_btn_truco);
-                break;
-            case 3:
-                binding.btnToAddMatchValue.setText(R.string.txt_btn_six);
-                break;
-            case 6:
-                binding.btnToAddMatchValue.setText(R.string.txt_btn_nine);
-                break;
-            case 9:
-                binding.btnToAddMatchValue.setText(R.string.txt_btn_twelve);
-                break;
-        }
-    }
-
-    private void resetMatchValue() {
-        viewModel.getMatch().setMatchValue(viewModel.getMatch().getInitialValueMatch());
-        setupTextViewToAddPoints();
-        setupTextBtnToAddMatchValue();
-    }
-
-    private int getWhiteTeamScore() {
-        return viewModel.getMatch().getWhiteTeam().getScore();
-    }
-
-    private int getBlueTeamScore() {
-        return viewModel.getMatch().getBlueTeam().getScore();
-    }
-
-    private int getMatchValue() {
-        return viewModel.getMatch().getMatchValue();
-    }
-
-    private String getMatchValueWithPlusSign() {
-        return "+ " + viewModel.getMatch().getMatchValue();
-    }
-
-    private void setupAlertDialog(){
+    private void setupAlertDialog() {
         Dialog dialog = new Dialog(requireContext());
         dialog.setContentView(R.layout.dialog_confirmation);
         dialog.setCancelable(true);
@@ -254,5 +225,10 @@ public class MatchFragment extends Fragment {
         });
 
         dialog.show();
+    }
+
+    private void endGame() {
+            EndGameFragment fragment = new EndGameFragment();
+            fragment.show(requireActivity().getSupportFragmentManager(), "end_game");
     }
 }

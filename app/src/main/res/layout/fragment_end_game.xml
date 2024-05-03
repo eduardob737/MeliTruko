@@ -3,210 +3,260 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.view.activities.MatchActivity">
-
-    <View
-        android:id="@+id/main_view"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/navy_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_name_app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_melitruko"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/main_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btn_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginBottom="3dp"
-        android:background="@drawable/ic_back"
-        android:foreground="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_name_app"
-        app:layout_constraintStart_toStartOf="@+id/main_view"
-        app:layout_constraintTop_toTopOf="@+id/tv_name_app"
-        android:contentDescription="@string/cd_ic_back" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="20dp"
+    android:background="@drawable/style_players_list">
 
     <TextView
         android:id="@+id/tv_end_game"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:background="@drawable/style_blue_view_choose_a_player"
+        android:padding="10dp"
         android:text="@string/txt_end_game"
-        android:textColor="@color/navy_blue"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/view_blue_team"
-        app:layout_constraintTop_toBottomOf="@id/main_view" />
-
-    <View
-        android:id="@+id/view_blue_team"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginStart="-2dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/navy_blue"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_end_game"/>
-
-    <View
-        android:id="@+id/view_white_team"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="-4dp"
-        android:layout_marginEnd="-4dp"
-        android:background="@drawable/style_end_game_white_team"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_x" />
+        app:layout_constraintTop_toTopOf="@id/main" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player1_blue"
+        style="@style/ImageViewPlayerPhotoMatch"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/cd_player_photo"
         app:layout_constraintEnd_toStartOf="@+id/iv_player2_blue"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/view_blue_team"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_blue_team"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile"
-        android:contentDescription="@string/cd_player_photo"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_end_game"
+        tools:srcCompat="@drawable/img_profile" />
+
+    <TextView
+        android:id="@+id/tv_name_player1_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/navy_blue"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player1_blue"
+        app:layout_constraintStart_toStartOf="@+id/iv_player1_blue"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player1_blue"
+        tools:text="Jogador" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_player2_blue"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="10dp"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile"
-        app:layout_constraintEnd_toEndOf="@+id/view_blue_team"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/cd_player_photo"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player3_blue"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_player1_blue"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_blue_team"
-        android:contentDescription="@string/cd_player_photo"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_end_game"
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile"/>
 
     <TextView
-        android:id="@+id/tv_name_blue_team"
+        android:id="@+id/tv_name_player2_blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_blue"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/white"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="@+id/view_blue_team"
-        app:layout_constraintStart_toStartOf="@+id/view_blue_team"
-        app:layout_constraintTop_toTopOf="@+id/view_blue_team" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_player1_white"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="14dp"
-        app:layout_constraintEnd_toStartOf="@+id/iv_player2_white"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/view_white_team"
-        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile"
-        android:contentDescription="@string/cd_player_photo"/>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_player2_white"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="10dp"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@drawable/img_profile"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_player1_white"
-        app:layout_constraintEnd_toEndOf="@+id/view_white_team"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/iv_player1_white"
-        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
-        android:contentDescription="@string/cd_player_photo"/>
-
-    <TextView
-        android:id="@+id/tv_name_white_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_white"
-        android:layout_marginTop="10dp"
         android:textColor="@color/navy_blue"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="@+id/view_white_team"
-        app:layout_constraintStart_toStartOf="@+id/view_white_team"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player1_white" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player2_blue"
+        app:layout_constraintStart_toStartOf="@+id/iv_player2_blue"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player2_blue"
+        tools:text="Jogador" />
 
-    <TextView
-        android:id="@+id/tv_x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player3_blue"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:text="@string/txt_x"
-        android:textColor="@color/navy_blue"
-        android:textSize="28sp"
+        android:contentDescription="@string/cd_player_photo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_blue_team" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_player2_blue"
+        app:layout_constraintTop_toBottomOf="@+id/tv_end_game"
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile"/>
+
+    <TextView
+        android:id="@+id/tv_name_player3_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/navy_blue"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player3_blue"
+        app:layout_constraintStart_toStartOf="@+id/iv_player3_blue"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player3_blue"
+        tools:text="Jogador" />
 
     <TextView
         android:id="@+id/tv_blue_team_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        tools:text="12"
-        android:textColor="@color/white"
+        android:textColor="@color/navy_blue"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_player1_blue" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_player2_blue"
+        tools:text="12" />
+
+    <ImageView
+        android:id="@+id/iv_trophy_2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_trophy"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_blue_team_score"
+        app:layout_constraintStart_toEndOf="@+id/tv_blue_team_score"
+        app:layout_constraintTop_toTopOf="@+id/tv_blue_team_score" />
+
+    <TextView
+        android:id="@+id/tv_x"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/navy_blue"
+        android:text="@string/txt_x"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_blue_team_score" />
 
     <TextView
         android:id="@+id/tv_white_team_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="0"
         android:textColor="@color/navy_blue"
-        android:textSize="34sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view_white_team" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_x"
+        tools:text="9" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player1_white"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/cd_player_photo"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player2_white"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile"/>
+
+    <TextView
+        android:id="@+id/tv_name_player1_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/navy_blue"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player1_white"
+        app:layout_constraintStart_toStartOf="@+id/iv_player1_white"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player1_white"
+        tools:text="Jogador" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player2_white"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/cd_player_photo"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_player1_white"
+        app:layout_constraintEnd_toStartOf="@+id/iv_player3_white"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_player1_white"
+        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile"/>
+
+    <TextView
+        android:id="@+id/tv_name_player2_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/navy_blue"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player2_white"
+        app:layout_constraintStart_toStartOf="@+id/iv_player2_white"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player2_white"
+        tools:text="Jogador" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_player3_white"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/cd_player_photo"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_player2_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_player2_white"
+        app:layout_constraintTop_toBottomOf="@+id/tv_white_team_score"
+        style="@style/ImageViewPlayerPhotoMatch"
+        tools:srcCompat="@drawable/img_profile"/>
+
+    <TextView
+        android:id="@+id/tv_name_player3_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/navy_blue"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_player3_white"
+        app:layout_constraintStart_toStartOf="@+id/iv_player3_white"
+        app:layout_constraintTop_toBottomOf="@+id/iv_player3_white"
+        tools:text="Jogador" />
+
+    <View
+        android:id="@id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/style_blue_view_players_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_player3_white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_to_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/white"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Voltar"
+        android:textColor="@color/navy_blue"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_new_game"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_new_game"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/txt_new_game"
-        android:textColor="@color/white"
-        android:textSize="36sp"
-        android:padding="8dp"
-        app:cornerRadius="0dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_to_back"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,17 +1,16 @@
 package com.example.melitruko.domain.model;
 
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
 public class Match {
 
     private int qtdPlayersMatch = 0;
-    private int matchValue = 1;
+    private int value = 1;
     private final int initialValueMatch = 1;
     private final int additionalValueMatch = 3;
-    private final int finalValueMatch = 12;
+    private final int maximumValue = 12;
     private Team blueTeam;
     private Team whiteTeam;
+    private Team winnerTeam;
+    private Team loserTeam;
 
     public Match (Team blueTeam, Team whiteTeam){
         this.blueTeam = blueTeam;
@@ -20,12 +19,12 @@ public class Match {
     }
     public Match (){}
 
-    public int getMatchValue() {
-        return matchValue;
+    public int getValue() {
+        return value;
     }
 
-    public void setMatchValue(int matchValue) {
-        this.matchValue = matchValue;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public Team getBlueTeam() {
@@ -52,8 +51,8 @@ public class Match {
         return additionalValueMatch;
     }
 
-    public int getFinalValueMatch() {
-        return finalValueMatch;
+    public int getMaximumValue() {
+        return maximumValue;
     }
 
     public int getQtdPlayersMatch() {
@@ -62,5 +61,21 @@ public class Match {
 
     public void setQtdPlayersMatch(int qtdPlayersMatch) {
         this.qtdPlayersMatch = qtdPlayersMatch;
+    }
+
+    public Team getWinnerTeam() {
+        return winnerTeam;
+    }
+
+    public void setWinnerTeam(Team winnerTeam) {
+        this.winnerTeam = winnerTeam;
+    }
+
+    public Team getLoserTeam() {
+        return loserTeam;
+    }
+
+    public void setLoserTeam(Team loserTeam) {
+        this.loserTeam = loserTeam;
     }
 }
