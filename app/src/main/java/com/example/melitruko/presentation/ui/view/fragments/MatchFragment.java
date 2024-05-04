@@ -57,14 +57,16 @@ public class MatchFragment extends Fragment {
                 break;
 
             case 4:
+                setupTwoPlayers();
                 setupFourPlayers();
                 break;
 
             case 6:
+                setupTwoPlayers();
+                setupFourPlayers();
                 setupSixPlayers();
                 break;
         }
-
     }
 
     private void setupTwoPlayers() {
@@ -85,71 +87,36 @@ public class MatchFragment extends Fragment {
     }
 
     private void setupFourPlayers() {
-        TextView tvNamePlayer1Blue = layoutTeams.findViewById(R.id.tv_name_player1_blue);
         TextView tvNamePlayer2Blue = layoutTeams.findViewById(R.id.tv_name_player2_blue);
-        TextView tvNamePlayer1White = layoutTeams.findViewById(R.id.tv_name_player1_white);
         TextView tvNamePlayer2White = layoutTeams.findViewById(R.id.tv_name_player2_white);
 
-        ImageView ivPlayer1Blue = layoutTeams.findViewById(R.id.iv_player1_blue);
         ImageView ivPlayer2Blue = layoutTeams.findViewById(R.id.iv_player2_blue);
-        ImageView ivPlayer1White = layoutTeams.findViewById(R.id.iv_player1_white);
         ImageView ivPlayer2White = layoutTeams.findViewById(R.id.iv_player2_white);
 
-        Player bluePlayer1 = viewModel.getMatch().getBlueTeam().getPlayers().get(0);
         Player bluePlayer2 = viewModel.getMatch().getBlueTeam().getPlayers().get(1);
-        Player whitePlayer1 = viewModel.getMatch().getWhiteTeam().getPlayers().get(0);
         Player whitePlayer2 = viewModel.getMatch().getWhiteTeam().getPlayers().get(1);
 
-        tvNamePlayer1Blue.setText(bluePlayer1.getName());
         tvNamePlayer2Blue.setText(bluePlayer2.getName());
-
-        tvNamePlayer1White.setText(whitePlayer1.getName());
         tvNamePlayer2White.setText(whitePlayer2.getName());
 
-        ivPlayer1Blue.setImageURI(bluePlayer1.getPhoto());
         ivPlayer2Blue.setImageURI(bluePlayer2.getPhoto());
-
-        ivPlayer1White.setImageURI(whitePlayer1.getPhoto());
         ivPlayer2White.setImageURI(whitePlayer2.getPhoto());
     }
 
     private void setupSixPlayers() {
-        TextView tvNamePlayer1Blue = layoutTeams.findViewById(R.id.tv_name_player1_blue);
-        TextView tvNamePlayer2Blue = layoutTeams.findViewById(R.id.tv_name_player2_blue);
         TextView tvNamePlayer3Blue = layoutTeams.findViewById(R.id.tv_name_player3_blue);
-        TextView tvNamePlayer1White = layoutTeams.findViewById(R.id.tv_name_player1_white);
-        TextView tvNamePlayer2White = layoutTeams.findViewById(R.id.tv_name_player2_white);
         TextView tvNamePlayer3White = layoutTeams.findViewById(R.id.tv_name_player3_white);
 
-        ImageView ivPlayer1Blue = layoutTeams.findViewById(R.id.iv_player1_blue);
-        ImageView ivPlayer2Blue = layoutTeams.findViewById(R.id.iv_player2_blue);
         ImageView ivPlayer3Blue = layoutTeams.findViewById(R.id.iv_player3_blue);
-        ImageView ivPlayer1White = layoutTeams.findViewById(R.id.iv_player1_white);
-        ImageView ivPlayer2White = layoutTeams.findViewById(R.id.iv_player2_white);
         ImageView ivPlayer3White = layoutTeams.findViewById(R.id.iv_player3_white);
 
-        Player bluePlayer1 = viewModel.getMatch().getBlueTeam().getPlayers().get(0);
-        Player bluePlayer2 = viewModel.getMatch().getBlueTeam().getPlayers().get(1);
         Player bluePlayer3 = viewModel.getMatch().getBlueTeam().getPlayers().get(2);
-
-        Player whitePlayer1 = viewModel.getMatch().getWhiteTeam().getPlayers().get(0);
-        Player whitePlayer2 = viewModel.getMatch().getWhiteTeam().getPlayers().get(1);
         Player whitePlayer3 = viewModel.getMatch().getWhiteTeam().getPlayers().get(2);
 
-        tvNamePlayer1Blue.setText(bluePlayer1.getName());
-        tvNamePlayer2Blue.setText(bluePlayer2.getName());
         tvNamePlayer3Blue.setText(bluePlayer3.getName());
-
-        tvNamePlayer1White.setText(whitePlayer1.getName());
-        tvNamePlayer2White.setText(whitePlayer2.getName());
         tvNamePlayer3White.setText(whitePlayer3.getName());
 
-        ivPlayer1Blue.setImageURI(bluePlayer1.getPhoto());
-        ivPlayer2Blue.setImageURI(bluePlayer2.getPhoto());
         ivPlayer3Blue.setImageURI(bluePlayer3.getPhoto());
-
-        ivPlayer1White.setImageURI(whitePlayer1.getPhoto());
-        ivPlayer2White.setImageURI(whitePlayer2.getPhoto());
         ivPlayer3White.setImageURI(whitePlayer3.getPhoto());
     }
 

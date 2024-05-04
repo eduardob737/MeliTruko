@@ -2,6 +2,7 @@ package com.example.melitruko.presentation.ui.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,31 +25,15 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewModelProviderFactory factory = new ViewModelProviderFactory(getApplication());
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
-        viewModel = new ViewModelProvider(getViewModelStore(), factory).get(HomeViewModel.class);
         setContentView(binding.getRoot());
+        ViewModelProviderFactory factory = new ViewModelProviderFactory(getApplication());
+        viewModel = new ViewModelProvider(getViewModelStore(), factory).get(HomeViewModel.class);
 
+        setupButtonsActions();
         setupShowLayouts();
-
-        binding.btnPlayers.setOnClickListener(view -> {
-            startActivity(new Intent(this, PlayersControlActivity.class));
-        });
-
-        binding.btnStartGame.setOnClickListener(view1 -> {
-            if (binding.chipGroup.getCheckedChipId() == -1) {
-                Toast.makeText(this, "Escolha a quantidade de jogadores", Toast.LENGTH_SHORT).show();
-            } else {
-                if (playerValidation()) {
-                    Intent intent = new Intent(this, MatchActivity.class);
-                    intent.putExtra("BLUE_TEAM",  viewModel.getBlueTeam());
-                    intent.putExtra("WHITE_TEAM", viewModel.getWhiteTeam());
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
     }
+
     private void setupShowLayouts() {
         binding.chipGroup.setOnCheckedStateChangeListener((chipGroup, list) -> {
             viewModel.clearViewModel();
@@ -101,6 +86,26 @@ public class HomeActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    private void setupButtonsActions(){
+        binding.btnPlayers.setOnClickListener(view -> {
+            startActivity(new Intent(this, PlayersControlActivity.class));
+        });
+
+        binding.btnStartGame.setOnClickListener(view1 -> {
+            if (binding.chipGroup.getCheckedChipId() == -1) {
+                Toast.makeText(this, "Escolha a quantidade de jogadores", Toast.LENGTH_SHORT).show();
+            } else {
+                if (playerValidation()) {
+                    Intent intent = new Intent(this, MatchActivity.class);
+                    intent.putExtra("BLUE_TEAM",  viewModel.getBlueTeam());
+                    intent.putExtra("WHITE_TEAM", viewModel.getWhiteTeam());
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
 
 }

@@ -48,15 +48,18 @@ public class PlayerListFragment extends DialogFragment {
         binding.recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(requireContext(), binding.recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if (binding.recyclerView.getChildViewHolder(view).itemView.isPressed()) {
-                    binding.recyclerView.getChildViewHolder(view).itemView.setPressed(false);
-                    setPosition(-1);
+                if (isChosenPlayer(position)){
+                    Toast.makeText(requireContext(), "Esse jogador já foi escolhido", Toast.LENGTH_SHORT).show();
                 } else {
-                    binding.recyclerView.setPressed(false);
-                    binding.recyclerView.getChildViewHolder(view).itemView.setPressed(true);
-                    setPosition(position);
+                    if (binding.recyclerView.getChildViewHolder(view).itemView.isPressed()) {
+                        binding.recyclerView.getChildViewHolder(view).itemView.setPressed(false);
+                        setPosition(-1);
+                    } else {
+                        binding.recyclerView.setPressed(false);
+                        binding.recyclerView.getChildViewHolder(view).itemView.setPressed(true);
+                        setPosition(position);
+                    }
                 }
-                //TODO otimizar metodo setupPlayers
             }
 
             @Override
@@ -72,10 +75,13 @@ public class PlayerListFragment extends DialogFragment {
                 this.dismiss();
             }
         });
-
         binding.btnNewPlayer.setOnClickListener(view1 -> {
             startActivity(new Intent(requireActivity(), PlayersControlActivity.class));
         });
+    }
+
+    private boolean isChosenPlayer(int position) {
+        return viewModel.isChosenPlayer(position);
     }
 
     private void setPosition(int position) {
@@ -85,5 +91,4 @@ public class PlayerListFragment extends DialogFragment {
     private void setupPlayers(Player player) {
         viewModel.createNewPlayer(player);
     }
-
 }

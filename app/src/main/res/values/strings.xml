@@ -36,7 +36,7 @@
     <string name="txt_toast_choose_option">Escolha uma opção</string>
     <string name="txt_numbers_players">N° de jogadores</string>
     <string name="txt_select_a_player">Selecione um jogador</string>
-    <string name="txt_tap_the_image">Aperte nas imagens para escolher os jogadores</string>
+    <string name="txt_tap_the_image">Aperte na imagem para escolher um jogador</string>
     <string name="txt_tv_choose_a_player">Escolha um jogador</string>
     <string name="txt_positive_button">SIM</string>
     <string name="txt_negative_button">NÃO</string>

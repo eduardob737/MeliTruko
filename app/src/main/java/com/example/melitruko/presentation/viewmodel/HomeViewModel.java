@@ -6,14 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.melitruko.data.repositories.TeamsRepository;
 import com.example.melitruko.domain.CreateTeamUseCase;
 import com.example.melitruko.domain.GetPlayersListUseCase;
+import com.example.melitruko.domain.ResetStatusPlayersUseCase;
 import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.domain.model.Team;
 import com.example.melitruko.data.repositories.PlayersRepository;
+import com.example.melitruko.domain.UpdateStatusPlayerUseCase;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class HomeViewModel extends AndroidViewModel {
 
     private final PlayersRepository playersRepository = new PlayersRepository();
     private final GetPlayersListUseCase getPlayersListUseCase = new GetPlayersListUseCase(playersRepository);
+    private final UpdateStatusPlayerUseCase updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(playersRepository);
+    private final ResetStatusPlayersUseCase resetStatusPlayersUseCase = new ResetStatusPlayersUseCase(playersRepository);
 
     private final TeamsRepository teamsRepository = new TeamsRepository();
     private final CreateTeamUseCase createTeamUseCase = new CreateTeamUseCase(teamsRepository);
@@ -44,9 +47,14 @@ public class HomeViewModel extends AndroidViewModel {
     public void createNewPlayer(Player player){
         if (mPlayer.getValue() != player){
             setPlayer(player);
+            player.setPartOfATeam(true);
             atributePlayer(player);
             notifyObservers(player);
         }
+    }
+
+    public void updateStatusPlayer(int id){
+        updateStatusPlayerUseCase.invoke(id);
     }
 
     public void setTeamAtributes(Team.ColorTeam colorTeam, int position){
@@ -56,15 +64,29 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void atributePlayer(Player player) {
         if (colorTeam.equals(Team.ColorTeam.BLUE)){
+            if (!isEmptyPosition(getBlueTeam())) {
+                updateStatusPlayer(getBlueTeam().getPlayers().get(position).getId());
+            }
             getBlueTeam().getPlayers().set(position, player);
         }
         if (colorTeam.equals(Team.ColorTeam.WHITE)){
+            if (!isEmptyPosition(getWhiteTeam())) {
+                updateStatusPlayer(getWhiteTeam().getPlayers().get(position).getId());
+            }
             getWhiteTeam().getPlayers().set(position, player);
         }
     }
 
+    public boolean isEmptyPosition(Team team){
+        return team.getPlayers().get(position) == null;
+    }
+
     public List<Player> getPlayers(){
         return getPlayersListUseCase.invoke();
+    }
+
+    public boolean isChosenPlayer(int position) {
+        return getPlayers().get(position).isPartOfATeam();
     }
 
     public void createTeam(Team team){
@@ -105,5 +127,7 @@ public class HomeViewModel extends AndroidViewModel {
         whiteTeam = new Team();
         colorTeam = null;
         position = -1;
+        resetStatusPlayersUseCase.invoke();
+
     }
 }
