@@ -64,21 +64,21 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void atributePlayer(Player player) {
         if (colorTeam.equals(Team.ColorTeam.BLUE)){
-            if (!isEmptyPosition(getBlueTeam())) {
+            if (isPositionFilled(getBlueTeam())) {
                 updateStatusPlayer(getBlueTeam().getPlayers().get(position).getId());
             }
             getBlueTeam().getPlayers().set(position, player);
         }
         if (colorTeam.equals(Team.ColorTeam.WHITE)){
-            if (!isEmptyPosition(getWhiteTeam())) {
+            if (isPositionFilled(getWhiteTeam())) {
                 updateStatusPlayer(getWhiteTeam().getPlayers().get(position).getId());
             }
             getWhiteTeam().getPlayers().set(position, player);
         }
     }
 
-    public boolean isEmptyPosition(Team team){
-        return team.getPlayers().get(position) == null;
+    public boolean isPositionFilled(Team team){
+        return team.getPlayers().get(position) != null;
     }
 
     public List<Player> getPlayers(){
@@ -87,10 +87,6 @@ public class HomeViewModel extends AndroidViewModel {
 
     public boolean isChosenPlayer(int position) {
         return getPlayers().get(position).isPartOfATeam();
-    }
-
-    public void createTeam(Team team){
-        createTeamUseCase.invoke(team);
     }
 
     private void notifyObservers(Player player){
@@ -109,16 +105,8 @@ public class HomeViewModel extends AndroidViewModel {
         return blueTeam;
     }
 
-    public void setBlueTeam(Team blueTeam) {
-        this.blueTeam = blueTeam;
-    }
-
     public Team getWhiteTeam() {
         return whiteTeam;
-    }
-
-    public void setWhiteTeam(Team whiteTeam) {
-        this.whiteTeam = whiteTeam;
     }
 
     public void clearViewModel(){
@@ -128,6 +116,5 @@ public class HomeViewModel extends AndroidViewModel {
         colorTeam = null;
         position = -1;
         resetStatusPlayersUseCase.invoke();
-
     }
 }
