@@ -1,6 +1,5 @@
 package com.example.melitruko.presentation.ui.view.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         View view = layoutInflater.inflate(R.layout.layout_player, parent, false);
         colorBackgroundChosenPlayer = view.getResources().getColor(R.color.gray, view.getContext().getTheme());
         colorTextChosenPlayer = view.getResources().getColor(R.color.gray_text, view.getContext().getTheme());
-        return new PlayerViewHolder(view, parent.getContext());
+        return new PlayerViewHolder(view);
     }
 
     @Override
@@ -67,21 +66,12 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         public TextView tvPlayer;
         public ConstraintLayout constraintLayout;
 
-        public PlayerViewHolder(@NonNull View itemView, Context context) {
+        public PlayerViewHolder(@NonNull View itemView) {
             super(itemView);
 
             ivPlayer = itemView.findViewById(R.id.iv_player);
             tvPlayer = itemView.findViewById(R.id.tv_player);
             constraintLayout = itemView.findViewById(R.id.constraint_main);
-
-            /*itemView.setOnClickListener(view -> {
-                if (!players.isEmpty()) {
-                    Player player = players.get(getLayoutPosition());
-                    Toast.makeText(context, player.getName(), Toast.LENGTH_SHORT).show();
-                }
-            });
-
-             */
         }
     }
 }
