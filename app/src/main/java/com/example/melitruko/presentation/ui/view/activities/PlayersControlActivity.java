@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.melitruko.databinding.ActivityPlayersControlBinding;
+import com.example.melitruko.presentation.ui.view.fragments.EndGameFragment;
+import com.example.melitruko.presentation.ui.view.fragments.NewPlayerFragment;
 
 public class PlayersControlActivity extends AppCompatActivity {
 
@@ -15,14 +17,15 @@ public class PlayersControlActivity extends AppCompatActivity {
         binding = ActivityPlayersControlBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });*/
+        binding.btnAddPlayer.setOnClickListener(view -> openDialogCreateNewPlayer());
 
         binding.icBack.setOnClickListener(view -> {
             finish();
         });
+    }
+
+    private void openDialogCreateNewPlayer() {
+        NewPlayerFragment fragment = new NewPlayerFragment();
+        fragment.show(getSupportFragmentManager(), "new_player");
     }
 }

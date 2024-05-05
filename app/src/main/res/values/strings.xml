@@ -31,7 +31,6 @@
     <string name="txt_player_5">Jogador 5</string>
     <string name="txt_player_6">Jogador 6</string>
     <string name="cd_btn_add_player_image">Botão para inserir uma imagem ao jogador</string>
-    <string name="txt_hint_insert_player_name">Insira o nome do jogador</string>
     <string name="cd_app_logo">Logotipo do aplicativo Melitruko</string>
     <string name="txt_toast_choose_option">Escolha uma opção</string>
     <string name="txt_numbers_players">N° de jogadores</string>
@@ -45,4 +44,13 @@
     <string name="cd_bad_emoji">Emoji de raiva</string>
     <string name="cd_happy_emoji">Emoji de alegria com óculos escuros</string>
     <string name="txt_btn_back">Voltar</string>
+    <string name="cd_btn_remove_photo">Botão para excluir foto escolhida para o jogador</string>
+    <string name="txt_new_player">Novo jogador</string>
+    <string name="txt_name">Nome</string>
+    <string name="txt_image">Imagem</string>
+    <string name="txt_default_image">Imagem padrão</string>
+    <string name="txt_camera">Câmera</string>
+    <string name="txt_gallery">Galeria</string>
+    <string name="txt_cancel">Cancelar</string>
+    <string name="txt_to_save">Salvar</string>
 </resources>
