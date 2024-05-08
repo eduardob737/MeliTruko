@@ -16,9 +16,6 @@
             android:name=".presentation.ui.view.activities.MatchActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.view.activities.PlayersControlActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.ui.view.activities.HomeActivity"
             android:exported="false" />
         <activity

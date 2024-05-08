@@ -12,12 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
-import com.example.melitruko.databinding.ActivityHomeBinding;
 import com.example.melitruko.databinding.FragmentSetupMatchBinding;
 import com.example.melitruko.presentation.ui.view.activities.MatchActivity;
-import com.example.melitruko.presentation.ui.view.activities.PlayersControlActivity;
 import com.example.melitruko.presentation.viewmodel.HomeViewModel;
-import com.example.melitruko.presentation.viewmodel.ViewModelProviderFactory;
 
 public class SetupMatchFragment extends Fragment {
 

@@ -1,27 +1,18 @@
 package com.example.melitruko.presentation.ui.view.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.melitruko.R;
-import com.example.melitruko.databinding.ActivityPlayersControlBinding;
-import com.example.melitruko.databinding.FragmentNewPlayerBinding;
 import com.example.melitruko.databinding.FragmentPlayersControlBinding;
-import com.example.melitruko.databinding.FragmentSetupMatchBinding;
 import com.example.melitruko.presentation.ui.view.adapter.PlayerAdapter;
 import com.example.melitruko.presentation.viewmodel.HomeViewModel;
-import com.example.melitruko.presentation.viewmodel.ViewModelProviderFactory;
-
-import java.util.Objects;
 
 public class PlayersControlFragment extends Fragment {
 
@@ -40,9 +31,14 @@ public class PlayersControlFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        PlayerAdapter adapter = new PlayerAdapter(viewModel.getPlayers());
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.recyclerView.setAdapter(adapter);
+        if (viewModel.getPlayers().isEmpty()) {
+            binding.ivPerson.setVisibility(View.VISIBLE);
+            binding.tvNonePlayer.setVisibility(View.VISIBLE);
+        } else {
+            PlayerAdapter adapter = new PlayerAdapter(viewModel.getPlayers());
+            binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.recyclerView.setAdapter(adapter);
+        }
     }
 
     private void setupButtonsActions() {
