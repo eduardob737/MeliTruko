@@ -20,23 +20,6 @@ public class PlayersControlActivity extends AppCompatActivity {
         binding = ActivityPlayersControlBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setupRecyclerView();
-        setupButtonsActions();
     }
 
-    private void setupRecyclerView() {
-        //PlayerAdapter adapter = new PlayerAdapter();
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //binding.recyclerView.setAdapter(adapter);
-    }
-
-    private void setupButtonsActions() {
-        binding.btnAddPlayer.setOnClickListener(view -> openDialogCreateNewPlayer());
-        binding.icBack.setOnClickListener(view -> finish());
-    }
-
-    private void openDialogCreateNewPlayer() {
-        NewPlayerFragment fragment = new NewPlayerFragment();
-        fragment.show(getSupportFragmentManager(), "new_player");
-    }
 }
