@@ -38,7 +38,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/txt_x"
         android:textColor="@color/white"
-        android:textSize="34sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_player_1" />

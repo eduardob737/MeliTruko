@@ -45,7 +45,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+    implementation ("androidx.fragment:fragment-ktx:1.7.0")
     implementation ("androidx.navigation:navigation-fragment:2.7.7")
     implementation ("androidx.navigation:navigation-ui:2.7.7")
     implementation("com.github.bumptech.glide:glide:4.16.0")

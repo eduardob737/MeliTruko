@@ -45,31 +45,37 @@ public class SixPlayersFragment extends Fragment {
         List<Player> whiteList = viewModel.getWhiteTeam().getPlayers();
 
         if (blueList.get(0) != null){
+            binding.ivPlayer1.setContentPadding(0,0,0,0);
             binding.ivPlayer1.setImageURI(blueList.get(0).getPhoto());
             binding.tvPlayer1.setText(blueList.get(0).getName());
         }
 
         if (blueList.get(1) != null){
+            binding.ivPlayer2.setContentPadding(0,0,0,0);
             binding.ivPlayer2.setImageURI(blueList.get(1).getPhoto());
             binding.tvPlayer2.setText(blueList.get(1).getName());
         }
 
         if (blueList.get(2) != null){
+            binding.ivPlayer3.setContentPadding(0,0,0,0);
             binding.ivPlayer3.setImageURI(blueList.get(2).getPhoto());
             binding.tvPlayer3.setText(blueList.get(2).getName());
         }
 
         if (whiteList.get(0) != null){
+            binding.ivPlayer4.setContentPadding(0,0,0,0);
             binding.ivPlayer4.setImageURI(whiteList.get(0).getPhoto());
             binding.tvPlayer4.setText(whiteList.get(0).getName());
         }
 
         if (whiteList.get(1) != null){
+            binding.ivPlayer5.setContentPadding(0,0,0,0);
             binding.ivPlayer5.setImageURI(whiteList.get(1).getPhoto());
             binding.tvPlayer5.setText(whiteList.get(1).getName());
         }
 
         if (whiteList.get(2) != null){
+            binding.ivPlayer6.setContentPadding(0,0,0,0);
             binding.ivPlayer6.setImageURI(whiteList.get(2).getPhoto());
             binding.tvPlayer6.setText(whiteList.get(2).getName());
         }

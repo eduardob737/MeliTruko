@@ -45,11 +45,13 @@ public class TwoPlayersFragment extends Fragment {
         List<Player> whiteList = viewModel.getWhiteTeam().getPlayers();
 
         if ((!blueList.isEmpty()) && (blueList.get(0) != null)) {
+            binding.ivPlayer1.setContentPadding(0,0,0,0);
             binding.ivPlayer1.setImageURI(blueList.get(0).getPhoto());
             binding.tvPlayer1.setText(blueList.get(0).getName());
         }
 
         if ((!whiteList.isEmpty()) && (whiteList.get(0) != null)) {
+            binding.ivPlayer2.setContentPadding(0,0,0,0);
             binding.ivPlayer2.setImageURI(whiteList.get(0).getPhoto());
             binding.tvPlayer2.setText(whiteList.get(0).getName());
         }
