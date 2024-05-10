@@ -18,6 +18,10 @@ public class PlayersRepository {
         createPlayersList();
     }
 
+    public void createPlayer(){
+
+    }
+
     public void createPlayersList() {
         File imagem = new File("/data/data/com.example.melitruko/files/foto_isabela.jpeg");
 

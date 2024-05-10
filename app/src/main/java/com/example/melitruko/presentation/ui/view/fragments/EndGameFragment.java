@@ -1,14 +1,11 @@
 package com.example.melitruko.presentation.ui.view.fragments;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -17,25 +14,24 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentEndGameBinding;
 import com.example.melitruko.domain.model.Player;
-import com.example.melitruko.presentation.ui.view.activities.HomeActivity;
-import com.example.melitruko.presentation.viewmodel.MatchViewModel;
+import com.example.melitruko.presentation.viewmodel.HomeViewModel;
 
 public class EndGameFragment extends DialogFragment {
 
     private FragmentEndGameBinding binding;
-    private MatchViewModel viewModel;
+    private HomeViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         binding = FragmentEndGameBinding.inflate(getLayoutInflater(), container, false);
 
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         binding.btnToBack.setOnClickListener(view -> dismiss());
         binding.btnNewGame.setOnClickListener(view -> {
-            requireActivity().finish();
-            startActivity(new Intent(requireActivity(), HomeActivity.class));
+            dismiss();
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, MenuFragment.class, null).commit();
         });
 
         setupView();

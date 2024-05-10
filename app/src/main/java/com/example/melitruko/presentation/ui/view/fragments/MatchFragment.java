@@ -1,13 +1,13 @@
 package com.example.melitruko.presentation.ui.view.fragments;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -17,19 +17,18 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentMatchBinding;
 import com.example.melitruko.domain.model.Player;
-import com.example.melitruko.presentation.ui.view.activities.HomeActivity;
-import com.example.melitruko.presentation.viewmodel.MatchViewModel;
+import com.example.melitruko.presentation.viewmodel.HomeViewModel;
 
 public class MatchFragment extends Fragment {
 
     private FragmentMatchBinding binding;
-    private MatchViewModel viewModel;
+    private HomeViewModel viewModel;
     private View layoutTeams;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(requireActivity()).get(MatchViewModel.class);
         binding = FragmentMatchBinding.inflate(getLayoutInflater(), container, false);
+        viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
 
         setupPlayersTeams();
         setupButtonsActions();
@@ -143,7 +142,7 @@ public class MatchFragment extends Fragment {
         });
     }
 
-    private StringBuilder formatValueMatch(int value){
+    private StringBuilder formatValueMatch(int value) {
         StringBuilder text = new StringBuilder();
         text.append("+ ");
         text.append(value);
@@ -151,15 +150,11 @@ public class MatchFragment extends Fragment {
     }
 
     private void setupButtonsActions() {
-        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 setupAlertDialog();
             }
-        });
-
-        binding.btnBack.setOnClickListener(view -> {
-            setupAlertDialog();
         });
 
         binding.btnToAddPointsBlueTeam.setOnClickListener(view1 -> {
@@ -183,8 +178,8 @@ public class MatchFragment extends Fragment {
         dialog.setCancelable(true);
 
         dialog.findViewById(R.id.positive_button).setOnClickListener(view -> {
-            requireActivity().finish();
-            startActivity(new Intent(requireActivity(), HomeActivity.class));
+            dialog.dismiss();
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, MenuFragment.class, null).commit();
         });
 
         dialog.findViewById(R.id.negative_button).setOnClickListener(view -> {
@@ -195,7 +190,7 @@ public class MatchFragment extends Fragment {
     }
 
     private void endGame() {
-            EndGameFragment fragment = new EndGameFragment();
-            fragment.show(requireActivity().getSupportFragmentManager(), "end_game");
+        EndGameFragment fragment = new EndGameFragment();
+        fragment.show(requireActivity().getSupportFragmentManager(), "end_game");
     }
 }

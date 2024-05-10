@@ -1,6 +1,5 @@
 package com.example.melitruko.presentation.ui.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentSetupMatchBinding;
-import com.example.melitruko.presentation.ui.view.activities.MatchActivity;
 import com.example.melitruko.presentation.viewmodel.HomeViewModel;
 
 public class SetupMatchFragment extends Fragment {
@@ -92,15 +90,10 @@ public class SetupMatchFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Escolha a quantidade de jogadores", Toast.LENGTH_SHORT).show();
             } else {
                 if (playerValidation()) {
-                    Intent intent = new Intent(requireActivity(), MatchActivity.class);
-                    intent.putExtra("BLUE_TEAM", viewModel.getBlueTeam());
-                    intent.putExtra("WHITE_TEAM", viewModel.getWhiteTeam());
-                    startActivity(intent);
-                    requireActivity().finish();
+                    viewModel.setNewMatch(viewModel.getBlueTeam(), viewModel.getWhiteTeam());
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, MatchFragment.class, null).commit();
                 }
             }
         });
     }
-
-
 }
