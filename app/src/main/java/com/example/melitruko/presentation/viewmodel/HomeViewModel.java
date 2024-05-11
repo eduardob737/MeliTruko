@@ -1,6 +1,7 @@
 package com.example.melitruko.presentation.viewmodel;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
@@ -33,7 +34,8 @@ public class HomeViewModel extends AndroidViewModel {
     private final MutableLiveData<Player> mPlayer = new MutableLiveData<>();
     public LiveData<Player> playerLiveData = mPlayer;
 
-    private final PlayersRepository playersRepository = new PlayersRepository();
+    private final PlayersRepository playersRepository = new PlayersRepository(getApplication().getApplicationContext());
+
     private final GetPlayersListUseCase getPlayersListUseCase = new GetPlayersListUseCase(playersRepository);
     private final UpdateStatusPlayerUseCase updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(playersRepository);
     private final ResetStatusPlayersUseCase resetStatusPlayersUseCase = new ResetStatusPlayersUseCase(playersRepository);
@@ -51,7 +53,6 @@ public class HomeViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Integer> mMatchValue = new MutableLiveData<>();
     public LiveData<Integer> matchValueLiveData = mMatchValue;
-
 
     public HomeViewModel(@NonNull Application application) {
         super(application);

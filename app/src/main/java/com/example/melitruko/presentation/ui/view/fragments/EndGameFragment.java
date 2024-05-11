@@ -68,8 +68,8 @@ public class EndGameFragment extends DialogFragment {
         binding.tvNamePlayer1Winner.setText(winnerPlayer1.getName());
         binding.tvNamePlayer1Loser.setText(loserPlayer1.getName());
 
-        binding.ivPlayer1Winner.setImageURI(winnerPlayer1.getPhoto());
-        binding.ivPlayer1Loser.setImageURI(loserPlayer1.getPhoto());
+        binding.ivPlayer1Winner.setImageBitmap(winnerPlayer1.getPhoto());
+        binding.ivPlayer1Loser.setImageBitmap(loserPlayer1.getPhoto());
     }
 
     private void setupFourPlayers() {
@@ -85,8 +85,8 @@ public class EndGameFragment extends DialogFragment {
         binding.ivPlayer2Winner.setVisibility(View.VISIBLE);
         binding.ivPlayer2Loser.setVisibility(View.VISIBLE);
 
-        binding.ivPlayer2Winner.setImageURI(winnerPlayer2.getPhoto());
-        binding.ivPlayer2Loser.setImageURI(loserPlayer2.getPhoto());
+        binding.ivPlayer2Winner.setImageBitmap(winnerPlayer2.getPhoto());
+        binding.ivPlayer2Loser.setImageBitmap(loserPlayer2.getPhoto());
     }
 
     private void setupSixPlayers() {
@@ -102,7 +102,7 @@ public class EndGameFragment extends DialogFragment {
         binding.ivPlayer3Winner.setVisibility(View.VISIBLE);
         binding.ivPlayer3Loser.setVisibility(View.VISIBLE);
 
-        binding.ivPlayer3Winner.setImageURI(winnerPlayer3.getPhoto());
-        binding.ivPlayer3Loser.setImageURI(loserPlayer3.getPhoto());
+        binding.ivPlayer3Winner.setImageBitmap(winnerPlayer3.getPhoto());
+        binding.ivPlayer3Loser.setImageBitmap(loserPlayer3.getPhoto());
     }
 }

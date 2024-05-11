@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentTwoPlayersBinding;
 import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.domain.model.Team;
@@ -46,13 +47,13 @@ public class TwoPlayersFragment extends Fragment {
 
         if ((!blueList.isEmpty()) && (blueList.get(0) != null)) {
             binding.ivPlayer1.setContentPadding(0,0,0,0);
-            binding.ivPlayer1.setImageURI(blueList.get(0).getPhoto());
+            binding.ivPlayer1.setImageBitmap(blueList.get(0).getPhoto());
             binding.tvPlayer1.setText(blueList.get(0).getName());
         }
 
         if ((!whiteList.isEmpty()) && (whiteList.get(0) != null)) {
             binding.ivPlayer2.setContentPadding(0,0,0,0);
-            binding.ivPlayer2.setImageURI(whiteList.get(0).getPhoto());
+            binding.ivPlayer2.setImageBitmap(whiteList.get(0).getPhoto());
             binding.tvPlayer2.setText(whiteList.get(0).getName());
         }
     }

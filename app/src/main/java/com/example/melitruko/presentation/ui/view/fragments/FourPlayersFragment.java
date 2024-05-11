@@ -45,25 +45,25 @@ public class FourPlayersFragment extends Fragment {
 
         if (blueList.get(0) != null){
             binding.ivPlayer1.setContentPadding(0,0,0,0);
-            binding.ivPlayer1.setImageURI(blueList.get(0).getPhoto());
+            binding.ivPlayer1.setImageBitmap(blueList.get(0).getPhoto());
             binding.tvPlayer1.setText(blueList.get(0).getName());
         }
 
         if (blueList.get(1) != null){
             binding.ivPlayer2.setContentPadding(0,0,0,0);
-            binding.ivPlayer2.setImageURI(blueList.get(1).getPhoto());
+            binding.ivPlayer2.setImageBitmap(blueList.get(1).getPhoto());
             binding.tvPlayer2.setText(blueList.get(1).getName());
         }
 
         if (whiteList.get(0) != null){
             binding.ivPlayer3.setContentPadding(0,0,0,0);
-            binding.ivPlayer3.setImageURI(whiteList.get(0).getPhoto());
+            binding.ivPlayer3.setImageBitmap(whiteList.get(0).getPhoto());
             binding.tvPlayer3.setText(whiteList.get(0).getName());
         }
 
         if (whiteList.get(1) != null){
             binding.ivPlayer4.setContentPadding(0,0,0,0);
-            binding.ivPlayer4.setImageURI(whiteList.get(1).getPhoto());
+            binding.ivPlayer4.setImageBitmap(whiteList.get(1).getPhoto());
             binding.tvPlayer4.setText(whiteList.get(1).getName());
         }
     }

@@ -1,11 +1,15 @@
 package com.example.melitruko.data.repositories;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.Toast;
 
 import com.example.melitruko.domain.model.Player;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +18,25 @@ public class PlayersRepository {
     // Lista interna que futuramente receberá a lista do banco de dados
     List<Player> playerList = new ArrayList<>();
 
-    public PlayersRepository() {
-        createPlayersList();
+    public PlayersRepository(Context context) {
+        createPlayersList(context);
     }
 
     public void createPlayer(){
 
     }
 
-    public void createPlayersList() {
+    public void createPlayersList(Context context) {
         File imagem = new File("/data/data/com.example.melitruko/files/foto_isabela.jpeg");
 
-        Uri foto = Uri.fromFile(imagem);
+        Uri fotoUri = Uri.fromFile(imagem);
+        Bitmap foto;
+
+        try {
+            foto = MediaStore.Images.Media.getBitmap(context.getContentResolver(), fotoUri);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         int id = 0;
 

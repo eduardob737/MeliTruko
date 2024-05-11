@@ -81,8 +81,8 @@ public class MatchFragment extends Fragment {
         tvNamePlayer1Blue.setText(bluePlayer1.getName());
         tvNamePlayer1White.setText(whitePlayer1.getName());
 
-        ivPlayer1Blue.setImageURI(bluePlayer1.getPhoto());
-        ivPlayer1White.setImageURI(whitePlayer1.getPhoto());
+        ivPlayer1Blue.setImageBitmap(bluePlayer1.getPhoto());
+        ivPlayer1White.setImageBitmap(whitePlayer1.getPhoto());
     }
 
     private void setupFourPlayers() {
@@ -98,8 +98,8 @@ public class MatchFragment extends Fragment {
         tvNamePlayer2Blue.setText(bluePlayer2.getName());
         tvNamePlayer2White.setText(whitePlayer2.getName());
 
-        ivPlayer2Blue.setImageURI(bluePlayer2.getPhoto());
-        ivPlayer2White.setImageURI(whitePlayer2.getPhoto());
+        ivPlayer2Blue.setImageBitmap(bluePlayer2.getPhoto());
+        ivPlayer2White.setImageBitmap(whitePlayer2.getPhoto());
     }
 
     private void setupSixPlayers() {
@@ -115,8 +115,8 @@ public class MatchFragment extends Fragment {
         tvNamePlayer3Blue.setText(bluePlayer3.getName());
         tvNamePlayer3White.setText(whitePlayer3.getName());
 
-        ivPlayer3Blue.setImageURI(bluePlayer3.getPhoto());
-        ivPlayer3White.setImageURI(whitePlayer3.getPhoto());
+        ivPlayer3Blue.setImageBitmap(bluePlayer3.getPhoto());
+        ivPlayer3White.setImageBitmap(whitePlayer3.getPhoto());
     }
 
     private void setupObservers() {

@@ -2,6 +2,7 @@ package com.example.melitruko.presentation.ui.view.activities;
 
 import android.os.Bundle;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 

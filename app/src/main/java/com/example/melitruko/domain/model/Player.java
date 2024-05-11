@@ -1,5 +1,6 @@
 package com.example.melitruko.domain.model;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -12,7 +13,7 @@ public class Player implements Parcelable {
 
     private int id;
     private String name;
-    private Uri photo;
+    private Bitmap photo;
     private boolean isPartOfATeam = false;
 
     public Player() {
@@ -21,7 +22,7 @@ public class Player implements Parcelable {
     protected Player(Parcel in) {
         id = in.readInt();
         name = in.readString();
-        photo = in.readParcelable(Uri.class.getClassLoader());
+        photo = in.readParcelable(Bitmap.class.getClassLoader());
         isPartOfATeam = in.readByte() != 0;
     }
 
@@ -53,11 +54,11 @@ public class Player implements Parcelable {
         this.name = name;
     }
 
-    public Uri getPhoto() {
+    public Bitmap getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Uri photo) {
+    public void setPhoto(Bitmap photo) {
         this.photo = photo;
     }
 
