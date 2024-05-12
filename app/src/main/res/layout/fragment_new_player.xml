@@ -23,13 +23,14 @@
         app:layout_constraintTop_toTopOf="@id/main" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedTextField"
+        android:id="@+id/text_input_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:hint="@string/txt_name"
         android:textColorHint="@color/navy_blue"
+        android:paddingVertical="10dp"
         app:endIconMode="clear_text"
         app:boxStrokeColor="@color/navy_blue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,10 +38,11 @@
         app:layout_constraintTop_toBottomOf="@id/tv_new_player">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-
+            tools:text="Carlos Menezes"
             android:textCursorDrawable="@drawable/cursor_custom"
             android:maxLength="20"/>
 
@@ -50,13 +52,12 @@
         android:id="@+id/tv_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/txt_image"
         android:textColor="@color/navy_blue"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField" />
+        app:layout_constraintStart_toStartOf="@+id/text_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout" />
 
     <ImageButton
         android:id="@+id/ib_remove_photo"
@@ -76,6 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:padding="10dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"

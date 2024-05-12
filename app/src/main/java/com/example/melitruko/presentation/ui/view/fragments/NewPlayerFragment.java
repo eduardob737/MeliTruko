@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,12 @@ public class NewPlayerFragment extends DialogFragment {
 
         this.getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        setupActionsButtons();
+
+        return binding.getRoot();
+    }
+
+    private void setupActionsButtons() {
         binding.btnDefaultImage.setOnClickListener(view -> {
             createBitmapDefaultImage();
         });
@@ -74,8 +81,6 @@ public class NewPlayerFragment extends DialogFragment {
         });
 
         binding.btnCancel.setOnClickListener(view -> dismiss());
-
-        return binding.getRoot();
     }
 
     private void createBitmapDefaultImage() {
