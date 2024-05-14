@@ -6,6 +6,10 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
+import androidx.lifecycle.LiveData;
+import androidx.room.Query;
+import androidx.room.Update;
+
 import com.example.melitruko.domain.model.Player;
 
 import java.io.File;
@@ -18,12 +22,8 @@ public class PlayersRepository {
     // Lista interna que futuramente receberá a lista do banco de dados
     List<Player> playerList = new ArrayList<>();
 
-    public PlayersRepository(Context context) {
+public PlayersRepository(Context context) {
         createPlayersList(context);
-    }
-
-    public void createPlayer(){
-
     }
 
     public void createPlayersList(Context context) {

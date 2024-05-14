@@ -1,22 +1,28 @@
 package com.example.melitruko.domain.model;
 
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import java.util.UUID;
-
+@Entity (tableName = "players")
 public class Player implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
     private Bitmap photo;
     private boolean isPartOfATeam = false;
 
     public Player() {
+    }
+
+    public Player(String name, Bitmap photo) {
+        this.name = name;
+        this.photo = photo;
     }
 
     protected Player(Parcel in) {
