@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +59,14 @@ public class NewPlayerFragment extends DialogFragment {
         this.getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         setupActionsButtons();
+        setupObservers();
 
         return binding.getRoot();
+    }
+
+    private void setupObservers() {
+        viewModel.insertLiveData.observe(getViewLifecycleOwner(), result ->
+            Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show());
     }
 
     private void setupActionsButtons() {
@@ -77,6 +84,15 @@ public class NewPlayerFragment extends DialogFragment {
 
         binding.ibRemovePhoto.setOnClickListener(view -> {
             removePhoto();
+        });
+
+        binding.btnToSave.setOnClickListener(view -> {
+            String playerName = Objects.requireNonNull(binding.inputName.getText()).toString();
+            if (viewModel.nameValidation(playerName)){
+                viewModel.insertPlayer(playerName, null);
+            } else {
+                Toast.makeText(requireContext(), "Nome inválido", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.btnCancel.setOnClickListener(view -> dismiss());

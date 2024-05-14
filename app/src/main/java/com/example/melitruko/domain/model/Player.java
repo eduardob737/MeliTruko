@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity (tableName = "players")
@@ -14,6 +15,7 @@ public class Player implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
+    @Ignore
     private Bitmap photo;
     private boolean isPartOfATeam = false;
 

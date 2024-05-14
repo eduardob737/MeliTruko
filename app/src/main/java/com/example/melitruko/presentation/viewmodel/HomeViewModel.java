@@ -1,28 +1,28 @@
 package com.example.melitruko.presentation.viewmodel;
 
-import android.app.Application;
-import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Parcelable;
+import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.melitruko.R;
+import com.example.melitruko.data.repositories.PlayersRepository;
+import com.example.melitruko.data.repositories.RepositoryTemp;
 import com.example.melitruko.data.repositories.TeamsRepository;
 import com.example.melitruko.domain.CreateTeamUseCase;
 import com.example.melitruko.domain.GetPlayersListUseCase;
 import com.example.melitruko.domain.ResetStatusPlayersUseCase;
+import com.example.melitruko.domain.UpdateStatusPlayerUseCase;
 import com.example.melitruko.domain.model.Match;
 import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.domain.model.Team;
-import com.example.melitruko.data.repositories.PlayersRepository;
-import com.example.melitruko.domain.UpdateStatusPlayerUseCase;
 
 import java.util.List;
 
-public class HomeViewModel extends AndroidViewModel {
+public class HomeViewModel extends ViewModel {
 
     private Player player = null;
     private Team blueTeam = new Team();
@@ -34,11 +34,9 @@ public class HomeViewModel extends AndroidViewModel {
     private final MutableLiveData<Player> mPlayer = new MutableLiveData<>();
     public LiveData<Player> playerLiveData = mPlayer;
 
-    private final PlayersRepository playersRepository = new PlayersRepository(getApplication().getApplicationContext());
-
-    private final GetPlayersListUseCase getPlayersListUseCase = new GetPlayersListUseCase(playersRepository);
-    private final UpdateStatusPlayerUseCase updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(playersRepository);
-    private final ResetStatusPlayersUseCase resetStatusPlayersUseCase = new ResetStatusPlayersUseCase(playersRepository);
+    private final GetPlayersListUseCase getPlayersListUseCase;
+    private final UpdateStatusPlayerUseCase updateStatusPlayerUseCase;
+    private final ResetStatusPlayersUseCase resetStatusPlayersUseCase;
 
     private final TeamsRepository teamsRepository = new TeamsRepository();
     private final CreateTeamUseCase createTeamUseCase = new CreateTeamUseCase(teamsRepository);
@@ -54,10 +52,33 @@ public class HomeViewModel extends AndroidViewModel {
     private final MutableLiveData<Integer> mMatchValue = new MutableLiveData<>();
     public LiveData<Integer> matchValueLiveData = mMatchValue;
 
-    public HomeViewModel(@NonNull Application application) {
-        super(application);
+    private RepositoryTemp repositoryTemp;
+    private static final String TAG = HomeViewModel.class.getSimpleName();
+    private final MutableLiveData<String> _mutableInsert = new MutableLiveData<>();
+    public LiveData<String> insertLiveData = _mutableInsert;
+
+    public HomeViewModel(RepositoryTemp repositoryTemp, PlayersRepository playersRepository) {
+        this.repositoryTemp = repositoryTemp;
+        getPlayersListUseCase = new GetPlayersListUseCase(playersRepository);
+        updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(playersRepository);
+        resetStatusPlayersUseCase = new ResetStatusPlayersUseCase(playersRepository);
+
         blueTeam.setColor(Team.ColorTeam.BLUE);
         whiteTeam.setColor(Team.ColorTeam.WHITE);
+    }
+
+    public boolean nameValidation(String name){
+        return !name.isEmpty() && name.length() >= 2;
+    }
+
+    public void insertPlayer(String name, Bitmap photo){
+        try {
+            repositoryTemp.insert(name, photo);
+             _mutableInsert.postValue("Sucesso");
+        } catch (Exception exception){
+            _mutableInsert.postValue("Erro");
+            Log.e(TAG, exception.toString());
+        }
     }
 
     public void createNewPlayer(Player player){

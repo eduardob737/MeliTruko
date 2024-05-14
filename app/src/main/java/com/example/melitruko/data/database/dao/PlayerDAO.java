@@ -1,6 +1,6 @@
 package com.example.melitruko.data.database.dao;
 
-import android.graphics.Bitmap;
+import android.database.Observable;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

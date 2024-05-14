@@ -13,6 +13,10 @@ public class DatabaseDataSource implements RepositoryTemp{
 
     private PlayerDAO playerDAO;
 
+    public DatabaseDataSource(PlayerDAO playerDAO) {
+        this.playerDAO = playerDAO;
+    }
+
     @Override
     public void insert(String name, Bitmap photo) {
         Player player = new Player(name, photo);

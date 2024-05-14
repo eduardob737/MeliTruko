@@ -12,11 +12,11 @@ import com.example.melitruko.domain.model.Player;
 @Database(entities = Player.class, version = 1, exportSchema = false)
 abstract public class AppDatabase extends RoomDatabase {
 
-    abstract PlayerDAO playerDAO();
+    public abstract PlayerDAO playerDAO();
 
     private static volatile AppDatabase appDatabase;
 
-    static AppDatabase getDatabase(Context context) {
+    public static AppDatabase getDatabase(Context context) {
         if (appDatabase == null) {
             synchronized (AppDatabase.class) {
                 if (appDatabase == null) {
@@ -24,6 +24,7 @@ abstract public class AppDatabase extends RoomDatabase {
                                     context,
                                     AppDatabase.class,
                                     "app_database")
+                            .allowMainThreadQueries()
                             .build();
                 }
             }
