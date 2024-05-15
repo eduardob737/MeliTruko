@@ -74,9 +74,9 @@ public class HomeViewModel extends ViewModel {
     public void insertPlayer(String name, Bitmap photo){
         try {
             repositoryTemp.insert(name, photo);
-             _mutableInsert.postValue("Sucesso");
+             _mutableInsert.postValue("Jogador criado com sucesso");
         } catch (Exception exception){
-            _mutableInsert.postValue("Erro");
+            _mutableInsert.postValue("Erro ao cadastrar, tente novamente");
             Log.e(TAG, exception.toString());
         }
     }

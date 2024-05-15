@@ -7,10 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -28,7 +30,12 @@ import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentNewPlayerBinding;
 import com.example.melitruko.presentation.viewmodel.HomeViewModel;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class NewPlayerFragment extends DialogFragment {
@@ -41,14 +48,17 @@ public class NewPlayerFragment extends DialogFragment {
     private ActivityResultLauncher<String> requestPermissionGallery;
     private ActivityResultLauncher<Intent> resultCamera;
     private ActivityResultLauncher<Intent> resultGallery;
+    private ActivityResultLauncher<Intent> resultFile;
+    private Uri selectedPhotoUri = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        createImageOfGallery();
-        createImageOfCamera();
-        requestPermissionGallery();
         requestPermissionCamera();
+        requestPermissionGallery();
+        createNewFile();
+        createImageOfCamera();
+        createImageOfGallery();
     }
 
     @Override
@@ -66,7 +76,7 @@ public class NewPlayerFragment extends DialogFragment {
 
     private void setupObservers() {
         viewModel.insertLiveData.observe(getViewLifecycleOwner(), result ->
-            Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show());
+                Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show());
     }
 
     private void setupActionsButtons() {
@@ -88,7 +98,8 @@ public class NewPlayerFragment extends DialogFragment {
 
         binding.btnToSave.setOnClickListener(view -> {
             String playerName = Objects.requireNonNull(binding.inputName.getText()).toString();
-            if (viewModel.nameValidation(playerName)){
+            if (viewModel.nameValidation(playerName)) {
+
                 viewModel.insertPlayer(playerName, null);
             } else {
                 Toast.makeText(requireContext(), "Nome inválido", Toast.LENGTH_SHORT).show();
@@ -96,6 +107,50 @@ public class NewPlayerFragment extends DialogFragment {
         });
 
         binding.btnCancel.setOnClickListener(view -> dismiss());
+    }
+
+    private void createNewFile() {
+        String pattern = "yyyyMMdd_HHmmss";
+        String timeStamp = new SimpleDateFormat(pattern, Locale.US).format(new Date());
+
+        File internalStorageDir = requireContext().getFilesDir();
+        File imageFile = new File(internalStorageDir.getPath() + File.separator + "profile_image_" + timeStamp + ".jpg");
+
+        selectedPhotoUri = Uri.fromFile(imageFile);
+    }
+
+    private void requestPermissionCamera() {
+        requestPermissionCamera = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                setupLauncherResultCamera();
+            } else {
+                Toast.makeText(requireContext(), "É preciso permitir o acesso à câmera", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    private void requestPermissionGallery() {
+        requestPermissionGallery = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                setupLauncherResultGallery();
+            } else {
+                Toast.makeText(requireContext(), "É preciso permitir o acesso à galeria", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void validationCameraPermission() {
+        if (isCameraPermissionGranted()) {
+            setupLauncherResultCamera();
+        } else {
+            requestPermissionCamera.launch(CAMERA_PERMISSION);
+        }
+    }
+    private void validationGalleryPermission() {
+        if (isGalleryPermissionGranted()) {
+            setupLauncherResultGallery();
+        } else {
+            requestPermissionGallery.launch(GALLERY_PERMISSION);
+        }
     }
 
     private void createBitmapDefaultImage() {
@@ -112,7 +167,6 @@ public class NewPlayerFragment extends DialogFragment {
         }
         setupPlayerImageView(bitmap);
     }
-
     private void createImageOfCamera() {
         resultCamera = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             Bitmap bitmap = null;
@@ -123,7 +177,6 @@ public class NewPlayerFragment extends DialogFragment {
             setupPlayerImageView(bitmap);
         });
     }
-
     private void createImageOfGallery() {
         resultGallery = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             Bitmap bitmap = null;
@@ -149,46 +202,30 @@ public class NewPlayerFragment extends DialogFragment {
         });
     }
 
-    private void requestPermissionCamera() {
-        requestPermissionCamera = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-            if (isGranted) {
-                resultCamera.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
-            } else {
-                Toast.makeText(requireContext(), "É preciso permitir o acesso à câmera", Toast.LENGTH_LONG).show();
-            }
+    private void setupIntentCreateFile() {
+        Intent intent = new Intent(MediaStore.EXTRA_OUTPUT, selectedPhotoUri);
+        resultFile.launch(intent);
+
+        resultFile = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if ((result.getData() != null) && (result.getData().getExtras() != null))
+                Toast.makeText(requireContext(), result.getData().getData().toString(), Toast.LENGTH_SHORT).show();
         });
     }
 
-    private void requestPermissionGallery() {
-        requestPermissionGallery = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-            if (isGranted) {
-                resultGallery.launch(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
-            } else {
-                Toast.makeText(requireContext(), "É preciso permitir o acesso à galeria", Toast.LENGTH_LONG).show();
-            }
-        });
+    private void setupLauncherResultCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, selectedPhotoUri);
+        resultCamera.launch(intent);
     }
-
-    private void validationCameraPermission() {
-        if (isCameraPermissionGranted()) {
-            resultCamera.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
-        } else {
-            requestPermissionCamera.launch(CAMERA_PERMISSION);
-        }
-    }
-
-    private void validationGalleryPermission() {
-        if (isGalleryPermissionGranted()) {
-            resultGallery.launch(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
-        } else {
-            requestPermissionGallery.launch(GALLERY_PERMISSION);
-        }
+    private void setupLauncherResultGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, selectedPhotoUri);
+        resultGallery.launch(intent);
     }
 
     private boolean isCameraPermissionGranted() {
         return ContextCompat.checkSelfPermission(requireContext(), NewPlayerFragment.CAMERA_PERMISSION) == PackageManager.PERMISSION_GRANTED;
     }
-
     private boolean isGalleryPermissionGranted() {
         return ContextCompat.checkSelfPermission(requireContext(), NewPlayerFragment.GALLERY_PERMISSION) == PackageManager.PERMISSION_GRANTED;
     }
