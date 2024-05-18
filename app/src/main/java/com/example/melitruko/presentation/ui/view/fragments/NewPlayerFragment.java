@@ -129,7 +129,7 @@ public class NewPlayerFragment extends DialogFragment {
         imageFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
     }
 
-    private Uri getUriOfImageFile(){
+    private Uri getUriOfImageFile() {
         return FileProvider.getUriForFile(requireContext(), requireContext().getApplicationContext().getPackageName() + ".provider", imageFile);
     }
 
@@ -202,8 +202,16 @@ public class NewPlayerFragment extends DialogFragment {
         resultCamera = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
                 validationStoragePermission();
-                if (imageFile != null) {
-                    setupPlayerImageView(imageFile);
+
+                if ((result.getData() != null) && (result.getData().getExtras() != null)) {
+                    Bundle extras = result.getData().getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+                    try {
+                        compressAndSavePhoto(imageBitmap);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
@@ -215,7 +223,12 @@ public class NewPlayerFragment extends DialogFragment {
                 validationStoragePermission();
 
                 try {
-                    createCopyImage(result.getData().getData());
+                    InputStream inputStream = requireContext().getContentResolver().openInputStream(result.getData().getData());
+                    if (inputStream != null) {
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        inputStream.close();
+                        compressAndSavePhoto(bitmap);
+                    }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -223,15 +236,10 @@ public class NewPlayerFragment extends DialogFragment {
         });
     }
 
-    private void createCopyImage(Uri data) throws IOException {
-        InputStream inputStream = requireContext().getContentResolver().openInputStream(data);
-
-        if (inputStream != null) {
-            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-            inputStream.close();
-
+    private void compressAndSavePhoto(Bitmap bitmap) throws IOException {
+        if (bitmap != null) {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
             byte[] compressedImage = byteArrayOutputStream.toByteArray();
 
             createImageFile();
@@ -245,19 +253,14 @@ public class NewPlayerFragment extends DialogFragment {
     }
 
     private void setupLauncherResultCamera() {
-        createImageFile();
-
-        if (imageFile != null) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, getUriOfImageFile());
-            resultCamera.launch(intent);
-        }
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        resultCamera.launch(intent);
     }
 
     private void setupLauncherResultGallery() {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            resultGallery.launch(intent);
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        resultGallery.launch(intent);
     }
 
     private boolean isCameraPermissionGranted() {
@@ -274,12 +277,12 @@ public class NewPlayerFragment extends DialogFragment {
 
     private void setupPlayerImageView(File file) {
         Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-            binding.ivPlayer.setImageBitmap(bitmap);
-            binding.ivPlayer.setVisibility(View.VISIBLE);
-            binding.ibRemovePhoto.setVisibility(View.VISIBLE);
-            binding.btnGallery.setVisibility(View.GONE);
-            binding.btnCamera.setVisibility(View.GONE);
-            binding.btnDefaultImage.setVisibility(View.GONE);
+        binding.ivPlayer.setImageBitmap(bitmap);
+        binding.ivPlayer.setVisibility(View.VISIBLE);
+        binding.ibRemovePhoto.setVisibility(View.VISIBLE);
+        binding.btnGallery.setVisibility(View.GONE);
+        binding.btnCamera.setVisibility(View.GONE);
+        binding.btnDefaultImage.setVisibility(View.GONE);
     }
 
     private void removePhoto() {
