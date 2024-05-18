@@ -22,58 +22,49 @@ public class PlayersRepository {
     // Lista interna que futuramente receberá a lista do banco de dados
     List<Player> playerList = new ArrayList<>();
 
-public PlayersRepository(Context context) {
-        createPlayersList(context);
+public PlayersRepository() {
+        createPlayersList();
     }
 
-    public void createPlayersList(Context context) {
-        File imagem = new File("/data/data/com.example.melitruko/files/foto_isabela.jpeg");
-
-        Uri fotoUri = Uri.fromFile(imagem);
-        Bitmap foto;
-
-        try {
-            foto = MediaStore.Images.Media.getBitmap(context.getContentResolver(), fotoUri);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void createPlayersList() {
+        String foto = "/data/data/com.example.melitruko/files/foto_isabela.jpeg";
 
         int id = 0;
 
         Player player1 = new Player();
         player1.setId(id++);
         player1.setName("Eduardo");
-        player1.setPhoto(foto);
+        player1.setPhotoPath(foto);
         playerList.add(player1);
 
         Player player2 = new Player();
         player2.setId(id++);
         player2.setName("Wilson");
-        player2.setPhoto(foto);
+        player2.setPhotoPath(foto);
         playerList.add(player2);
 
         Player player3 = new Player();
         player3.setId(id++);
         player3.setName("Bruno");
-        player3.setPhoto(foto);
+        player3.setPhotoPath(foto);
         playerList.add(player3);
 
         Player player4 = new Player();
         player4.setId(id++);
         player4.setName("Leo");
-        player4.setPhoto(foto);
+        player4.setPhotoPath(foto);
         playerList.add(player4);
 
         Player player5 = new Player();
         player5.setId(id++);
         player5.setName("Denis");
-        player5.setPhoto(foto);
+        player5.setPhotoPath(foto);
         playerList.add(player5);
 
         Player player6 = new Player();
         player6.setId(id++);
         player6.setName("Lucas");
-        player6.setPhoto(foto);
+        player6.setPhotoPath(foto);
         playerList.add(player6);
     }
 

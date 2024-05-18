@@ -1,12 +1,12 @@
 package com.example.melitruko.domain.model;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity (tableName = "players")
@@ -15,23 +15,30 @@ public class Player implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
-    @Ignore
-    private Bitmap photo;
+    private String photoPath;
     private boolean isPartOfATeam = false;
 
     public Player() {
     }
 
-    public Player(String name, Bitmap photo) {
+    public Player(String name, String photoPath) {
         this.name = name;
-        this.photo = photo;
+        this.photoPath = photoPath;
     }
 
     protected Player(Parcel in) {
         id = in.readInt();
         name = in.readString();
-        photo = in.readParcelable(Bitmap.class.getClassLoader());
+        photoPath = in.readString();
         isPartOfATeam = in.readByte() != 0;
+    }
+
+    public Bitmap getImageBitmap(){
+        if (photoPath != null){
+            return BitmapFactory.decodeFile(photoPath);
+        } else {
+            return null;
+        }
     }
 
     public static final Creator<Player> CREATOR = new Creator<Player>() {
@@ -62,12 +69,12 @@ public class Player implements Parcelable {
         this.name = name;
     }
 
-    public Bitmap getPhoto() {
-        return photo;
+    public String getPhotoPath() {
+        return photoPath;
     }
 
-    public void setPhoto(Bitmap photo) {
-        this.photo = photo;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
     public boolean isPartOfATeam() {
@@ -87,7 +94,7 @@ public class Player implements Parcelable {
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeInt(id);
         parcel.writeString(name);
-        parcel.writeParcelable(photo, i);
+        parcel.writeString(photoPath);
         parcel.writeByte((byte) (isPartOfATeam ? 1 : 0));
     }
 }

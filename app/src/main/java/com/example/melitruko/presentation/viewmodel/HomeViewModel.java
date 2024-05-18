@@ -1,6 +1,7 @@
 package com.example.melitruko.presentation.viewmodel;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcelable;
 import android.util.Log;
 
@@ -71,9 +72,9 @@ public class HomeViewModel extends ViewModel {
         return !name.isEmpty() && name.length() >= 2;
     }
 
-    public void insertPlayer(String name, Bitmap photo){
+    public void insertPlayer(String name, String photoPath){
         try {
-            repositoryTemp.insert(name, photo);
+            repositoryTemp.insert(name, photoPath);
              _mutableInsert.postValue("Jogador criado com sucesso");
         } catch (Exception exception){
             _mutableInsert.postValue("Erro ao cadastrar, tente novamente");

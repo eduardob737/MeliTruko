@@ -11,21 +11,21 @@ import java.util.List;
 
 public class DatabaseDataSource implements RepositoryTemp{
 
-    private PlayerDAO playerDAO;
+    private final PlayerDAO playerDAO;
 
     public DatabaseDataSource(PlayerDAO playerDAO) {
         this.playerDAO = playerDAO;
     }
 
     @Override
-    public void insert(String name, Bitmap photo) {
-        Player player = new Player(name, photo);
+    public void insert(String name, String photoPath) {
+        Player player = new Player(name, photoPath);
         playerDAO.insert(player);
     }
 
     @Override
-    public void update(int id, String name, Bitmap photo) {
-        Player player = new Player(name, photo);
+    public void update(int id, String name, String photoPath) {
+        Player player = new Player(name, photoPath);
         player.setId(id);
         playerDAO.update(player);
     }

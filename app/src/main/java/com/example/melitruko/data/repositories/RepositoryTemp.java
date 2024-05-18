@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface RepositoryTemp {
 
-    void insert(String name, Bitmap photo);
+    void insert(String name, String photoPath);
 
-    void update(int id, String name, Bitmap photo);
+    void update(int id, String name, String photoPath);
 
     void delete(int id);
 

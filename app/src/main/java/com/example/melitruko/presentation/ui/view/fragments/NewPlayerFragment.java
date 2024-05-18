@@ -31,8 +31,11 @@ import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentNewPlayerBinding;
 import com.example.melitruko.presentation.viewmodel.HomeViewModel;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -51,7 +54,7 @@ public class NewPlayerFragment extends DialogFragment {
     private ActivityResultLauncher<Intent> resultCamera;
     private ActivityResultLauncher<Intent> resultGallery;
     private Uri selectedPhotoUri = null;
-    private File imageFile;
+    private File imageFile = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,21 +114,23 @@ public class NewPlayerFragment extends DialogFragment {
         binding.btnCancel.setOnClickListener(view -> dismiss());
     }
 
-    private Uri getOutputPictureUri(){
+    private void createImageFile() {
         File mediaStorageDir = new File(requireContext().getFilesDir(), "profiles_images");
 
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
                 Toast.makeText(requireContext(), "profiles_images", Toast.LENGTH_LONG).show();
-                return null;
             }
         }
 
         String pattern = "yyyyMMdd_HHmmss";
         String timeStamp = new SimpleDateFormat(pattern, Locale.US).format(new Date());
-        imageFile = new File(mediaStorageDir.getPath() + File.separator +
-                "IMG_"+ timeStamp + ".jpg");
-        return selectedPhotoUri = FileProvider.getUriForFile(requireContext(), requireContext().getApplicationContext().getPackageName() + ".provider", imageFile);
+
+        imageFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+    }
+
+    private Uri getUriOfImageFile(){
+        return FileProvider.getUriForFile(requireContext(), requireContext().getApplicationContext().getPackageName() + ".provider", imageFile);
     }
 
     private void requestPermissionCamera() {
@@ -190,16 +195,15 @@ public class NewPlayerFragment extends DialogFragment {
                 throw new RuntimeException(e);
             }
         }
-        setupPlayerImageView(bitmap);
+        //TODO setupPlayerImageView(bitmap);
     }
 
     private void createImageOfCamera() {
         resultCamera = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
                 validationStoragePermission();
-                if (selectedPhotoUri != null){
-                    Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
-                    setupPlayerImageView(bitmap);
+                if (imageFile != null) {
+                    setupPlayerImageView(imageFile);
                 }
             }
         });
@@ -207,44 +211,53 @@ public class NewPlayerFragment extends DialogFragment {
 
     private void createImageOfGallery() {
         resultGallery = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            Bitmap bitmap = null;
             if ((result.getData() != null) && (result.getData().getData() != null)) {
                 validationStoragePermission();
-                if (Build.VERSION.SDK_INT < 28) {
-                    try {
-                        assert result.getData() != null;
-                        bitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), result.getData().getData());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else {
-                    assert result.getData() != null;
-                    ImageDecoder.Source source = ImageDecoder.createSource(requireActivity().getContentResolver(), Objects.requireNonNull(result.getData().getData()));
-                    try {
-                        bitmap = ImageDecoder.decodeBitmap(source);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+
+                try {
+                    createCopyImage(result.getData().getData());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
-            setupPlayerImageView(bitmap);
         });
     }
 
-    private void setupLauncherResultCamera() {
-        selectedPhotoUri = getOutputPictureUri();
+    private void createCopyImage(Uri data) throws IOException {
+        InputStream inputStream = requireContext().getContentResolver().openInputStream(data);
 
-        if (selectedPhotoUri != null) {
+        if (inputStream != null) {
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            inputStream.close();
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+            byte[] compressedImage = byteArrayOutputStream.toByteArray();
+
+            createImageFile();
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+
+            outputStream.write(compressedImage);
+            outputStream.close();
+
+            setupPlayerImageView(imageFile);
+        }
+    }
+
+    private void setupLauncherResultCamera() {
+        createImageFile();
+
+        if (imageFile != null) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, selectedPhotoUri);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, getUriOfImageFile());
             resultCamera.launch(intent);
         }
     }
 
     private void setupLauncherResultGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, selectedPhotoUri);
-        resultGallery.launch(intent);
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            resultGallery.launch(intent);
     }
 
     private boolean isCameraPermissionGranted() {
@@ -259,15 +272,14 @@ public class NewPlayerFragment extends DialogFragment {
         return ContextCompat.checkSelfPermission(requireContext(), NewPlayerFragment.WRITE_STORAGE_PERMISSION) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void setupPlayerImageView(Bitmap bitmap) {
-        if (bitmap != null) {
+    private void setupPlayerImageView(File file) {
+        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
             binding.ivPlayer.setImageBitmap(bitmap);
             binding.ivPlayer.setVisibility(View.VISIBLE);
             binding.ibRemovePhoto.setVisibility(View.VISIBLE);
             binding.btnGallery.setVisibility(View.GONE);
             binding.btnCamera.setVisibility(View.GONE);
             binding.btnDefaultImage.setVisibility(View.GONE);
-        }
     }
 
     private void removePhoto() {

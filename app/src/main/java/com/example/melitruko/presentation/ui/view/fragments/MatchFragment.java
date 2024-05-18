@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -38,7 +37,7 @@ public class MatchFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void setupDefaultScore(){
+    private void setupDefaultScore() {
         binding.tvBlueTeamScore.setText(String.valueOf(viewModel.getBlueTeamScore()));
         binding.tvWhiteTeamScore.setText(String.valueOf(viewModel.getWhiteTeamScore()));
         binding.tvToAddPointsBlueTeam.setText(formatValueMatch(viewModel.getMatchValue()));
@@ -81,8 +80,8 @@ public class MatchFragment extends Fragment {
         tvNamePlayer1Blue.setText(bluePlayer1.getName());
         tvNamePlayer1White.setText(whitePlayer1.getName());
 
-        ivPlayer1Blue.setImageBitmap(bluePlayer1.getPhoto());
-        ivPlayer1White.setImageBitmap(whitePlayer1.getPhoto());
+        ivPlayer1Blue.setImageBitmap(bluePlayer1.getImageBitmap());
+        ivPlayer1White.setImageBitmap(whitePlayer1.getImageBitmap());
     }
 
     private void setupFourPlayers() {
@@ -98,8 +97,8 @@ public class MatchFragment extends Fragment {
         tvNamePlayer2Blue.setText(bluePlayer2.getName());
         tvNamePlayer2White.setText(whitePlayer2.getName());
 
-        ivPlayer2Blue.setImageBitmap(bluePlayer2.getPhoto());
-        ivPlayer2White.setImageBitmap(whitePlayer2.getPhoto());
+        ivPlayer2Blue.setImageBitmap(bluePlayer2.getImageBitmap());
+        ivPlayer2White.setImageBitmap(whitePlayer2.getImageBitmap());
     }
 
     private void setupSixPlayers() {
@@ -115,8 +114,8 @@ public class MatchFragment extends Fragment {
         tvNamePlayer3Blue.setText(bluePlayer3.getName());
         tvNamePlayer3White.setText(whitePlayer3.getName());
 
-        ivPlayer3Blue.setImageBitmap(bluePlayer3.getPhoto());
-        ivPlayer3White.setImageBitmap(whitePlayer3.getPhoto());
+        ivPlayer3Blue.setImageBitmap(bluePlayer3.getImageBitmap());
+        ivPlayer3White.setImageBitmap(whitePlayer3.getImageBitmap());
     }
 
     private void setupObservers() {
@@ -125,6 +124,7 @@ public class MatchFragment extends Fragment {
             if (score == viewModel.maximumValueMatch())
                 endGame();
         });
+
         viewModel.whiteTeamScoreLiveData.observe(getViewLifecycleOwner(), score -> {
             binding.tvWhiteTeamScore.setText(String.valueOf(score));
             if (score == viewModel.maximumValueMatch())

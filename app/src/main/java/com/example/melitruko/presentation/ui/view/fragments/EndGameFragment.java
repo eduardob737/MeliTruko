@@ -1,5 +1,7 @@
 package com.example.melitruko.presentation.ui.view.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -68,8 +70,8 @@ public class EndGameFragment extends DialogFragment {
         binding.tvNamePlayer1Winner.setText(winnerPlayer1.getName());
         binding.tvNamePlayer1Loser.setText(loserPlayer1.getName());
 
-        binding.ivPlayer1Winner.setImageBitmap(winnerPlayer1.getPhoto());
-        binding.ivPlayer1Loser.setImageBitmap(loserPlayer1.getPhoto());
+        binding.ivPlayer1Winner.setImageBitmap(winnerPlayer1.getImageBitmap());
+        binding.ivPlayer1Loser.setImageBitmap(loserPlayer1.getImageBitmap());
     }
 
     private void setupFourPlayers() {
@@ -85,8 +87,8 @@ public class EndGameFragment extends DialogFragment {
         binding.ivPlayer2Winner.setVisibility(View.VISIBLE);
         binding.ivPlayer2Loser.setVisibility(View.VISIBLE);
 
-        binding.ivPlayer2Winner.setImageBitmap(winnerPlayer2.getPhoto());
-        binding.ivPlayer2Loser.setImageBitmap(loserPlayer2.getPhoto());
+        binding.ivPlayer2Winner.setImageBitmap(winnerPlayer2.getImageBitmap());
+        binding.ivPlayer2Loser.setImageBitmap(loserPlayer2.getImageBitmap());
     }
 
     private void setupSixPlayers() {
@@ -102,7 +104,7 @@ public class EndGameFragment extends DialogFragment {
         binding.ivPlayer3Winner.setVisibility(View.VISIBLE);
         binding.ivPlayer3Loser.setVisibility(View.VISIBLE);
 
-        binding.ivPlayer3Winner.setImageBitmap(winnerPlayer3.getPhoto());
-        binding.ivPlayer3Loser.setImageBitmap(loserPlayer3.getPhoto());
+        binding.ivPlayer3Winner.setImageBitmap(winnerPlayer3.getImageBitmap());
+        binding.ivPlayer3Loser.setImageBitmap(loserPlayer3.getImageBitmap());
     }
 }

@@ -1,5 +1,7 @@
 package com.example.melitruko.presentation.ui.view.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +45,11 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
             Player player = players.get(position);
             holder.tvPlayer.setText(player.getName());
 
+            String imagePath = player.getPhotoPath();
+            Bitmap imageBitmap = BitmapFactory.decodeFile(imagePath);
+
             Glide.with(holder.itemView)
-                    .load(player.getPhoto())
+                    .load(imageBitmap)
                     .into(holder.ivPlayer);
 
             if (players.get(position).isPartOfATeam()){

@@ -42,6 +42,6 @@ public class HomeActivity extends AppCompatActivity {
     private void setupDependencies() {
         PlayerDAO playerDAO = AppDatabase.getDatabase(getApplicationContext()).playerDAO();
         repositoryTemp = new DatabaseDataSource(playerDAO);
-        playersRepository = new PlayersRepository(getApplicationContext());
+        playersRepository = new PlayersRepository();
     }
 }

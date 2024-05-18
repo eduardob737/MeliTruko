@@ -47,13 +47,13 @@ public class TwoPlayersFragment extends Fragment {
 
         if ((!blueList.isEmpty()) && (blueList.get(0) != null)) {
             binding.ivPlayer1.setContentPadding(0,0,0,0);
-            binding.ivPlayer1.setImageBitmap(blueList.get(0).getPhoto());
+            binding.ivPlayer1.setImageBitmap(blueList.get(0).getImageBitmap());
             binding.tvPlayer1.setText(blueList.get(0).getName());
         }
 
         if ((!whiteList.isEmpty()) && (whiteList.get(0) != null)) {
             binding.ivPlayer2.setContentPadding(0,0,0,0);
-            binding.ivPlayer2.setImageBitmap(whiteList.get(0).getPhoto());
+            binding.ivPlayer2.setImageBitmap(whiteList.get(0).getImageBitmap());
             binding.tvPlayer2.setText(whiteList.get(0).getName());
         }
     }
