@@ -1,7 +1,5 @@
 package com.example.melitruko.data.database.dao;
 
-import android.database.Observable;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;

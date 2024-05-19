@@ -11,8 +11,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.melitruko.databinding.FragmentPlayersControlBinding;
+import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.presentation.ui.view.adapter.PlayerAdapter;
 import com.example.melitruko.presentation.viewmodel.HomeViewModel;
+
+import java.util.List;
 
 public class PlayersControlFragment extends Fragment {
 
@@ -24,21 +27,32 @@ public class PlayersControlFragment extends Fragment {
         binding = FragmentPlayersControlBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
 
-        setupRecyclerView();
         setupButtonsActions();
 
         return binding.getRoot();
     }
 
-    private void setupRecyclerView() {
-        if (viewModel.getPlayers().isEmpty()) {
-            binding.ivPerson.setVisibility(View.VISIBLE);
-            binding.tvNonePlayer.setVisibility(View.VISIBLE);
-        } else {
-            PlayerAdapter adapter = new PlayerAdapter(viewModel.getPlayers());
-            binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            binding.recyclerView.setAdapter(adapter);
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupObservers();
+    }
+
+    private void setupObservers() {
+        viewModel.playersListLiveData.observe(getViewLifecycleOwner(), list -> {
+            if (list.isEmpty()) {
+                binding.ivPerson.setVisibility(View.VISIBLE);
+                binding.tvNonePlayer.setVisibility(View.VISIBLE);
+            } else {
+                setupRecyclerView(list);
+            }
+        });
+    }
+
+    private void setupRecyclerView(List<Player> list) {
+        PlayerAdapter adapter = new PlayerAdapter(list);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerView.setAdapter(adapter);
     }
 
     private void setupButtonsActions() {

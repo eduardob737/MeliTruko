@@ -21,6 +21,7 @@ import com.example.melitruko.domain.model.Match;
 import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.domain.model.Team;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeViewModel extends ViewModel {
@@ -61,8 +62,11 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<Boolean> _mutableStatusSucess = new MutableLiveData<>();
     public LiveData<Boolean> statusSucessLiveData = _mutableStatusSucess;
 
+    public LiveData<List<Player>> playersListLiveData;
+
     public HomeViewModel(RepositoryTemp repositoryTemp, PlayersRepository playersRepository) {
         this.repositoryTemp = repositoryTemp;
+        playersListLiveData = repositoryTemp.getAllPlayers();
         getPlayersListUseCase = new GetPlayersListUseCase(playersRepository);
         updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(playersRepository);
         resetStatusPlayersUseCase = new ResetStatusPlayersUseCase(playersRepository);

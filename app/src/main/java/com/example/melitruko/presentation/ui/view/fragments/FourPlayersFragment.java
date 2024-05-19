@@ -91,7 +91,7 @@ public class FourPlayersFragment extends Fragment {
     }
 
     private void showPlayersListFragment(){
-        PlayerListFragment playerListFragment = new PlayerListFragment();
-        playerListFragment.show(requireActivity().getSupportFragmentManager(), "list");
+        PlayersListFragment playersListFragment = new PlayersListFragment();
+        playersListFragment.show(requireActivity().getSupportFragmentManager(), "list");
     }
 }

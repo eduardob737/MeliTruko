@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +20,9 @@ import com.example.melitruko.presentation.ui.view.RecyclerItemClickListener;
 import com.example.melitruko.presentation.ui.view.adapter.PlayerAdapter;
 import com.example.melitruko.presentation.viewmodel.HomeViewModel;
 
-public class PlayerListFragment extends DialogFragment {
+import java.util.List;
+
+public class PlayersListFragment extends DialogFragment {
     private FragmentPlayersListBinding binding;
     private HomeViewModel viewModel;
     private int position = -1;
@@ -33,21 +34,30 @@ public class PlayerListFragment extends DialogFragment {
 
         this.getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        if (viewModel.getPlayers().isEmpty()) {
-            binding.ivPerson.setVisibility(View.VISIBLE);
-            binding.tvNonePlayer.setVisibility(View.VISIBLE);
-        } else {
-            setupRecyclerView();
-        }
-
         setupButtonsDialog();
 
         return binding.getRoot();
     }
 
-    private void setupRecyclerView() {
-        PlayerAdapter adapter = new PlayerAdapter(viewModel.getPlayers());
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupObservers();
+    }
 
+    private void setupObservers() {
+        viewModel.playersListLiveData.observe(getViewLifecycleOwner(), list -> {
+            if (list.isEmpty()) {
+                binding.ivPerson.setVisibility(View.VISIBLE);
+                binding.tvNonePlayer.setVisibility(View.VISIBLE);
+            } else {
+                setupRecyclerView(list);
+            }
+        });
+    }
+
+    private void setupRecyclerView(List<Player> list) {
+        PlayerAdapter adapter = new PlayerAdapter(list);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerView.setAdapter(adapter);
 

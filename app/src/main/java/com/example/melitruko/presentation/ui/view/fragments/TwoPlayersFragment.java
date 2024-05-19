@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentTwoPlayersBinding;
 import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.domain.model.Team;
@@ -71,7 +70,7 @@ public class TwoPlayersFragment extends Fragment {
     }
 
     private void showPlayersListFragment() {
-        PlayerListFragment playerListFragment = new PlayerListFragment();
-        playerListFragment.show(requireActivity().getSupportFragmentManager(), "list");
+        PlayersListFragment playersListFragment = new PlayersListFragment();
+        playersListFragment.show(requireActivity().getSupportFragmentManager(), "list");
     }
 }
