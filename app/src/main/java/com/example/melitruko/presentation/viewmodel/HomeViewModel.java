@@ -58,6 +58,9 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<String> _mutableInsert = new MutableLiveData<>();
     public LiveData<String> insertLiveData = _mutableInsert;
 
+    private final MutableLiveData<Boolean> _mutableStatusSucess = new MutableLiveData<>();
+    public LiveData<Boolean> statusSucessLiveData = _mutableStatusSucess;
+
     public HomeViewModel(RepositoryTemp repositoryTemp, PlayersRepository playersRepository) {
         this.repositoryTemp = repositoryTemp;
         getPlayersListUseCase = new GetPlayersListUseCase(playersRepository);
@@ -76,8 +79,10 @@ public class HomeViewModel extends ViewModel {
         try {
             repositoryTemp.insert(name, photoPath);
              _mutableInsert.postValue("Jogador criado com sucesso");
+             _mutableStatusSucess.postValue(true);
         } catch (Exception exception){
             _mutableInsert.postValue("Erro ao cadastrar, tente novamente");
+            _mutableStatusSucess.postValue(false);
             Log.e(TAG, exception.toString());
         }
     }

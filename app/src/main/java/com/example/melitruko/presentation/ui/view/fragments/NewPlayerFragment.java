@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,9 @@ public class NewPlayerFragment extends DialogFragment {
     private ActivityResultLauncher<String> requestPermissionCamera, requestPermissionGallery, requestPermissionWriteStorage;
     private ActivityResultLauncher<Intent> resultCamera, resultGallery;
     private File imageFile = null, fileDefaultImage = null;
-    private String nameFileDefaultImage = File.separator + "IMG_DEFAULT_PLAYER.jpg";
+    private String pathImage = null;
+    private final String NAME_FILE_DEFAULT_IMAGE = "IMG_DEFAULT_PLAYER.jpg";
+    private final String NAME_FOLDER_PROFILE_IMAGES = "profile_images";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,8 +75,11 @@ public class NewPlayerFragment extends DialogFragment {
     }
 
     private void setupObservers() {
-        viewModel.insertLiveData.observe(getViewLifecycleOwner(), result ->
-                Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show());
+        viewModel.insertLiveData.observe(getViewLifecycleOwner(), result -> Toast.makeText(requireContext(), result, Toast.LENGTH_SHORT).show());
+        viewModel.statusSucessLiveData.observe(getViewLifecycleOwner(), result -> {
+            if (result)
+                NewPlayerFragment.this.dismiss();
+        });
     }
 
     private void setupActionsButtons() {
@@ -97,27 +101,36 @@ public class NewPlayerFragment extends DialogFragment {
 
         binding.btnToSave.setOnClickListener(view -> {
             String playerName = Objects.requireNonNull(binding.inputName.getText()).toString();
-            if (viewModel.nameValidation(playerName)) {
-
-                viewModel.insertPlayer(playerName, null);
-            } else {
-                Toast.makeText(requireContext(), "Nome inválido", Toast.LENGTH_SHORT).show();
-            }
+            if (validationInputData(playerName))
+                viewModel.insertPlayer(playerName, pathImage);
         });
 
         binding.btnCancel.setOnClickListener(view -> dismiss());
+    }
+
+    private boolean validationInputData(String name) {
+        if (!viewModel.nameValidation(name)) {
+            Toast.makeText(requireContext(), "Nome inválido", Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            if (pathImage == null) {
+                Toast.makeText(requireContext(), "Nenhuma imagem foi selecionada", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+        return true;
     }
 
     private void createImageFile() {
         String pattern = "yyyyMMdd_HHmmss";
         String timeStamp = new SimpleDateFormat(pattern, Locale.US).format(new Date());
 
-        imageFile = new File(getFolderProfilesImages().getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+        imageFile = new File(getFolderProfileImages().getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
     }
 
-    private File getFolderProfilesImages(){
-        File mediaStorageDir = new File(requireContext().getFilesDir(), "profiles_images");
-        fileDefaultImage = new File(mediaStorageDir.getPath() + nameFileDefaultImage);
+    private File getFolderProfileImages() {
+        File mediaStorageDir = new File(requireContext().getFilesDir(), NAME_FOLDER_PROFILE_IMAGES);
+        fileDefaultImage = new File(mediaStorageDir.getPath() + File.separator + NAME_FILE_DEFAULT_IMAGE);
 
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
@@ -195,8 +208,8 @@ public class NewPlayerFragment extends DialogFragment {
     }
 
     private void createBitmapDefaultImage() {
-        if (fileDefaultImage == null){
-            getFolderProfilesImages();
+        if (fileDefaultImage == null) {
+            getFolderProfileImages();
         }
         setupPlayerImageView(fileDefaultImage);
     }
@@ -280,6 +293,7 @@ public class NewPlayerFragment extends DialogFragment {
     }
 
     private void setupPlayerImageView(@NonNull File file) {
+        pathImage = file.getAbsolutePath();
         Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
         binding.ivPlayer.setImageBitmap(bitmap);
         binding.ivPlayer.setVisibility(View.VISIBLE);
@@ -290,7 +304,7 @@ public class NewPlayerFragment extends DialogFragment {
     }
 
     private void removePhoto() {
-        // TODO remover foto da view model
+        pathImage = null;
         binding.ivPlayer.setVisibility(View.GONE);
         binding.ibRemovePhoto.setVisibility(View.GONE);
         binding.btnGallery.setVisibility(View.VISIBLE);
