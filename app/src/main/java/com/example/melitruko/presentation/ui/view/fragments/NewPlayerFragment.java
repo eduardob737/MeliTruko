@@ -7,12 +7,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.ImageDecoder;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +21,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.melitruko.R;
 import com.example.melitruko.databinding.FragmentNewPlayerBinding;
 import com.example.melitruko.presentation.viewmodel.HomeViewModel;
 
@@ -48,13 +44,10 @@ public class NewPlayerFragment extends DialogFragment {
     private static final String CAMERA_PERMISSION = Manifest.permission.CAMERA;
     private static final String GALLERY_PERMISSION = Manifest.permission.READ_EXTERNAL_STORAGE;
     private static final String WRITE_STORAGE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-    private ActivityResultLauncher<String> requestPermissionCamera;
-    private ActivityResultLauncher<String> requestPermissionGallery;
-    private ActivityResultLauncher<String> requestPermissionWriteStorage;
-    private ActivityResultLauncher<Intent> resultCamera;
-    private ActivityResultLauncher<Intent> resultGallery;
-    private Uri selectedPhotoUri = null;
-    private File imageFile = null;
+    private ActivityResultLauncher<String> requestPermissionCamera, requestPermissionGallery, requestPermissionWriteStorage;
+    private ActivityResultLauncher<Intent> resultCamera, resultGallery;
+    private File imageFile = null, fileDefaultImage = null;
+    private String nameFileDefaultImage = File.separator + "IMG_DEFAULT_PLAYER.jpg";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +57,7 @@ public class NewPlayerFragment extends DialogFragment {
         requestPermissionWriteStorage();
         createImageOfCamera();
         createImageOfGallery();
+        validationStoragePermission();
     }
 
     @Override
@@ -115,22 +109,39 @@ public class NewPlayerFragment extends DialogFragment {
     }
 
     private void createImageFile() {
-        File mediaStorageDir = new File(requireContext().getFilesDir(), "profiles_images");
-
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Toast.makeText(requireContext(), "profiles_images", Toast.LENGTH_LONG).show();
-            }
-        }
-
         String pattern = "yyyyMMdd_HHmmss";
         String timeStamp = new SimpleDateFormat(pattern, Locale.US).format(new Date());
 
-        imageFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+        imageFile = new File(getFolderProfilesImages().getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
     }
 
-    private Uri getUriOfImageFile() {
-        return FileProvider.getUriForFile(requireContext(), requireContext().getApplicationContext().getPackageName() + ".provider", imageFile);
+    private File getFolderProfilesImages(){
+        File mediaStorageDir = new File(requireContext().getFilesDir(), "profiles_images");
+        fileDefaultImage = new File(mediaStorageDir.getPath() + nameFileDefaultImage);
+
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Toast.makeText(requireContext(), "Ocorreu um erro, tente novamente", Toast.LENGTH_LONG).show();
+            } else {
+                createFileDefaultImage();
+            }
+        }
+        return mediaStorageDir;
+    }
+
+    private void createFileDefaultImage() {
+        try {
+            InputStream inputStream = requireContext().getResources().getAssets().open("default_image_player.bmp");
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            inputStream.close();
+
+            FileOutputStream outputStream = new FileOutputStream(fileDefaultImage);
+            outputStream.write(getCompressedImage(bitmap));
+            outputStream.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void requestPermissionCamera() {
@@ -156,7 +167,7 @@ public class NewPlayerFragment extends DialogFragment {
     private void requestPermissionWriteStorage() {
         requestPermissionWriteStorage = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
             if (!isGranted) {
-                Toast.makeText(requireContext(), "É preciso permitir a gravação de imagens", Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), "É preciso permitir acesso ao armazenamento do dispositivo", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -184,24 +195,15 @@ public class NewPlayerFragment extends DialogFragment {
     }
 
     private void createBitmapDefaultImage() {
-        Bitmap bitmap = null;
-        ImageDecoder.Source source;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            source = ImageDecoder.createSource(requireActivity().getResources(), R.drawable.default_person_bmp);
-
-            try {
-                bitmap = ImageDecoder.decodeBitmap(source);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        if (fileDefaultImage == null){
+            getFolderProfilesImages();
         }
-        //TODO setupPlayerImageView(bitmap);
+        setupPlayerImageView(fileDefaultImage);
     }
 
     private void createImageOfCamera() {
         resultCamera = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
-                validationStoragePermission();
 
                 if ((result.getData() != null) && (result.getData().getExtras() != null)) {
                     Bundle extras = result.getData().getExtras();
@@ -220,8 +222,6 @@ public class NewPlayerFragment extends DialogFragment {
     private void createImageOfGallery() {
         resultGallery = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if ((result.getData() != null) && (result.getData().getData() != null)) {
-                validationStoragePermission();
-
                 try {
                     InputStream inputStream = requireContext().getContentResolver().openInputStream(result.getData().getData());
                     if (inputStream != null) {
@@ -238,9 +238,7 @@ public class NewPlayerFragment extends DialogFragment {
 
     private void compressAndSavePhoto(Bitmap bitmap) throws IOException {
         if (bitmap != null) {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
-            byte[] compressedImage = byteArrayOutputStream.toByteArray();
+            byte[] compressedImage = getCompressedImage(bitmap);
 
             createImageFile();
             FileOutputStream outputStream = new FileOutputStream(imageFile);
@@ -250,6 +248,12 @@ public class NewPlayerFragment extends DialogFragment {
 
             setupPlayerImageView(imageFile);
         }
+    }
+
+    private byte[] getCompressedImage(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
     }
 
     private void setupLauncherResultCamera() {
@@ -275,7 +279,7 @@ public class NewPlayerFragment extends DialogFragment {
         return ContextCompat.checkSelfPermission(requireContext(), NewPlayerFragment.WRITE_STORAGE_PERMISSION) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void setupPlayerImageView(File file) {
+    private void setupPlayerImageView(@NonNull File file) {
         Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
         binding.ivPlayer.setImageBitmap(bitmap);
         binding.ivPlayer.setVisibility(View.VISIBLE);
