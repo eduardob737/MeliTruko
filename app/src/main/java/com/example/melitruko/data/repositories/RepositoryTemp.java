@@ -18,4 +18,12 @@ public interface RepositoryTemp {
     void delete(int id);
 
     LiveData<List<Player>> getAllPlayers();
+
+    boolean isPlayerChosen(List<Player> list, int position);
+
+    void updateStatus(int id);
+
+    int getPosition(int id);
+
+    void resetStatusPlayer();
 }

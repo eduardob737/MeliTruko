@@ -5,12 +5,12 @@ import com.example.melitruko.domain.model.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayersRepository {
+public class PlayerRepository {
 
     // Lista interna que futuramente receberá a lista do banco de dados
     List<Player> playerList = new ArrayList<>();
 
-    public PlayersRepository() {
+    public PlayerRepository() {
         createPlayersList();
     }
 

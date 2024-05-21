@@ -1,7 +1,5 @@
 package com.example.melitruko.presentation.viewmodel;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Parcelable;
 import android.util.Log;
 
@@ -10,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.melitruko.R;
-import com.example.melitruko.data.repositories.PlayersRepository;
+import com.example.melitruko.data.repositories.PlayerRepository;
 import com.example.melitruko.data.repositories.RepositoryTemp;
 import com.example.melitruko.data.repositories.TeamsRepository;
 import com.example.melitruko.domain.CreateTeamUseCase;
@@ -21,7 +19,6 @@ import com.example.melitruko.domain.model.Match;
 import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.domain.model.Team;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeViewModel extends ViewModel {
@@ -59,18 +56,18 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<String> _mutableInsert = new MutableLiveData<>();
     public LiveData<String> insertLiveData = _mutableInsert;
 
-    private final MutableLiveData<Boolean> _mutableStatusSucess = new MutableLiveData<>();
-    public LiveData<Boolean> statusSucessLiveData = _mutableStatusSucess;
+    private final MutableLiveData<Boolean> _mutableStatusSuccess = new MutableLiveData<>();
+    public LiveData<Boolean> statusSuccessLiveData = _mutableStatusSuccess;
 
     public LiveData<List<Player>> playersListLiveData;
+    public List<Player> list;
 
-    public HomeViewModel(RepositoryTemp repositoryTemp, PlayersRepository playersRepository) {
+    public HomeViewModel(RepositoryTemp repositoryTemp, PlayerRepository playerRepository) {
         this.repositoryTemp = repositoryTemp;
-        playersListLiveData = repositoryTemp.getAllPlayers();
-        getPlayersListUseCase = new GetPlayersListUseCase(playersRepository);
-        updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(playersRepository);
-        resetStatusPlayersUseCase = new ResetStatusPlayersUseCase(playersRepository);
-
+        getPlayersListUseCase = new GetPlayersListUseCase(repositoryTemp);
+        updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(playerRepository);
+        resetStatusPlayersUseCase = new ResetStatusPlayersUseCase(playerRepository);
+        playersListLiveData = getPlayersListUseCase.invoke();
         blueTeam.setColor(Team.ColorTeam.BLUE);
         whiteTeam.setColor(Team.ColorTeam.WHITE);
     }
@@ -83,10 +80,10 @@ public class HomeViewModel extends ViewModel {
         try {
             repositoryTemp.insert(name, photoPath);
              _mutableInsert.postValue("Jogador criado com sucesso");
-             _mutableStatusSucess.postValue(true);
+             _mutableStatusSuccess.postValue(true);
         } catch (Exception exception){
             _mutableInsert.postValue("Erro ao cadastrar, tente novamente");
-            _mutableStatusSucess.postValue(false);
+            _mutableStatusSuccess.postValue(false);
             Log.e(TAG, exception.toString());
         }
     }
@@ -128,12 +125,12 @@ public class HomeViewModel extends ViewModel {
         return team.getPlayers().get(position) != null;
     }
 
-    public List<Player> getPlayers(){
-        return getPlayersListUseCase.invoke();
+    public void storesList(List<Player> list) {
+        this.list = list;
     }
 
     public boolean isChosenPlayer(int position) {
-        return getPlayers().get(position).isPartOfATeam();
+        return repositoryTemp.isPlayerChosen(list, position);
     }
 
     private void notifyObservers(Player player){

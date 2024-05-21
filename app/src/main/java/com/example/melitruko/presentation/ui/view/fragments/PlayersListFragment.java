@@ -34,15 +34,10 @@ public class PlayersListFragment extends DialogFragment {
 
         this.getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        setupObservers();
         setupButtonsDialog();
 
         return binding.getRoot();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setupObservers();
     }
 
     private void setupObservers() {
@@ -52,6 +47,7 @@ public class PlayersListFragment extends DialogFragment {
                 binding.tvNonePlayer.setVisibility(View.VISIBLE);
             } else {
                 setupRecyclerView(list);
+                viewModel.storesList(list);
             }
         });
     }
@@ -64,7 +60,7 @@ public class PlayersListFragment extends DialogFragment {
         binding.recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(requireContext(), binding.recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if (isChosenPlayer(position)) {
+                if (viewModel.isChosenPlayer(position)) {
                     Toast.makeText(requireContext(), "Esse jogador já foi escolhido", Toast.LENGTH_SHORT).show();
                 } else {
                     if (binding.recyclerView.getChildViewHolder(view).itemView.isPressed()) {
@@ -89,7 +85,7 @@ public class PlayersListFragment extends DialogFragment {
             if (position == -1) {
                 Toast.makeText(requireActivity(), "Escolha um jogador", Toast.LENGTH_SHORT).show();
             } else {
-                setupPlayers(viewModel.getPlayers().get(position));
+                // TODO setupPlayers(viewModel.getPlayers().get(position));
                 this.dismiss();
             }
         });
@@ -97,10 +93,6 @@ public class PlayersListFragment extends DialogFragment {
             this.dismiss();
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, PlayersControlFragment.class, null).addToBackStack(null).commit();
         });
-    }
-
-    private boolean isChosenPlayer(int position) {
-        return viewModel.isChosenPlayer(position);
     }
 
     private void setPosition(int position) {

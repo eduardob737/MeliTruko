@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.melitruko.data.repositories.PlayersRepository;
+import com.example.melitruko.data.repositories.PlayerRepository;
 import com.example.melitruko.data.repositories.RepositoryTemp;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,10 +12,10 @@ import java.lang.reflect.InvocationTargetException;
 public class ViewModelProviderFactory implements ViewModelProvider.Factory {
 
     private final RepositoryTemp repositoryTemp;
-    private final PlayersRepository playersRepository;
+    private final PlayerRepository playerRepository;
 
-    public ViewModelProviderFactory(RepositoryTemp repositoryTemp, PlayersRepository playersRepository) {
-        this.playersRepository = playersRepository;
+    public ViewModelProviderFactory(RepositoryTemp repositoryTemp, PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
         this.repositoryTemp = repositoryTemp;
     }
 
@@ -23,7 +23,7 @@ public class ViewModelProviderFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         try {
-            return modelClass.getConstructor(RepositoryTemp.class, PlayersRepository.class).newInstance(repositoryTemp, playersRepository);
+            return modelClass.getConstructor(RepositoryTemp.class, PlayerRepository.class).newInstance(repositoryTemp, playerRepository);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }

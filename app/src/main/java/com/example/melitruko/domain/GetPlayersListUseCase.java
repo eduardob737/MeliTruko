@@ -1,18 +1,22 @@
 package com.example.melitruko.domain;
 
-import com.example.melitruko.data.repositories.PlayersRepository;
+import androidx.lifecycle.LiveData;
+
+import com.example.melitruko.data.repositories.DatabaseDataSource;
+import com.example.melitruko.data.repositories.PlayerRepository;
+import com.example.melitruko.data.repositories.RepositoryTemp;
 import com.example.melitruko.domain.model.Player;
 
 import java.util.List;
 
 public class GetPlayersListUseCase {
-    private final PlayersRepository playersRepository;
+    private final RepositoryTemp repositoryTemp;
 
-    public GetPlayersListUseCase(PlayersRepository playersRepository) {
-        this.playersRepository = playersRepository;
+    public GetPlayersListUseCase(RepositoryTemp repositoryTemp) {
+        this.repositoryTemp = repositoryTemp;
     }
 
-    public List<Player> invoke(){
-        return playersRepository.getPlayersList();
+    public LiveData<List<Player>> invoke(){
+        return repositoryTemp.getAllPlayers();
     }
 }

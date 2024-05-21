@@ -1,8 +1,13 @@
 package com.example.melitruko.data.repositories;
 
-import android.graphics.Bitmap;
 
+import android.content.Context;
+import android.util.Log;
+
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.melitruko.data.database.dao.PlayerDAO;
 import com.example.melitruko.domain.model.Player;
@@ -38,5 +43,24 @@ public class DatabaseDataSource implements RepositoryTemp{
     @Override
     public LiveData<List<Player>> getAllPlayers() {
         return playerDAO.getAllPlayers();
+    }
+
+    @Override
+    public boolean isPlayerChosen(List<Player> list, int position) {
+        return list.get(position).isPartOfATeam();
+    }
+
+    @Override
+    public void updateStatus(int id) {
+    }
+
+    @Override
+    public int getPosition(int id) {
+        return 0;
+    }
+
+    @Override
+    public void resetStatusPlayer() {
+
     }
 }

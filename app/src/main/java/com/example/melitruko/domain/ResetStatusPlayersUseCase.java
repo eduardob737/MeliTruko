@@ -1,15 +1,15 @@
 package com.example.melitruko.domain;
 
-import com.example.melitruko.data.repositories.PlayersRepository;
+import com.example.melitruko.data.repositories.PlayerRepository;
 
 public class ResetStatusPlayersUseCase {
-    private final PlayersRepository playersRepository;
+    private final PlayerRepository playerRepository;
 
-    public ResetStatusPlayersUseCase(PlayersRepository playersRepository) {
-        this.playersRepository = playersRepository;
+    public ResetStatusPlayersUseCase(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
     }
 
     public void invoke(){
-        playersRepository.resetStatusPlayers();
+        playerRepository.resetStatusPlayers();
     }
 }

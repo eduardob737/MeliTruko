@@ -76,7 +76,7 @@ public class NewPlayerFragment extends DialogFragment {
 
     private void setupObservers() {
         viewModel.insertLiveData.observe(getViewLifecycleOwner(), result -> Toast.makeText(requireContext(), result, Toast.LENGTH_LONG).show());
-        viewModel.statusSucessLiveData.observe(getViewLifecycleOwner(), result -> {
+        viewModel.statusSuccessLiveData.observe(getViewLifecycleOwner(), result -> {
             if (result)
                 NewPlayerFragment.this.dismiss();
         });
