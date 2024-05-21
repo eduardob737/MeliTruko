@@ -1,17 +1,16 @@
 package com.example.melitruko.domain;
 
-import com.example.melitruko.data.repositories.PlayerRepository;
-
+import com.example.melitruko.data.repositories.RepositoryTemp;
 
 public class UpdateStatusPlayerUseCase {
-    private final PlayerRepository playerRepository;
+    private final RepositoryTemp repositoryTemp;
 
-    public UpdateStatusPlayerUseCase(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
+    public UpdateStatusPlayerUseCase(RepositoryTemp repositoryTemp) {
+        this.repositoryTemp = repositoryTemp;
     }
 
     public void invoke(int id){
-        playerRepository.updateStatusPlayer(id);
+        repositoryTemp.updateStatusPlayer(id);
     }
 }
 

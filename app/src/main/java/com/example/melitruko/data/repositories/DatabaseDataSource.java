@@ -1,13 +1,6 @@
 package com.example.melitruko.data.repositories;
 
-
-import android.content.Context;
-import android.util.Log;
-
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.example.melitruko.data.database.dao.PlayerDAO;
 import com.example.melitruko.domain.model.Player;
@@ -17,6 +10,7 @@ import java.util.List;
 public class DatabaseDataSource implements RepositoryTemp{
 
     private final PlayerDAO playerDAO;
+    private List<Player> listPlayersIntern = null;
 
     public DatabaseDataSource(PlayerDAO playerDAO) {
         this.playerDAO = playerDAO;
@@ -46,17 +40,44 @@ public class DatabaseDataSource implements RepositoryTemp{
     }
 
     @Override
-    public boolean isPlayerChosen(List<Player> list, int position) {
-        return list.get(position).isPartOfATeam();
+    public void setInternPlayersList(List<Player> list) {
+        listPlayersIntern = list;
     }
 
     @Override
-    public void updateStatus(int id) {
+    public List<Player> getInternPlayersList() {
+        return listPlayersIntern;
     }
 
     @Override
-    public int getPosition(int id) {
-        return 0;
+    public Player getPlayer(int position) {
+        return listPlayersIntern.get(position);
+    }
+
+    @Override
+    public boolean isPlayerChosen(int position) {
+        return listPlayersIntern.get(position).isPartOfATeam();
+    }
+
+    @Override
+    public void updateStatusPlayer(int id) {
+        int position = getPositionPlayer(id);
+        try {
+            Player player = getInternPlayersList().get(position);
+            player.setPartOfATeam(!player.isPartOfATeam());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int getPositionPlayer(int id) {
+        for (int i = 0; i < getInternPlayersList().size(); i++) {
+            if (id == getInternPlayersList().get(i).getId()) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override

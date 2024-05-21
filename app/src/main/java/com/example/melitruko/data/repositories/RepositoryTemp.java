@@ -19,11 +19,17 @@ public interface RepositoryTemp {
 
     LiveData<List<Player>> getAllPlayers();
 
-    boolean isPlayerChosen(List<Player> list, int position);
+    void setInternPlayersList(List<Player> list);
 
-    void updateStatus(int id);
+    List<Player> getInternPlayersList();
 
-    int getPosition(int id);
+    Player getPlayer(int position);
+
+    boolean isPlayerChosen(int position);
+
+    void updateStatusPlayer(int id);
+
+    int getPositionPlayer(int id);
 
     void resetStatusPlayer();
 }

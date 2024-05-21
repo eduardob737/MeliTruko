@@ -25,7 +25,6 @@ import java.util.List;
 public class PlayersListFragment extends DialogFragment {
     private FragmentPlayersListBinding binding;
     private HomeViewModel viewModel;
-    private int position = -1;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,11 +64,11 @@ public class PlayersListFragment extends DialogFragment {
                 } else {
                     if (binding.recyclerView.getChildViewHolder(view).itemView.isPressed()) {
                         binding.recyclerView.getChildViewHolder(view).itemView.setPressed(false);
-                        setPosition(-1);
+                        viewModel.setPositionList(-1);
                     } else {
                         binding.recyclerView.setPressed(false);
                         binding.recyclerView.getChildViewHolder(view).itemView.setPressed(true);
-                        setPosition(position);
+                        viewModel.setPositionList(position);
                     }
                 }
             }
@@ -82,10 +81,10 @@ public class PlayersListFragment extends DialogFragment {
 
     private void setupButtonsDialog(){
         binding.btnConfirme.setOnClickListener(view1 -> {
-            if (position == -1) {
+            if (viewModel.getPositionList() == -1) {
                 Toast.makeText(requireActivity(), "Escolha um jogador", Toast.LENGTH_SHORT).show();
             } else {
-                // TODO setupPlayers(viewModel.getPlayers().get(position));
+                setupPlayers(viewModel.getPlayerOfList(viewModel.getPositionList()));
                 this.dismiss();
             }
         });
@@ -93,10 +92,6 @@ public class PlayersListFragment extends DialogFragment {
             this.dismiss();
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, PlayersControlFragment.class, null).addToBackStack(null).commit();
         });
-    }
-
-    private void setPosition(int position) {
-        this.position = position;
     }
 
     private void setupPlayers(Player player) {

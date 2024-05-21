@@ -33,7 +33,7 @@ public class TwoPlayersFragment extends Fragment {
     }
 
     private void setupObservers() {
-        viewModel.playerLiveData.observe(getViewLifecycleOwner(), (Observer<Object>) player -> {
+        viewModel.playerLiveData.observe(getViewLifecycleOwner(), player -> {
             if (player != null) {
                 setupChosenPlayers();
             }

@@ -60,12 +60,13 @@ public class HomeViewModel extends ViewModel {
     public LiveData<Boolean> statusSuccessLiveData = _mutableStatusSuccess;
 
     public LiveData<List<Player>> playersListLiveData;
-    public List<Player> list;
+
+    private int positionList = -1;
 
     public HomeViewModel(RepositoryTemp repositoryTemp, PlayerRepository playerRepository) {
         this.repositoryTemp = repositoryTemp;
         getPlayersListUseCase = new GetPlayersListUseCase(repositoryTemp);
-        updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(playerRepository);
+        updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(repositoryTemp);
         resetStatusPlayersUseCase = new ResetStatusPlayersUseCase(playerRepository);
         playersListLiveData = getPlayersListUseCase.invoke();
         blueTeam.setColor(Team.ColorTeam.BLUE);
@@ -97,6 +98,14 @@ public class HomeViewModel extends ViewModel {
         }
     }
 
+    public void setPositionList(int position) {
+        this.positionList = position;
+    }
+
+    public int getPositionList(){
+        return positionList;
+    }
+
     public void updateStatusPlayer(int id){
         updateStatusPlayerUseCase.invoke(id);
     }
@@ -126,11 +135,15 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void storesList(List<Player> list) {
-        this.list = list;
+        repositoryTemp.setInternPlayersList(list);
     }
 
     public boolean isChosenPlayer(int position) {
-        return repositoryTemp.isPlayerChosen(list, position);
+        return repositoryTemp.isPlayerChosen(position);
+    }
+
+    public Player getPlayerOfList(int position){
+        return repositoryTemp.getPlayer(position);
     }
 
     private void notifyObservers(Player player){
