@@ -1,18 +1,21 @@
 package com.example.melitruko.data.repositories;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.melitruko.domain.model.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerRepository {
+public interface PlayerRepository {
 
-    // Lista interna que futuramente receberá a lista do banco de dados
-    List<Player> playerList = new ArrayList<>();
+    void insert(Player player);
 
-    public void resetStatusPlayers() {
-        for (int i = 0; i < playerList.size(); i++) {
-            playerList.get(i).setPartOfATeam(false);
-        }
-    }
+    void update(Player player);
+
+    void delete(int id);
+
+    LiveData<List<Player>> getAllPlayers();
+
+    List<Player> getAllPlayersLikeList();
+
 }

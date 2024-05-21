@@ -24,4 +24,6 @@ public interface PlayerDAO {
     @Query("SELECT * FROM players")
     LiveData<List<Player>> getAllPlayers();
 
+    @Query("SELECT * FROM players")
+    List<Player> getAllPlayersLikeList();
 }

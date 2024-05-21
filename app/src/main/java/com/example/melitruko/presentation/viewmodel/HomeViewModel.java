@@ -9,12 +9,12 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.melitruko.R;
 import com.example.melitruko.data.repositories.PlayerRepository;
-import com.example.melitruko.data.repositories.RepositoryTemp;
 import com.example.melitruko.data.repositories.TeamsRepository;
 import com.example.melitruko.domain.CreateTeamUseCase;
-import com.example.melitruko.domain.GetPlayersListUseCase;
-import com.example.melitruko.domain.ResetStatusPlayersUseCase;
-import com.example.melitruko.domain.UpdateStatusPlayerUseCase;
+import com.example.melitruko.domain.business.usecases.GetInternalPlayersListUseCase;
+import com.example.melitruko.domain.business.PlayerBusiness;
+import com.example.melitruko.domain.business.usecases.GetPlayersListUseCase;
+import com.example.melitruko.domain.business.usecases.InsertPlayerUseCase;
 import com.example.melitruko.domain.model.Match;
 import com.example.melitruko.domain.model.Player;
 import com.example.melitruko.domain.model.Team;
@@ -27,20 +27,26 @@ public class HomeViewModel extends ViewModel {
     private Team blueTeam = new Team();
     private Team whiteTeam = new Team();
 
+    private Match match;
     private Team.ColorTeam colorTeam = null;
     private int position = -1;
 
-    private final MutableLiveData<Player> mPlayer = new MutableLiveData<>();
-    public LiveData<Player> playerLiveData = mPlayer;
+    private int positionList = -1;
 
-    private final GetPlayersListUseCase getPlayersListUseCase;
-    private final UpdateStatusPlayerUseCase updateStatusPlayerUseCase;
-    private final ResetStatusPlayersUseCase resetStatusPlayersUseCase;
-
+    // Dependencias
+    private final PlayerBusiness playerBusiness;
+    private final PlayerRepository playerRepository;
     private final TeamsRepository teamsRepository = new TeamsRepository();
+
+    // UseCases
+    private final GetPlayersListUseCase getPlayersListUseCase;
+    private final InsertPlayerUseCase insertPlayerUseCase;
+    private final GetInternalPlayersListUseCase getInternalPlayersListUseCase;
     private final CreateTeamUseCase createTeamUseCase = new CreateTeamUseCase(teamsRepository);
 
-    private Match match;
+    // Mutables e LiveDatas
+    private final MutableLiveData<Player> mPlayer = new MutableLiveData<>();
+    public LiveData<Player> playerLiveData = mPlayer;
 
     private final MutableLiveData<Integer> mBlueTeamScore = new MutableLiveData<>();
     public LiveData<Integer> blueTeamScoreLiveData = mBlueTeamScore;
@@ -51,7 +57,6 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<Integer> mMatchValue = new MutableLiveData<>();
     public LiveData<Integer> matchValueLiveData = mMatchValue;
 
-    private RepositoryTemp repositoryTemp;
     private static final String TAG = HomeViewModel.class.getSimpleName();
     private final MutableLiveData<String> _mutableInsert = new MutableLiveData<>();
     public LiveData<String> insertLiveData = _mutableInsert;
@@ -61,25 +66,21 @@ public class HomeViewModel extends ViewModel {
 
     public LiveData<List<Player>> playersListLiveData;
 
-    private int positionList = -1;
-
-    public HomeViewModel(RepositoryTemp repositoryTemp, PlayerRepository playerRepository) {
-        this.repositoryTemp = repositoryTemp;
-        getPlayersListUseCase = new GetPlayersListUseCase(repositoryTemp);
-        updateStatusPlayerUseCase = new UpdateStatusPlayerUseCase(repositoryTemp);
-        resetStatusPlayersUseCase = new ResetStatusPlayersUseCase(playerRepository);
+    public HomeViewModel(PlayerBusiness playerBusiness, PlayerRepository playerRepository) {
+        this.playerBusiness = playerBusiness;
+        this.playerRepository = playerRepository;
+        getPlayersListUseCase = new GetPlayersListUseCase(playerRepository);
+        insertPlayerUseCase = new InsertPlayerUseCase(playerRepository);
+        getInternalPlayersListUseCase = new GetInternalPlayersListUseCase(playerRepository);
         playersListLiveData = getPlayersListUseCase.invoke();
         blueTeam.setColor(Team.ColorTeam.BLUE);
         whiteTeam.setColor(Team.ColorTeam.WHITE);
     }
 
-    public boolean nameValidation(String name){
-        return !name.isEmpty() && name.length() >= 2;
-    }
-
+    // UseCase ABAIXO
     public void insertPlayer(String name, String photoPath){
         try {
-            repositoryTemp.insert(name, photoPath);
+            insertPlayerUseCase.invoke(name, photoPath);
              _mutableInsert.postValue("Jogador criado com sucesso");
              _mutableStatusSuccess.postValue(true);
         } catch (Exception exception){
@@ -87,6 +88,34 @@ public class HomeViewModel extends ViewModel {
             _mutableStatusSuccess.postValue(false);
             Log.e(TAG, exception.toString());
         }
+    }
+    public void updateStatusPlayer(int id){
+        int position = playerBusiness.getPositionPlayer(id);
+        playerBusiness.updateStatusPlayer(position);
+    }
+
+    public boolean isPlayerChosen(int position) {
+        return playerBusiness.isPlayerChosen(position);
+    }
+
+    public void setInternalPlayersList(List<Player> list) {
+        playerBusiness.setInternalListPlayer(list);
+    }
+
+    public List<Player> getInternalPlayersList() {
+        return playerBusiness.getInternalListPlayer();
+    }
+
+    // UseCase ACIMA
+
+    public List<Player> getList(){
+        if (playerBusiness.getInternalListPlayer() == null)
+            setInternalPlayersList(getInternalPlayersListUseCase.invoke());
+        return getInternalPlayersList();
+    }
+
+    public boolean nameValidation(String name){
+        return !name.isEmpty() && name.length() >= 2;
     }
 
     public void createNewPlayer(Player player){
@@ -104,10 +133,6 @@ public class HomeViewModel extends ViewModel {
 
     public int getPositionList(){
         return positionList;
-    }
-
-    public void updateStatusPlayer(int id){
-        updateStatusPlayerUseCase.invoke(id);
     }
 
     public void setTeamAtributes(Team.ColorTeam colorTeam, int position){
@@ -130,20 +155,10 @@ public class HomeViewModel extends ViewModel {
         }
     }
 
-    public boolean isPositionFilled(Team team){
-        return team.getPlayers().get(position) != null;
-    }
-
-    public void storesList(List<Player> list) {
-        repositoryTemp.setInternPlayersList(list);
-    }
-
-    public boolean isChosenPlayer(int position) {
-        return repositoryTemp.isPlayerChosen(position);
-    }
+    public boolean isPositionFilled(Team team){ return team.getPlayers().get(position) != null;}
 
     public Player getPlayerOfList(int position){
-        return repositoryTemp.getPlayer(position);
+        return playerBusiness.getPlayer(position);
     }
 
     private void notifyObservers(Player player){
@@ -268,6 +283,6 @@ public class HomeViewModel extends ViewModel {
         whiteTeam = new Team();
         colorTeam = null;
         position = -1;
-        resetStatusPlayersUseCase.invoke();
+        playerBusiness.resetStatusPlayer();
     }
 }

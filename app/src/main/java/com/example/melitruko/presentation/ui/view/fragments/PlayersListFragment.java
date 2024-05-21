@@ -33,22 +33,21 @@ public class PlayersListFragment extends DialogFragment {
 
         this.getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        setupObservers();
+        getPlayersList();
         setupButtonsDialog();
 
         return binding.getRoot();
     }
 
-    private void setupObservers() {
-        viewModel.playersListLiveData.observe(getViewLifecycleOwner(), list -> {
-            if (list.isEmpty()) {
-                binding.ivPerson.setVisibility(View.VISIBLE);
-                binding.tvNonePlayer.setVisibility(View.VISIBLE);
-            } else {
-                setupRecyclerView(list);
-                viewModel.storesList(list);
-            }
-        });
+    private void getPlayersList() {
+        List<Player> playersList = viewModel.getList();
+        if (playersList.isEmpty()) {
+            binding.ivPerson.setVisibility(View.VISIBLE);
+            binding.tvNonePlayer.setVisibility(View.VISIBLE);
+        } else {
+            setupRecyclerView(playersList);
+            Toast.makeText(requireContext(), "opa", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setupRecyclerView(List<Player> list) {
@@ -59,7 +58,7 @@ public class PlayersListFragment extends DialogFragment {
         binding.recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(requireContext(), binding.recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if (viewModel.isChosenPlayer(position)) {
+                if (viewModel.isPlayerChosen(position)) {
                     Toast.makeText(requireContext(), "Esse jogador já foi escolhido", Toast.LENGTH_SHORT).show();
                 } else {
                     if (binding.recyclerView.getChildViewHolder(view).itemView.isPressed()) {
@@ -79,7 +78,7 @@ public class PlayersListFragment extends DialogFragment {
         }));
     }
 
-    private void setupButtonsDialog(){
+    private void setupButtonsDialog() {
         binding.btnConfirme.setOnClickListener(view1 -> {
             if (viewModel.getPositionList() == -1) {
                 Toast.makeText(requireActivity(), "Escolha um jogador", Toast.LENGTH_SHORT).show();
