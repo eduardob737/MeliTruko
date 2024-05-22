@@ -23,7 +23,8 @@ import java.util.List;
 
 public class HomeViewModel extends ViewModel {
 
-    private Player player = null;
+    private static final String TAG = HomeViewModel.class.getSimpleName();
+
     private Team blueTeam = new Team();
     private Team whiteTeam = new Team();
 
@@ -31,11 +32,8 @@ public class HomeViewModel extends ViewModel {
     private Team.ColorTeam colorTeam = null;
     private int position = -1;
 
-    private int positionList = -1;
-
     // Dependencias
     private final PlayerBusiness playerBusiness;
-    private final PlayerRepository playerRepository;
     private final TeamsRepository teamsRepository = new TeamsRepository();
 
     // UseCases
@@ -57,7 +55,6 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<Integer> mMatchValue = new MutableLiveData<>();
     public LiveData<Integer> matchValueLiveData = mMatchValue;
 
-    private static final String TAG = HomeViewModel.class.getSimpleName();
     private final MutableLiveData<String> _mutableInsert = new MutableLiveData<>();
     public LiveData<String> insertLiveData = _mutableInsert;
 
@@ -68,7 +65,6 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel(PlayerBusiness playerBusiness, PlayerRepository playerRepository) {
         this.playerBusiness = playerBusiness;
-        this.playerRepository = playerRepository;
         getPlayersListUseCase = new GetPlayersListUseCase(playerRepository);
         insertPlayerUseCase = new InsertPlayerUseCase(playerRepository);
         getInternalPlayersListUseCase = new GetInternalPlayersListUseCase(playerRepository);
@@ -77,7 +73,7 @@ public class HomeViewModel extends ViewModel {
         whiteTeam.setColor(Team.ColorTeam.WHITE);
     }
 
-    // UseCase ABAIXO
+    //Business/Use Cases ABAIXO
     public void insertPlayer(String name, String photoPath){
         try {
             insertPlayerUseCase.invoke(name, photoPath);
@@ -89,6 +85,7 @@ public class HomeViewModel extends ViewModel {
             Log.e(TAG, exception.toString());
         }
     }
+
     public void updateStatusPlayer(int id){
         int position = playerBusiness.getPositionPlayer(id);
         playerBusiness.updateStatusPlayer(position);
@@ -106,34 +103,47 @@ public class HomeViewModel extends ViewModel {
         return playerBusiness.getInternalListPlayer();
     }
 
-    // UseCase ACIMA
-
     public List<Player> getList(){
         if (playerBusiness.getInternalListPlayer() == null)
             setInternalPlayersList(getInternalPlayersListUseCase.invoke());
         return getInternalPlayersList();
     }
 
-    public boolean nameValidation(String name){
-        return !name.isEmpty() && name.length() >= 2;
+    public boolean isNameValid(String name){
+        return playerBusiness.nameValidation(name);
     }
 
+    public Player getPlayerOfList(int position){
+        return playerBusiness.getPlayer(position);
+    }
+
+    public void setPositionList(int position) {
+        playerBusiness.setPositionList(position);
+    }
+
+    public int getPositionList(){
+        return playerBusiness.getPositionList();
+    }
+    //Business/Use Cases ACIMA
+
+    // Team
     public void createNewPlayer(Player player){
         if (mPlayer.getValue() != player){
-            setPlayer(player);
             player.setPartOfATeam(true);
             atributePlayer(player);
             notifyObservers(player);
         }
     }
 
-    public void setPositionList(int position) {
-        this.positionList = position;
+    public Team getBlueTeam() {
+        return blueTeam;
     }
 
-    public int getPositionList(){
-        return positionList;
+    public Team getWhiteTeam() {
+        return whiteTeam;
     }
+
+    public boolean isPositionFilled(Team team){ return team.getPlayers().get(position) != null;}
 
     public void setTeamAtributes(Team.ColorTeam colorTeam, int position){
         this.colorTeam = colorTeam;
@@ -153,32 +163,6 @@ public class HomeViewModel extends ViewModel {
             }
             getWhiteTeam().getPlayers().set(position, player);
         }
-    }
-
-    public boolean isPositionFilled(Team team){ return team.getPlayers().get(position) != null;}
-
-    public Player getPlayerOfList(int position){
-        return playerBusiness.getPlayer(position);
-    }
-
-    private void notifyObservers(Player player){
-        mPlayer.postValue(player);
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public Team getBlueTeam() {
-        return blueTeam;
-    }
-
-    public Team getWhiteTeam() {
-        return whiteTeam;
     }
 
     public void toAddPointsBlueTeam() {
@@ -201,20 +185,6 @@ public class HomeViewModel extends ViewModel {
         getMatch().setValue(getMatch().getInitialValueMatch());
     }
 
-    public void setupMatchValue() {
-        if (getMatchValue() == getMatch().getInitialValueMatch()) {
-            getMatch().setValue(getMatch().getAdditionalValueMatch());
-        } else {
-            getMatch().setValue(getMatchValue() + getMatch().getAdditionalValueMatch());
-        }
-        mMatchValue.postValue(getMatchValue());
-    }
-
-    public void resetMatchValue() {
-        getMatch().setValue(getMatch().getInitialValueMatch());
-        mMatchValue.postValue(getMatchValue());
-    }
-
     public int getWhiteTeamScore() {
         return getMatch().getWhiteTeam().getScore();
     }
@@ -229,6 +199,21 @@ public class HomeViewModel extends ViewModel {
 
     public void setNewMatch(Parcelable blueTeam, Parcelable whiteTeam) {
         match = new Match((Team) blueTeam, (Team) whiteTeam);
+    }
+
+    // Match
+    public void setupMatchValue() {
+        if (getMatchValue() == getMatch().getInitialValueMatch()) {
+            getMatch().setValue(getMatch().getAdditionalValueMatch());
+        } else {
+            getMatch().setValue(getMatchValue() + getMatch().getAdditionalValueMatch());
+        }
+        mMatchValue.postValue(getMatchValue());
+    }
+
+    public void resetMatchValue() {
+        getMatch().setValue(getMatch().getInitialValueMatch());
+        mMatchValue.postValue(getMatchValue());
     }
 
     public int setMessageButtonToAddPoints() {
@@ -277,8 +262,13 @@ public class HomeViewModel extends ViewModel {
         return getMatch().getLoserTeam().getScore();
     }
 
+    // Notify Observers
+    private void notifyObservers(Player player){
+        mPlayer.postValue(player);
+    }
+
+    // Clear Data
     public void clearViewModel(){
-        player = null;
         blueTeam = new Team();
         whiteTeam = new Team();
         colorTeam = null;

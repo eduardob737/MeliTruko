@@ -7,6 +7,15 @@ import java.util.List;
 public class PlayerBusiness {
 
     private List<Player> internalListPlayer;
+    private int positionList = -1;
+
+    public void setPositionList(int position) {
+        this.positionList = position;
+    }
+
+    public int getPositionList(){
+        return positionList;
+    }
 
     public void setInternalListPlayer(List<Player> internalListPlayer) {
         this.internalListPlayer = internalListPlayer;
@@ -48,5 +57,9 @@ public class PlayerBusiness {
                 internalListPlayer.get(i).setPartOfATeam(false);
             }
         }
+    }
+
+    public boolean nameValidation(String name){
+        return !name.isEmpty() && name.length() >= 2;
     }
 }

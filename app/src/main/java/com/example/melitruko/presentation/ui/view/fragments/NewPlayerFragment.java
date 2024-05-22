@@ -109,7 +109,7 @@ public class NewPlayerFragment extends DialogFragment {
     }
 
     private boolean validationInputData(String name) {
-        if (!viewModel.nameValidation(name)) {
+        if (!viewModel.isNameValid(name)) {
             Toast.makeText(requireContext(), "Nome inválido", Toast.LENGTH_LONG).show();
             return false;
         } else {
