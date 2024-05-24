@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.databinding.FragmentTwoPlayersBinding;
@@ -33,38 +32,30 @@ public class TwoPlayersFragment extends Fragment {
     }
 
     private void setupObservers() {
-        viewModel.playerLiveData.observe(getViewLifecycleOwner(), player -> {
-            if (player != null) {
-                setupChosenPlayers();
-            }
-        });
+        viewModel.playersBlueTeamLiveData.observe(getViewLifecycleOwner(), this::setupPlayersBlueTeam);
+        viewModel.playersWhiteTeamLiveData.observe(getViewLifecycleOwner(), this::setupPlayersWhiteTeam);
     }
 
-    private void setupChosenPlayers() {
-        List<Player> blueList = viewModel.getBlueTeam().getPlayers();
-        List<Player> whiteList = viewModel.getWhiteTeam().getPlayers();
-
-        if ((!blueList.isEmpty()) && (blueList.get(0) != null)) {
+    private void setupPlayersBlueTeam(List<Player> list) {
             binding.ivPlayer1.setContentPadding(0,0,0,0);
-            binding.ivPlayer1.setImageBitmap(blueList.get(0).getImageBitmap());
-            binding.tvPlayer1.setText(blueList.get(0).getName());
-        }
+            binding.ivPlayer1.setImageBitmap(list.get(0).getImageBitmap());
+            binding.tvPlayer1.setText(list.get(0).getName());
+    }
 
-        if ((!whiteList.isEmpty()) && (whiteList.get(0) != null)) {
+    private void setupPlayersWhiteTeam(List<Player> list) {
             binding.ivPlayer2.setContentPadding(0,0,0,0);
-            binding.ivPlayer2.setImageBitmap(whiteList.get(0).getImageBitmap());
-            binding.tvPlayer2.setText(whiteList.get(0).getName());
-        }
+            binding.ivPlayer2.setImageBitmap(list.get(0).getImageBitmap());
+            binding.tvPlayer2.setText(list.get(0).getName());
     }
 
     private void setupPlayersButton() {
         binding.ivPlayer1.setOnClickListener(view1 -> {
-            viewModel.setTeamAtributes(Team.ColorTeam.BLUE, 0);
+            viewModel.setTeamAttributes(Team.ColorTeam.BLUE, 0);
             showPlayersListFragment();
         });
 
         binding.ivPlayer2.setOnClickListener(view1 -> {
-            viewModel.setTeamAtributes(Team.ColorTeam.WHITE, 0);
+            viewModel.setTeamAttributes(Team.ColorTeam.WHITE, 0);
             showPlayersListFragment();
         });
     }

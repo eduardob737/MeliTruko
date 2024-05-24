@@ -83,32 +83,32 @@ public class SixPlayersFragment extends Fragment {
 
     private void setupPlayersButton() {
         binding.ivPlayer1.setOnClickListener(view1 -> {
-            viewModel.setTeamAtributes(Team.ColorTeam.BLUE, 0);
+            viewModel.setTeamAttributes(Team.ColorTeam.BLUE, 0);
             showPlayersListFragment();
         });
 
         binding.ivPlayer2.setOnClickListener(view1 -> {
-            viewModel.setTeamAtributes(Team.ColorTeam.BLUE, 1);
+            viewModel.setTeamAttributes(Team.ColorTeam.BLUE, 1);
             showPlayersListFragment();
         });
 
         binding.ivPlayer3.setOnClickListener(view1 -> {
-            viewModel.setTeamAtributes(Team.ColorTeam.BLUE, 2);
+            viewModel.setTeamAttributes(Team.ColorTeam.BLUE, 2);
             showPlayersListFragment();
         });
 
         binding.ivPlayer4.setOnClickListener(view1 -> {
-            viewModel.setTeamAtributes(Team.ColorTeam.WHITE, 0);
+            viewModel.setTeamAttributes(Team.ColorTeam.WHITE, 0);
             showPlayersListFragment();
         });
 
         binding.ivPlayer5.setOnClickListener(view1 -> {
-            viewModel.setTeamAtributes(Team.ColorTeam.WHITE, 1);
+            viewModel.setTeamAttributes(Team.ColorTeam.WHITE, 1);
             showPlayersListFragment();
         });
 
         binding.ivPlayer6.setOnClickListener(view1 -> {
-            viewModel.setTeamAtributes(Team.ColorTeam.WHITE, 2);
+            viewModel.setTeamAttributes(Team.ColorTeam.WHITE, 2);
             showPlayersListFragment();
         });
     }

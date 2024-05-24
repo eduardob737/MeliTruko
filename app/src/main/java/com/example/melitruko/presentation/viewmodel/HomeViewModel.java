@@ -2,6 +2,7 @@ package com.example.melitruko.presentation.viewmodel;
 
 import android.os.Parcelable;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,10 +10,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.melitruko.R;
 import com.example.melitruko.data.repositories.PlayerRepository;
-import com.example.melitruko.data.repositories.TeamsRepository;
-import com.example.melitruko.domain.CreateTeamUseCase;
 import com.example.melitruko.domain.business.usecases.GetInternalPlayersListUseCase;
-import com.example.melitruko.domain.business.PlayerBusiness;
+import com.example.melitruko.domain.business.MainBusiness;
 import com.example.melitruko.domain.business.usecases.GetPlayersListUseCase;
 import com.example.melitruko.domain.business.usecases.InsertPlayerUseCase;
 import com.example.melitruko.domain.model.Match;
@@ -25,26 +24,33 @@ public class HomeViewModel extends ViewModel {
 
     private static final String TAG = HomeViewModel.class.getSimpleName();
 
-    private Team blueTeam = new Team();
-    private Team whiteTeam = new Team();
-
-    private Match match;
+    private int positionList = -1;
+    private Team blueTeam;
+    private Team whiteTeam;
     private Team.ColorTeam colorTeam = null;
     private int position = -1;
 
+    private List<Player> internalListPlayer;
+
+    private Match match;
+
     // Dependencias
-    private final PlayerBusiness playerBusiness;
-    private final TeamsRepository teamsRepository = new TeamsRepository();
+    private final MainBusiness mainBusiness;
 
     // UseCases
     private final GetPlayersListUseCase getPlayersListUseCase;
     private final InsertPlayerUseCase insertPlayerUseCase;
     private final GetInternalPlayersListUseCase getInternalPlayersListUseCase;
-    private final CreateTeamUseCase createTeamUseCase = new CreateTeamUseCase(teamsRepository);
 
     // Mutables e LiveDatas
     private final MutableLiveData<Player> mPlayer = new MutableLiveData<>();
     public LiveData<Player> playerLiveData = mPlayer;
+
+    private final MutableLiveData<List<Player>> mPlayersBlueTeam = new MutableLiveData<>();
+    public LiveData<List<Player>> playersBlueTeamLiveData = mPlayersBlueTeam;
+
+    private final MutableLiveData<List<Player>> mPlayersWhiteTeam = new MutableLiveData<>();
+    public LiveData<List<Player>> playersWhiteTeamLiveData = mPlayersWhiteTeam;
 
     private final MutableLiveData<Integer> mBlueTeamScore = new MutableLiveData<>();
     public LiveData<Integer> blueTeamScoreLiveData = mBlueTeamScore;
@@ -63,14 +69,46 @@ public class HomeViewModel extends ViewModel {
 
     public LiveData<List<Player>> playersListLiveData;
 
-    public HomeViewModel(PlayerBusiness playerBusiness, PlayerRepository playerRepository) {
-        this.playerBusiness = playerBusiness;
+    public HomeViewModel(MainBusiness mainBusiness, PlayerRepository playerRepository) {
+        this.mainBusiness = mainBusiness;
+        blueTeam = new Team();
+        whiteTeam = new Team();
+        blueTeam.setColor(Team.ColorTeam.BLUE);
+        whiteTeam.setColor(Team.ColorTeam.WHITE);
         getPlayersListUseCase = new GetPlayersListUseCase(playerRepository);
         insertPlayerUseCase = new InsertPlayerUseCase(playerRepository);
         getInternalPlayersListUseCase = new GetInternalPlayersListUseCase(playerRepository);
         playersListLiveData = getPlayersListUseCase.invoke();
-        blueTeam.setColor(Team.ColorTeam.BLUE);
-        whiteTeam.setColor(Team.ColorTeam.WHITE);
+    }
+
+    // GETTERS E SETTERS
+    public void setPositionList(int position) {
+        this.positionList = position;
+    }
+
+    public int getPositionList(){
+        return positionList;
+    }
+
+    public Team getBlueTeam() {
+        return blueTeam;
+    }
+
+    public Team getWhiteTeam() {
+        return whiteTeam;
+    }
+
+    public void setTeamAttributes(Team.ColorTeam colorTeam, int position){
+        this.colorTeam = colorTeam;
+        this.position = position;
+    }
+
+    public void setInternalListPlayer(List<Player> internalListPlayer) {
+        this.internalListPlayer = internalListPlayer;
+    }
+
+    public List<Player> getInternalListPlayer() {
+        return internalListPlayer;
     }
 
     //Business/Use Cases ABAIXO
@@ -86,83 +124,87 @@ public class HomeViewModel extends ViewModel {
         }
     }
 
-    public void updateStatusPlayer(int id){
-        int position = playerBusiness.getPositionPlayer(id);
-        playerBusiness.updateStatusPlayer(position);
+    public void updateStatusPlayer(int id) {
+        int position = mainBusiness.getPositionPlayer(internalListPlayer, id);
+        try {
+            Player player = internalListPlayer.get(position);
+            player.setPartOfATeam(!player.isPartOfATeam());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean isPlayerChosen(int position) {
-        return playerBusiness.isPlayerChosen(position);
-    }
-
-    public void setInternalPlayersList(List<Player> list) {
-        playerBusiness.setInternalListPlayer(list);
-    }
-
-    public List<Player> getInternalPlayersList() {
-        return playerBusiness.getInternalListPlayer();
+        return mainBusiness.isPlayerChosen(internalListPlayer, position);
     }
 
     public List<Player> getList(){
-        if (playerBusiness.getInternalListPlayer() == null)
-            setInternalPlayersList(getInternalPlayersListUseCase.invoke());
-        return getInternalPlayersList();
+        if (internalListPlayer == null)
+            setInternalListPlayer(getInternalPlayersListUseCase.invoke());
+        return getInternalListPlayer();
     }
 
     public boolean isNameValid(String name){
-        return playerBusiness.nameValidation(name);
+        return mainBusiness.nameValidation(name);
     }
 
     public Player getPlayerOfList(int position){
-        return playerBusiness.getPlayer(position);
+        return mainBusiness.getPlayer(internalListPlayer, position);
     }
 
-    public void setPositionList(int position) {
-        playerBusiness.setPositionList(position);
-    }
-
-    public int getPositionList(){
-        return playerBusiness.getPositionList();
-    }
-    //Business/Use Cases ACIMA
-
-    // Team
     public void createNewPlayer(Player player){
         if (mPlayer.getValue() != player){
-            player.setPartOfATeam(true);
-            atributePlayer(player);
-            notifyObservers(player);
-        }
-    }
 
-    public Team getBlueTeam() {
-        return blueTeam;
-    }
-
-    public Team getWhiteTeam() {
-        return whiteTeam;
-    }
-
-    public boolean isPositionFilled(Team team){ return team.getPlayers().get(position) != null;}
-
-    public void setTeamAtributes(Team.ColorTeam colorTeam, int position){
-        this.colorTeam = colorTeam;
-        this.position = position;
-    }
-
-    public void atributePlayer(Player player) {
-        if (colorTeam.equals(Team.ColorTeam.BLUE)){
-            if (isPositionFilled(getBlueTeam())) {
-                updateStatusPlayer(getBlueTeam().getPlayers().get(position).getId());
+            if (colorTeam.equals(Team.ColorTeam.BLUE)) {
+                attributePlayer(getBlueTeam(), position, player);
+                blueTeam.getPlayers().set(position, player);
+                mPlayersBlueTeam.postValue(getBlueTeam().getPlayers());
             }
-            getBlueTeam().getPlayers().set(position, player);
-        }
-        if (colorTeam.equals(Team.ColorTeam.WHITE)){
-            if (isPositionFilled(getWhiteTeam())) {
-                updateStatusPlayer(getWhiteTeam().getPlayers().get(position).getId());
+
+            if (colorTeam.equals(Team.ColorTeam.WHITE)) {
+                attributePlayer(getWhiteTeam(), position, player);
+                whiteTeam.getPlayers().set(position, player);
+                mPlayersWhiteTeam.postValue(getWhiteTeam().getPlayers());
             }
-            getWhiteTeam().getPlayers().set(position, player);
         }
+    }
+
+    public boolean isPositionFilled(Team team, int position) {
+        return team.getPlayers().get(position) != null;
+    }
+
+    public void attributePlayer(Team team, int position, Player player) {
+        player.setPartOfATeam(true);
+        if (isPositionFilled(team, position)) {
+            updateStatusPlayer(team.getPlayers().get(position).getId());
+        }
+    }
+
+    public void resetStatusPlayer() {
+        if (internalListPlayer != null) {
+            for (int i = 0; i < internalListPlayer.size(); i++) {
+                internalListPlayer.get(i).setPartOfATeam(false);
+            }
+        }
+    }
+
+    //Business/Use Cases ACIMA
+
+    // Match
+    public int getWhiteTeamScore() {
+        return getMatch().getWhiteTeam().getScore();
+    }
+
+    public int getBlueTeamScore() {
+        return getMatch().getBlueTeam().getScore();
+    }
+
+    public int getMatchValue() {
+        return getMatch().getValue();
+    }
+
+    public void setNewMatch(Parcelable blueTeam, Parcelable whiteTeam) {
+        match = new Match((Team) blueTeam, (Team) whiteTeam);
     }
 
     public void toAddPointsBlueTeam() {
@@ -185,23 +227,6 @@ public class HomeViewModel extends ViewModel {
         getMatch().setValue(getMatch().getInitialValueMatch());
     }
 
-    public int getWhiteTeamScore() {
-        return getMatch().getWhiteTeam().getScore();
-    }
-
-    public int getBlueTeamScore() {
-        return getMatch().getBlueTeam().getScore();
-    }
-
-    public int getMatchValue() {
-        return getMatch().getValue();
-    }
-
-    public void setNewMatch(Parcelable blueTeam, Parcelable whiteTeam) {
-        match = new Match((Team) blueTeam, (Team) whiteTeam);
-    }
-
-    // Match
     public void setupMatchValue() {
         if (getMatchValue() == getMatch().getInitialValueMatch()) {
             getMatch().setValue(getMatch().getAdditionalValueMatch());
@@ -273,6 +298,6 @@ public class HomeViewModel extends ViewModel {
         whiteTeam = new Team();
         colorTeam = null;
         position = -1;
-        playerBusiness.resetStatusPlayer();
+        resetStatusPlayer();
     }
 }

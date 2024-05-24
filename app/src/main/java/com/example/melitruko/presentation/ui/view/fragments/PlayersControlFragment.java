@@ -35,6 +35,7 @@ public class PlayersControlFragment extends Fragment {
 
     private void setupObservers() {
         viewModel.playersListLiveData.observe(getViewLifecycleOwner(), list -> {
+            viewModel.setInternalListPlayer(list);
             if (list.isEmpty()) {
                 binding.ivPerson.setVisibility(View.VISIBLE);
                 binding.tvNonePlayer.setVisibility(View.VISIBLE);

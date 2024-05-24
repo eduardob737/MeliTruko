@@ -5,17 +5,17 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.melitruko.data.repositories.PlayerRepository;
-import com.example.melitruko.domain.business.PlayerBusiness;
+import com.example.melitruko.domain.business.MainBusiness;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class ViewModelProviderFactory implements ViewModelProvider.Factory {
 
-    private final PlayerBusiness playerBusiness;
+    private final MainBusiness mainBusiness;
     private final PlayerRepository playerRepository;
 
-    public ViewModelProviderFactory(PlayerBusiness playerBusiness, PlayerRepository playerRepository) {
-        this.playerBusiness = playerBusiness;
+    public ViewModelProviderFactory(MainBusiness mainBusiness, PlayerRepository playerRepository) {
+        this.mainBusiness = mainBusiness;
         this.playerRepository = playerRepository;
     }
 
@@ -23,7 +23,7 @@ public class ViewModelProviderFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         try {
-            return modelClass.getConstructor(PlayerBusiness.class, PlayerRepository.class).newInstance(playerBusiness, playerRepository);
+            return modelClass.getConstructor(MainBusiness.class, PlayerRepository.class).newInstance(mainBusiness, playerRepository);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }

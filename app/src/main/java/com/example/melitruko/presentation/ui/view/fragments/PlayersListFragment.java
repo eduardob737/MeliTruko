@@ -46,7 +46,6 @@ public class PlayersListFragment extends DialogFragment {
             binding.tvNonePlayer.setVisibility(View.VISIBLE);
         } else {
             setupRecyclerView(playersList);
-            Toast.makeText(requireContext(), "opa", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -87,6 +86,7 @@ public class PlayersListFragment extends DialogFragment {
                 this.dismiss();
             }
         });
+
         binding.btnNewPlayer.setOnClickListener(view1 -> {
             this.dismiss();
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, PlayersControlFragment.class, null).addToBackStack(null).commit();
