@@ -34,15 +34,12 @@ public class HomeViewModel extends ViewModel {
 
     private Match match;
 
-    // Dependencias
     private final MainBusiness mainBusiness;
 
-    // UseCases
     private final GetPlayersListUseCase getPlayersListUseCase;
     private final InsertPlayerUseCase insertPlayerUseCase;
     private final GetInternalPlayersListUseCase getInternalPlayersListUseCase;
 
-    // Mutables e LiveDatas
     private final MutableLiveData<Player> mPlayer = new MutableLiveData<>();
     public LiveData<Player> playerLiveData = mPlayer;
 
@@ -154,7 +151,6 @@ public class HomeViewModel extends ViewModel {
 
     public void createNewPlayer(Player player){
         if (mPlayer.getValue() != player){
-
             if (colorTeam.equals(Team.ColorTeam.BLUE)) {
                 attributePlayer(getBlueTeam(), position, player);
                 blueTeam.getPlayers().set(position, player);
@@ -188,19 +184,17 @@ public class HomeViewModel extends ViewModel {
         }
     }
 
-    //Business/Use Cases ACIMA
-
     // Match
     public int getWhiteTeamScore() {
-        return getMatch().getWhiteTeam().getScore();
+        return match.getWhiteTeam().getScore();
     }
 
     public int getBlueTeamScore() {
-        return getMatch().getBlueTeam().getScore();
+        return match.getBlueTeam().getScore();
     }
 
     public int getMatchValue() {
-        return getMatch().getValue();
+        return match.getValue();
     }
 
     public void setNewMatch(Parcelable blueTeam, Parcelable whiteTeam) {
@@ -208,36 +202,36 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void toAddPointsBlueTeam() {
-        getMatch().getBlueTeam().setScore(getBlueTeamScore() + getMatchValue());
+        match.getBlueTeam().setScore(getBlueTeamScore() + getMatchValue());
         mBlueTeamScore.postValue(getBlueTeamScore());
         if (getBlueTeamScore() == 12) {
-            getMatch().setWinnerTeam(getMatch().getBlueTeam());
-            getMatch().setLoserTeam(getMatch().getWhiteTeam());
+            match.setWinnerTeam(match.getBlueTeam());
+            match.setLoserTeam(match.getWhiteTeam());
         }
-        getMatch().setValue(getMatch().getInitialValueMatch());
+        match.setValue(match.getInitialValueMatch());
     }
 
     public void toAddPointsWhiteTeam() {
-        getMatch().getWhiteTeam().setScore(getWhiteTeamScore() + getMatchValue());
+        match.getWhiteTeam().setScore(getWhiteTeamScore() + getMatchValue());
         mWhiteTeamScore.postValue(getWhiteTeamScore());
         if (getWhiteTeamScore() == 12) {
-            getMatch().setWinnerTeam(getMatch().getWhiteTeam());
-            getMatch().setLoserTeam(getMatch().getBlueTeam());
+            match.setWinnerTeam(match.getWhiteTeam());
+            match.setLoserTeam(match.getBlueTeam());
         }
-        getMatch().setValue(getMatch().getInitialValueMatch());
+        match.setValue(match.getInitialValueMatch());
     }
 
     public void setupMatchValue() {
-        if (getMatchValue() == getMatch().getInitialValueMatch()) {
-            getMatch().setValue(getMatch().getAdditionalValueMatch());
+        if (getMatchValue() == match.getInitialValueMatch()) {
+            match.setValue(match.getAdditionalValueMatch());
         } else {
-            getMatch().setValue(getMatchValue() + getMatch().getAdditionalValueMatch());
+            match.setValue(getMatchValue() + match.getAdditionalValueMatch());
         }
         mMatchValue.postValue(getMatchValue());
     }
 
     public void resetMatchValue() {
-        getMatch().setValue(getMatch().getInitialValueMatch());
+        match.setValue(match.getInitialValueMatch());
         mMatchValue.postValue(getMatchValue());
     }
 
@@ -255,7 +249,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public int maximumValueMatch(){
-        return getMatch().getMaximumValue();
+        return match.getMaximumValue();
     }
 
     public boolean isTheMaximumValueOfTheMatch(){
@@ -267,7 +261,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public int setLayoutMatch() {
-        switch (getMatch().getQtdPlayersMatch()) {
+        switch (match.getQtdPlayersMatch()) {
             case 2:
                 return R.layout.layout_two_players_match;
             case 4:
@@ -280,11 +274,11 @@ public class HomeViewModel extends ViewModel {
     }
 
     public int getWinnerTeamScore(){
-        return getMatch().getWinnerTeam().getScore();
+        return match.getWinnerTeam().getScore();
     }
 
     public int getLoserTeamScore(){
-        return getMatch().getLoserTeam().getScore();
+        return match.getLoserTeam().getScore();
     }
 
     // Notify Observers

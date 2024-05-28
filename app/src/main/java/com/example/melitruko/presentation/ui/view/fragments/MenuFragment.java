@@ -15,32 +15,49 @@ import com.example.melitruko.databinding.FragmentMenuBinding;
 
 public class MenuFragment extends Fragment {
 
-    private FragmentMenuBinding binding;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentMenuBinding.inflate(getLayoutInflater(), container, false);
+        FragmentMenuBinding binding = FragmentMenuBinding.inflate(getLayoutInflater(), container, false);
 
-        binding.btnPlayersList.setOnClickListener(view -> getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, PlayersControlFragment.class, null).addToBackStack(null).commit());
-        binding.btnMatch.setOnClickListener(view -> getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, SetupMatchFragment.class, null).addToBackStack(null).commit());
+        binding.btnPlayersList.setOnClickListener(view -> transitionPlayerControl());
+        binding.btnMatch.setOnClickListener(view -> transitionSetupMatch());
+        setupHandleOnBackPressed();
 
+        return binding.getRoot();
+    }
+
+    private void transitionPlayerControl() {
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container_view_home, PlayersControlFragment.class, null)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void transitionSetupMatch() {
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container_view_home, SetupMatchFragment.class, null)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void setupHandleOnBackPressed() {
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 setupAlertDialog();
             }
         });
-
-        return binding.getRoot();
     }
 
     private void setupAlertDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(requireContext());
         dialog.setCancelable(true);
-        dialog.setTitle("Deseja sair do aplicativo?");
+        dialog.setTitle(R.string.txt_app_exit_confirmation);
         dialog.setIcon(R.drawable.ic_caution);
-        dialog.setPositiveButton("Sair", (dialogInterface, i) -> requireActivity().finish());
-        dialog.setNegativeButton("Cancelar", null);
+        dialog.setPositiveButton(R.string.dialog_btn_exit, (dialogInterface, i) -> requireActivity().finish());
+        dialog.setNegativeButton(R.string.dialog_btn_cancel, null);
         dialog.show();
     }
 }

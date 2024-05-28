@@ -53,4 +53,7 @@
     <string name="txt_gallery">Galeria</string>
     <string name="txt_cancel">Cancelar</string>
     <string name="txt_to_save">Salvar</string>
+    <string name="txt_app_exit_confirmation">Deseja sair do aplicativo?</string>
+    <string name="dialog_btn_exit">Sair</string>
+    <string name="dialog_btn_cancel">Cancelar</string>
 </resources>

@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         setupDependencies();
 
         ViewModelProviderFactory factory = new ViewModelProviderFactory(mainBusiness, playerRepository);
-        HomeViewModel viewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
+        new ViewModelProvider(this, factory).get(HomeViewModel.class);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, MenuFragment.class, null).commit();
     }

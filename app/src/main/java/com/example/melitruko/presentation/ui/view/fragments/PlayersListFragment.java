@@ -54,7 +54,9 @@ public class PlayersListFragment extends DialogFragment {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerView.setAdapter(adapter);
 
-        binding.recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(requireContext(), binding.recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+        binding.recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(requireContext(),
+                binding.recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+
             @Override
             public void onItemClick(View view, int position) {
                 if (viewModel.isPlayerChosen(position)) {
@@ -89,7 +91,10 @@ public class PlayersListFragment extends DialogFragment {
 
         binding.btnNewPlayer.setOnClickListener(view1 -> {
             this.dismiss();
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view_home, PlayersControlFragment.class, null).addToBackStack(null).commit();
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container_view_home, PlayersControlFragment.class, null)
+                    .addToBackStack(null)
+                    .commit();
         });
     }
 
